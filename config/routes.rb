@@ -9,10 +9,10 @@ Rails.application.routes.draw do
       get 'shareable_link', to: "collect#shareable_link"
       get 'twitter_post', to: "collect#twitter_post"
       get 'twitter_search', to: "collect#twitter_search"
+      get "/shared_url/:collect_code", to: "collect#shared_url", as: "shared_link"
     end
     root to: 'dashboard#index', as: :app_root
   end
 
-  get "collect/:collect_code", to: "dashboard#collect", as: "collect_shared_link"
   root to: 'page#index'
 end
