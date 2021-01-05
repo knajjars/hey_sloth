@@ -1,4 +1,11 @@
 <h1>Collect#shareable_link</h1>
-<p>Find me in app/views/collect/shareable_link.html.erb</p>
 
+<p>Use this shareable url to collect testimonials for your product:
+</p>
+<p>
+  <%= text_field_tag :weburl, collect_shared_link_url(@collect_link.collect_code) %>
+  <%= button_tag "Copy", :type => "button", :id => "clipboard-btn", :data => { :clipboard_action => "copy", :clipboard_target => "#weburl" } %>
+</p>
 <%= link_to 'Back', collect_path %>
+
+<%= javascript_pack_tag 'copy_clipboard' %>
