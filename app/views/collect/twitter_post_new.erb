@@ -1,0 +1,10 @@
+<h1>Collect#twitter_post</h1>
+
+<h2>Paste the Twitter Post URL here:</h2>
+<%= form_with url: collect_twitter_post_create_path, method: :post do |form| %>
+  <%= form.label :tweet_url, "Tweet URL:" %>
+  <%= form.text_field :tweet_url, required: true, autofocus: true, type: :url, placeholder: "https://twitter.com/elonmusk/status/1336351038106869760" %>
+  <%= form.submit "Collect" %>
+<% end %>
+
+<%= link_to 'Back', collect_path %>

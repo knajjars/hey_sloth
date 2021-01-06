@@ -27,3 +27,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'haikunator', '~> 1.1'
+gem 'twitter', '~> 7.0'

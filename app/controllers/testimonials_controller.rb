@@ -55,7 +55,7 @@ class TestimonialsController < ApplicationController
   def collect_new
     @testimonial = Testimonial.new
     association = CollectLink.find_by("collect_code": collect_code)
-    render_not_found if association.nil?
+    return render_not_found if association.nil?
     @testimonial.user_id = association.user.id
   end
 
