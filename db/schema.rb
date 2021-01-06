@@ -25,21 +25,20 @@ ActiveRecord::Schema.define(version: 2021_01_06_140144) do
   end
 
   create_table "testimonials", force: :cascade do |t|
-    t.string "user_name"
+    t.string "user_name", null: false
     t.string "user_company"
     t.string "user_role"
     t.string "user_link"
-    t.text "user_testimonial"
+    t.text "user_testimonial", null: false
     t.bigint "user_id", null: false
     t.boolean "is_a_tweet", default: false, null: false
     t.string "tweet_status_id"
     t.text "tweet_url"
     t.string "tweet_user_id"
     t.text "tweet_image_url"
-    t.index ["user_id"], name: "index_testimonials_on_user_id"
-
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_testimonials_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

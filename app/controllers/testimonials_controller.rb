@@ -20,7 +20,6 @@ class TestimonialsController < ApplicationController
     code = CollectLink.find_by("collect_code": collect_code)
     return render_unauthorized if code.nil?
     @testimonial = Testimonial.new(testimonial_params)
-
     respond_to do |format|
       if @testimonial.save
         format.html { redirect_to @testimonial, notice: 'Testimonial was successfully created.' }
