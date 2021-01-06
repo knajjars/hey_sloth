@@ -5,7 +5,7 @@ class CreateTestimonials < ActiveRecord::Migration[6.1]
       t.string :user_company
       t.string :user_role
       t.string :user_link
-      t.string :user_testimonial
+      t.text :user_testimonial
 
       t.timestamps
     end

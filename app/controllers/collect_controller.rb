@@ -1,7 +1,4 @@
 class CollectController < ApplicationController
-  def shared_url
-  end
-
   def send_email
   end
 

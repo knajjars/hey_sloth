@@ -33,8 +33,11 @@
 
   <div class="field">
     <%= form.label :user_testimonial %>
-    <%= form.text_field :user_testimonial %>
+    <%= form.text_area :user_testimonial %>
   </div>
+
+  <%= hidden_field_tag :collect_code, params[:collect_code] %>
+  <%= hidden_field :testimonial, :user_id %>
 
   <div class="actions">
     <%= form.submit %>

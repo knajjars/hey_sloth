@@ -1,8 +1,9 @@
 class TestimonialsController < ApplicationController
+  layout "page", only: :collect_new
   before_action :set_testimonial, only: [:show, :edit, :update, :destroy]
 
   def index
-    @testimonials = Testimonial.all
+    @testimonials = current_user.testimonials
   end
 
   def show
@@ -16,6 +17,8 @@ class TestimonialsController < ApplicationController
   end
 
   def create
+    code = CollectLink.find_by("collect_code": collect_code)
+    return render_unauthorized if code.nil?
     @testimonial = Testimonial.new(testimonial_params)
 
     respond_to do |format|
@@ -23,7 +26,7 @@ class TestimonialsController < ApplicationController
         format.html { redirect_to @testimonial, notice: 'Testimonial was successfully created.' }
         format.json { render :show, status: :created, location: @testimonial }
       else
-        format.html { render :new }
+        format.html { render :collect_new }
         format.json { render json: @testimonial.errors, status: :unprocessable_entity }
       end
     end
@@ -49,6 +52,13 @@ class TestimonialsController < ApplicationController
     end
   end
 
+  def collect_new
+    @testimonial = Testimonial.new
+    association = CollectLink.find_by("collect_code": collect_code)
+    render_not_found if association.nil?
+    @testimonial.user_id = association.user.id
+  end
+
   private
 
   def set_testimonial
@@ -56,6 +66,10 @@ class TestimonialsController < ApplicationController
   end
 
   def testimonial_params
-    params.require(:testimonial).permit(:user_name, :user_company, :user_role, :user_link, :user_testimonial)
+    params.require(:testimonial).permit(:user_name, :user_company, :user_role, :user_link, :user_testimonial, :user_id)
+  end
+
+  def collect_code
+    params.require(:collect_code)
   end
 end
