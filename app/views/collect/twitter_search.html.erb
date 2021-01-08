@@ -1,4 +1,17 @@
 <h1>Collect#twitter_search</h1>
-<p>Find me in app/views/collect/twitter_search.html.erb</p>
+
+<h2>Put your company Twitter handle here:</h2>
+<%= form_with url: collect_twitter_search_path, method: :get do |form| %>
+  <%= form.label :twitter_handle, "Handle:" %>
+  <%= form.text_field :twitter_handle, required: true, autofocus: true, placeholder: "@tesla" %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<% unless @tweets.nil? %>
+  <% @tweets.each do |t| %>
+    <% tweet = TwitterApi.client.oembed(t) %>
+    <%= raw(tweet.html) %>
+  <% end %>
+<% end %>
 
 <%= link_to 'Back', collect_path %>

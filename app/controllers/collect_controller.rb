@@ -12,6 +12,15 @@ class CollectController < ApplicationController
     end
   end
 
+  def twitter_search
+    twitter_handle = params[:twitter_handle]
+    if twitter_handle.nil?
+      return
+    end
+    @tweets = TwitterApi.client.search("to:#{twitter_handle}", result_type: "recent")
+
+  end
+
   def twitter_post_new
   end
 
@@ -19,8 +28,7 @@ class CollectController < ApplicationController
     tweet_url = params.require(:tweet_url)
     begin
       tweet_status = tweet_url.split("/").last
-      tweet_res = Client.twitter.status(tweet_status)
-
+      tweet_res = TwitterApi.client.status(tweet_status)
       Testimonial.create(
         "user": current_user,
         "user_name": tweet_res.user.name,
