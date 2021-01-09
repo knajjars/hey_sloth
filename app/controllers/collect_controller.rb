@@ -17,7 +17,9 @@ class CollectController < ApplicationController
     if twitter_handle.nil?
       return
     end
-    @tweets = TwitterApi.client.search("to:#{twitter_handle}", result_type: "recent")
+    # @tweets = TwitterApi.client.search("to:#{twitter_handle}", result_type: "recent")
+
+    @tweets = TwitterApi.client.mentions_timeline
 
   end
 
