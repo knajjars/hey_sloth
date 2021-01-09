@@ -88,6 +88,7 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     haikunator (1.1.0)
+    hash_validator (1.0.0)
     http (4.4.1)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -242,6 +243,7 @@ DEPENDENCIES
   byebug
   devise (~> 4.7, >= 4.7.3)
   haikunator (~> 1.1)
+  hash_validator (~> 1.0)
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.3)
