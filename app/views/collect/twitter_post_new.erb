@@ -10,7 +10,7 @@
 <% if @tweet %>
   <%= embed_tweet(@tweet) %>
   <%= form_with url: collect_twitter_post_create_path, method: :post do |form| %>
-    <%= form.hidden_field :tweet, value: { user_name: @tweet.user.name, text: @tweet.text, status: @tweet.id, url: @tweet.url, user_id: @tweet.user.id, image_url: @tweet.user.profile_image_url_https(:original) }.to_json %>
+    <%= form.hidden_field :tweet, value: { user_name: @tweet.user.name, text: @tweet.full_text, status: @tweet.id, url: @tweet.url, user_id: @tweet.user.id, image_url: @tweet.user.profile_image_url_https(:original) }.to_json %>
     <%= form.submit "Collect" %>
   <% end %>
 <% end %>

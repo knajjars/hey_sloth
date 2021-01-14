@@ -17,10 +17,7 @@ class CollectController < ApplicationController
     if twitter_handle.nil?
       return
     end
-    # @tweets = TwitterApi.client.search("to:#{twitter_handle}", result_type: "recent")
-
-    @tweets = TwitterApi.client.mentions_timeline
-
+    @tweets = TwitterApi.client.mentions_timeline(tweet_mode: "extended")
   end
 
   def twitter_post_new
@@ -28,7 +25,7 @@ class CollectController < ApplicationController
     unless tweet_url.nil?
       begin
         tweet_status = tweet_url.split("/").last
-        @tweet = TwitterApi.client.status(tweet_status)
+        @tweet = TwitterApi.client.status(tweet_status, tweet_mode: 'extended')
       rescue Twitter::Error::NotFound => e
         return redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
       rescue

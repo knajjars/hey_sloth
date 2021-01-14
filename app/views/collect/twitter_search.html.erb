@@ -8,10 +8,7 @@
 <% end %>
 
 <% unless @tweets.nil? %>
-  <% @tweets.each do |t| %>
-    <% tweet = TwitterApi.client.oembed(t) %>
-    <%= raw(tweet.html) %>
-  <% end %>
+  <%= render 'tweet/many' %>
 <% end %>
 
 <%= link_to 'Back', collect_path %>
