@@ -9,10 +9,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     current_user.authorizations.build(auth_attr)
     current_user.save
 
-    redirect_to root_path
+    redirect_to edit_user_registration_path
   end
 
   def failure
-    redirect_to root_path
+    redirect_to edit_user_registration_path
   end
 end

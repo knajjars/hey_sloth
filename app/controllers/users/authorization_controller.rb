@@ -3,7 +3,7 @@ class Users::AuthorizationController < ApplicationController
     provider = params[:provider]
     current_user.authorizations.where(provider: provider.downcase).first.delete
 
-    redirect_to root_path
+    redirect_to edit_user_registration_path
   end
 
 end
