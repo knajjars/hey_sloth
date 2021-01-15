@@ -1,11 +1,15 @@
 <h1>Collect#twitter_search</h1>
 
-<h2>Put your company Twitter handle here:</h2>
-<%= form_with url: collect_twitter_search_path, method: :get do |form| %>
-  <%= form.label :twitter_handle, "Handle:" %>
-  <%= form.text_field :twitter_handle, required: true, autofocus: true, placeholder: "@tesla" %>
-  <%= form.submit "Search" %>
+<% if current_user.authorizations.where(provider: "twitter").empty? %>
+  <p>Please link your Twitter account in your <%= link_to 'profile', edit_user_registration_path %> first.</p>
+<% else %>
+  <%= form_with url: collect_twitter_search_path, method: :get do |form| %>
+    <%= form.label :twitter_handle, "Handle:" %>
+    <%= form.text_field :twitter_handle, required: true, autofocus: true, placeholder: "@tesla" %>
+    <%= form.submit "Search" %>
+  <% end %>
 <% end %>
+
 
 <% unless @tweets.nil? %>
   <%= render 'tweet/many' %>
