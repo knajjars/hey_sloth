@@ -1,6 +1,6 @@
 module ApplicationHelper
   def check_connection(provider)
-    if current_user.has_connection_with(provider)
+    if current_user.connection_with?(provider)
       link_to disconnect_path(social: provider.downcase), class: "#{provider}-m phone-verified row" do
         content_tag :span, 'Unlinked Twitter', class: 'verified'
       end
