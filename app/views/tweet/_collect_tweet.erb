@@ -1,8 +1,12 @@
 <div>
   <%= render 'tweet/tweet' %>
-  <%= form_with url: collect_twitter_post_create_path, method: :post do |form| %>
-    <%= form.hidden_field :tweet, value: { user_name: @tweet.user.name, text: @tweet.full_text, status: @tweet.id, url: @tweet.url, user_id: @tweet.user.id, image_url: @tweet.user.profile_image_url_https(:original) }.to_json %>
-    <%= form.submit "Collect" %>
+  <% if @collected_tweets.find_by(tweet_status_id: @tweet.id).nil? %>
+    <%= form_with url: collect_twitter_post_create_path, method: :post do |form| %>
+      <%= form.hidden_field :tweet, value: { user_name: @tweet.user.name, text: @tweet.full_text, status: @tweet.id, url: @tweet.url, user_id: @tweet.user.id, image_url: @tweet.user.profile_image_url_https(:original) }.to_json %>
+      <%= form.submit "Collect" %>
+    <% end %>
+  <% else %>
+    <%= button_to 'Remove', collect_delete_tweet_path(@tweet.id), method: :delete %>
   <% end %>
 </div>
 <hr>

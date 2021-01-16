@@ -1,4 +1,7 @@
 class CollectController < ApplicationController
+
+  before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
+
   def send_email
   end
 
@@ -46,10 +49,20 @@ class CollectController < ApplicationController
     redirect_back fallback_location: app_root_path, notice: "Successfully collected twitter post!"
   end
 
+  def delete_tweet
+    Testimonial.find_by(tweet_status_id: params["status_id"]).destroy
+
+    redirect_back fallback_location: app_root_path, notice: "Removed twitter post!"
+  end
+
   private
 
   def tweet_params
     ActionController::Parameters.new(JSON.parse(params.require(:tweet))).permit(:user_name, :text, :status, :url, :user_id, :image_url)
+  end
+
+  def get_collected_tweets
+    @collected_tweets = current_user.testimonials.tweets
   end
 
 end

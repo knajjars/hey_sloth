@@ -23,10 +23,8 @@ class TestimonialsController < ApplicationController
     respond_to do |format|
       if @testimonial.save
         format.html { redirect_to @testimonial, notice: 'Testimonial was successfully created.' }
-        format.json { render :show, status: :created, location: @testimonial }
       else
         format.html { render :collect_new }
-        format.json { render json: @testimonial.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -35,10 +33,8 @@ class TestimonialsController < ApplicationController
     respond_to do |format|
       if @testimonial.update(testimonial_params)
         format.html { redirect_to @testimonial, notice: 'Testimonial was successfully updated.' }
-        format.json { render :show, status: :ok, location: @testimonial }
       else
         format.html { render :edit }
-        format.json { render json: @testimonial.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -47,7 +43,6 @@ class TestimonialsController < ApplicationController
     @testimonial.destroy
     respond_to do |format|
       format.html { redirect_to testimonials_url, notice: 'Testimonial was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
