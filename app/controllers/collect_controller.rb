@@ -42,7 +42,8 @@ class CollectController < ApplicationController
       "tweet_user_id": tweet[:user_id],
       "tweet_image_url": tweet[:image_url]
     )
-    redirect_to collect_twitter_post_new_path, notice: "Successfully collected twitter post!"
+
+    redirect_back fallback_location: app_root_path, notice: "Successfully collected twitter post!"
   end
 
   private
