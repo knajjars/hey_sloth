@@ -13,11 +13,6 @@ class CollectController < ApplicationController
   end
 
   def twitter_search
-    twitter_handle = params[:twitter_handle]
-    if twitter_handle.nil?
-      return
-    end
-    @tweets = TwitterApi.client.mentions_timeline(tweet_mode: "extended")
   end
 
   def twitter_post_new

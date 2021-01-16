@@ -30,4 +30,3 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter', '~> 7.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'uuidtools', '~> 2.2'

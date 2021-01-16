@@ -16,4 +16,13 @@ class User < ApplicationRecord
       false
     end
   end
+
+  def twitter
+    Twitter::REST::Client.new do |config|
+      config.consumer_key = Rails.application.credentials.twitter[:api_key]
+      config.consumer_secret = Rails.application.credentials.twitter[:api_key_secret]
+      config.access_token = authorizations.where(provider: "twitter").first.token
+      config.access_token_secret = authorizations.where(provider: "twitter").first.secret
+    end
+  end
 end
