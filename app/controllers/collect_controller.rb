@@ -14,6 +14,9 @@ class CollectController < ApplicationController
       @collect_link = current_user.collect_link
     end
   end
+  
+  def video
+  end
 
   def twitter_search
   end
