@@ -1,5 +1,4 @@
 class TestimonialsController < ApplicationController
-  layout "page", only: :collect_new
   before_action :set_testimonial, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -46,11 +45,20 @@ class TestimonialsController < ApplicationController
     end
   end
 
-  def collect_new
+  def video_new
     @testimonial = Testimonial.new
-    association = CollectLink.find_by("collect_code": collect_code)
-    return render_not_found if association.nil?
-    @testimonial.user_id = association.user.id
+
+  end
+
+  def video_create
+    @testimonial = current_user.testimonials.new(testimonial_params)
+    respond_to do |format|
+      if @testimonial.save
+        format.html { redirect_to @testimonial, notice: 'Testimonial was successfully created.' }
+      else
+        format.html { render :video_new }
+      end
+    end
   end
 
   private
@@ -60,7 +68,7 @@ class TestimonialsController < ApplicationController
   end
 
   def testimonial_params
-    params.require(:testimonial).permit(:user_name, :user_company, :user_role, :user_link, :user_testimonial, :user_id)
+    params.require(:testimonial).permit(:user_name, :user_company, :user_role, :user_link, :user_testimonial, :user_id, :video)
   end
 
   def collect_code

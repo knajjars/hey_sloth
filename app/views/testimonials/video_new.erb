@@ -1,0 +1,35 @@
+<h1>Collect#video</h1>
+
+<%= form_with(model: @testimonial, url: video_testimonials_path, method: :post) do |form| %>
+
+  <% if @testimonial.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@testimonial.errors.count, "error") %> prohibited this testimonial from being saved:</h2>
+
+      <ul>
+        <% @testimonial.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.label :user_name %>
+  <%= form.text_field :user_name %>
+
+  <%= form.label :user_company %>
+  <%= form.text_field :user_company %>
+
+  <%= form.label :user_role %>
+  <%= form.text_field :user_role %>
+
+  <%= form.label :user_link %>
+  <%= form.text_field :user_link %>
+
+  <%= form.label :video, "Video:" %>
+  <%= form.file_field :video, required: true, accept: "video/*" %>
+
+  <%= form.submit "Submit" %>
+<% end %>
+
+<%= link_to 'Back', collect_path %>

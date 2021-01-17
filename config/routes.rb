@@ -5,15 +5,17 @@ Rails.application.routes.draw do
     delete 'disconnect_authorization/:provider', to: "users/authorization#disconnect", as: :disconnect_authorization
 
     resources :testimonials do
-      get 'new/:collect_code', on: :collection, to: 'testimonials#collect_new', as: :collect_new
+      get 'video', to: 'testimonials#video_new', on: :new
+      post 'video', to: 'testimonials#video_create', on: :collection
     end
 
     scope '/collect', as: 'collect' do
+      get 'new/:collect_code', to: 'collect#new', as: "new"
       get '/', to: 'dashboard#collect'
       get 'send_email', to: 'collect#get_send_email'
       post 'send_email', to: 'collect#post_send_email'
       get 'shareable_link', to: 'collect#shareable_link'
-      get 'video', to: 'collect#video'
+
       get 'twitter_search', to: 'collect#twitter_search'
       delete 'tweet/:status_id', to: 'collect#delete_tweet', as: 'delete_tweet'
       scope '/twitter_post', as: 'twitter_post' do

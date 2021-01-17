@@ -5,6 +5,13 @@ class CollectController < ApplicationController
   def get_send_email
   end
 
+  def new
+    @testimonial = Testimonial.new
+    association = CollectLink.find_by("collect_code": collect_code)
+    return render_not_found if association.nil?
+    @testimonial.user_id = association.user.id
+  end
+
   def post_send_email
     email_addresses = params[:email_addresses].reject { |e| e.empty? }
     email_addresses.each do |email_address|
@@ -22,9 +29,6 @@ class CollectController < ApplicationController
     else
       @collect_link = current_user.collect_link
     end
-  end
-
-  def video
   end
 
   def twitter_search
@@ -75,6 +79,10 @@ class CollectController < ApplicationController
 
   def get_collected_tweets
     @collected_tweets = current_user.testimonials.tweets
+  end
+
+  def collect_code
+    params.require(:collect_code)
   end
 
 end
