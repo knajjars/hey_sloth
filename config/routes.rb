@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
     scope '/collect', as: 'collect' do
       get '/', to: 'dashboard#collect'
-      get 'send_email', to: 'collect#send_email'
+      get 'send_email', to: 'collect#get_send_email'
+      post 'send_email', to: 'collect#post_send_email'
       get 'shareable_link', to: 'collect#shareable_link'
       get 'video', to: 'collect#video'
       get 'twitter_search', to: 'collect#twitter_search'

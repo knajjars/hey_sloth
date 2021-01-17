@@ -2,7 +2,12 @@ class CollectController < ApplicationController
 
   before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
 
-  def send_email
+  def get_send_email
+  end
+
+  def post_send_email
+    email_addresses = params[:email_addresses].reject { |e| e.empty? }
+    
   end
 
   def shareable_link
@@ -14,7 +19,7 @@ class CollectController < ApplicationController
       @collect_link = current_user.collect_link
     end
   end
-  
+
   def video
   end
 

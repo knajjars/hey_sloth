@@ -1,0 +1,10 @@
+<h1>Collect#send_email</h1>
+
+<%= form_with url: collect_send_email_path, method: :post do |form| %>
+  <%= form.label :email_addresses, "Email addresses:" %>
+  <%= form.text_field :email_addresses, required: true, autofocus: true, type: :email, multiple: true %>
+  <%= form.text_field :email_addresses, required: false, autofocus: true, type: :email, multiple: true %>
+  <%= form.submit "Send" %>
+<% end %>
+
+<%= link_to 'Back', collect_path %>
