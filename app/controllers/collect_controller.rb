@@ -7,7 +7,11 @@ class CollectController < ApplicationController
 
   def post_send_email
     email_addresses = params[:email_addresses].reject { |e| e.empty? }
-    
+    email_addresses.each do |email_address|
+      CollectMailer.new_testimonial(email_address, current_user).deliver
+    end
+
+    redirect_to collect_send_email_path, notice: "Successfully sent email to recipients!"
   end
 
   def shareable_link
