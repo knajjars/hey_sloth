@@ -1,6 +1,6 @@
 <h1>Collect#video</h1>
 
-<%= form_with(model: @testimonial, url: video_testimonials_path, method: :post) do |form| %>
+<%= form_with(model: @testimonial, url: video_testimonials_path, method: :post, id: "testimonial-video-form", local: false) do |form| %>
 
   <% if @testimonial.errors.any? %>
     <div id="error_explanation">
@@ -26,10 +26,11 @@
   <%= form.label :user_link %>
   <%= form.text_field :user_link %>
 
-  <%= form.label :video, "Video:" %>
-  <%= form.file_field :video, required: true, accept: "video/*" %>
-
-  <%= form.submit "Submit" %>
+  <div data-uppy="testimonial[video]">
+    <%= button_to 'Select video', '#', data: { behavior: "uppy-trigger" } %>
+  </div>
 <% end %>
 
 <%= link_to 'Back', collect_path %>
+
+<%= javascript_pack_tag 'uppy_upload' %>
