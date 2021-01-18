@@ -13,18 +13,17 @@ const Webcam = require('@uppy/webcam')
 require('@uppy/core/dist/style.css')
 require('@uppy/dashboard/dist/style.css')
 
-document.addEventListener('turbolinks:load', () => {
-    document.querySelectorAll('[data-uppy]').forEach(element => setupUppy(element))
-})
+const element = document.querySelector('[data-uppy]')
+setupUppy(element)
 
 function setupUppy(element) {
     let trigger = element.querySelector('[data-behavior="uppy-trigger"]')
     let direct_upload_url = document.querySelector("meta[name='direct-upload-url']").getAttribute("content")
     let field_name = element.dataset.uppy
 
-    trigger.addEventListener("click", (event) => event.preventDefault())
+    trigger.onclick = (event) => event.preventDefault()
 
-    let uppy = new Uppy({
+    const uppy = new Uppy({
         autoProceed: false,
         allowMultipleUploads: false,
         logger: Uppy.debugLogger,
@@ -36,16 +35,15 @@ function setupUppy(element) {
         }
     })
 
-
     uppy.use(Dashboard, {
         trigger: trigger,
         closeAfterFinish: false,
         showProgressDetails: true,
         height: 470,
         browserBackButtonClose: false,
-        proudlyDisplayPoweredByUppy: false,
-        theme: "dark"
+        proudlyDisplayPoweredByUppy: false
     })
+
 
     uppy
         .use(ActiveStorageUpload, {
@@ -55,6 +53,7 @@ function setupUppy(element) {
         .use(Dropbox, {target: Dashboard, companionUrl: 'https://companion.uppy.io'})
         .use(OneDrive, {target: Dashboard, companionUrl: 'https://companion.uppy.io'})
         .use(Webcam, {target: Dashboard})
+
 
     uppy.on('complete', (result) => {
         result.successful.forEach(file => {
