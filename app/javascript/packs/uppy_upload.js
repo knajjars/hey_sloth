@@ -52,7 +52,26 @@ function setupUppy(element) {
         .use(GoogleDrive, {target: Dashboard, companionUrl: 'https://companion.uppy.io'})
         .use(Dropbox, {target: Dashboard, companionUrl: 'https://companion.uppy.io'})
         .use(OneDrive, {target: Dashboard, companionUrl: 'https://companion.uppy.io'})
-        .use(Webcam, {target: Dashboard})
+        .use(Webcam, {
+            target: Dashboard,
+            onBeforeSnapshot: () => Promise.resolve(),
+            countdown: false,
+            modes: [
+                'video-audio',
+                'video-only',
+            ],
+            mirror: false,
+            videoConstraints: {
+                facingMode: 'user',
+                // width: {min: 720, ideal: 1280, max: 1920},
+                // height: {min: 480, ideal: 800, max: 1080},
+                width: {ideal: 300},
+                height: {ideal: 300}
+            },
+            showRecordingLength: false,
+            preferredVideoMimeType: "mp4",
+            preferredImageMimeType: null,
+        })
 
 
     uppy.on('complete', (result) => {
