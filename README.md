@@ -1,24 +1,13 @@
-# README
+# Hey Sloth
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Is a social proof collector platform built by [Khalil Najjar]: https://www.twitter.com/knajjars
 
-Things you may want to cover:
+Technologies used:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby on Rails
+* Postgres
+* Cloudflare
+* AWS
+* Docker
+* Kubernetes
+* Redis
