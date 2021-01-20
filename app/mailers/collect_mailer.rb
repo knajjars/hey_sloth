@@ -6,7 +6,7 @@ class CollectMailer < ApplicationMailer
     user_collect_link = current_user.collect_link
     if user_collect_link.nil?
       collect_code = Haikunator.haikunate
-      @collect_link = CollectLink.create("collect_code": collect_code, user: current_user)
+      @collect_link = CollectLink.create("tag": collect_code, user: current_user)
     else
       @collect_link = current_user.collect_link
     end
