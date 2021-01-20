@@ -16,7 +16,7 @@ class TestimonialsController < ApplicationController
   end
 
   def create
-    code = CollectLink.find_by("collect_code": collect_code)
+    code = CollectLink.find_by("tag": tag)
     return render_unauthorized if code.nil?
     @testimonial = Testimonial.new(testimonial_params)
     respond_to do |format|
@@ -52,6 +52,7 @@ class TestimonialsController < ApplicationController
 
   def video_create
     @testimonial = current_user.testimonials.new(testimonial_params)
+    @testimonial.video!
     respond_to do |format|
       if @testimonial.save
         format.html { redirect_to @testimonial, notice: 'Testimonial was successfully created.' }
@@ -68,10 +69,10 @@ class TestimonialsController < ApplicationController
   end
 
   def testimonial_params
-    params.require(:testimonial).permit(:user_name, :user_company, :user_role, :user_link, :user_testimonial, :user_id, :video)
+    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :user_id, :video)
   end
 
-  def collect_code
-    params.require(:collect_code)
+  def tag
+    params.require(:tag)
   end
 end

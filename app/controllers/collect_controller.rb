@@ -1,5 +1,4 @@
 class CollectController < ApplicationController
-
   before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
 
   def get_send_email
@@ -7,7 +6,7 @@ class CollectController < ApplicationController
 
   def new
     @testimonial = Testimonial.new
-    association = CollectLink.find_by("collect_code": collect_code)
+    association = CollectLink.find_by("tag": tag)
     return render_not_found if association.nil?
     @testimonial.user_id = association.user.id
   end
@@ -24,8 +23,8 @@ class CollectController < ApplicationController
   def shareable_link
     user_collect_link = current_user.collect_link
     if user_collect_link.nil?
-      collect_code = Haikunator.haikunate
-      @collect_link = CollectLink.create("collect_code": collect_code, user: current_user)
+      tag = Haikunator.haikunate
+      @collect_link = CollectLink.create("tag": tag, user: current_user)
     else
       @collect_link = current_user.collect_link
     end
@@ -53,9 +52,10 @@ class CollectController < ApplicationController
     tweet = tweet_params
     Testimonial.create(
       "user": current_user,
-      "user_name": tweet[:user_name],
-      "user_testimonial": tweet[:text],
-      "is_a_tweet": true,
+      "name": tweet[:name],
+      "testimonial": tweet[:text],
+      "source": "tweet",
+      "social_link": tweet[:social_link],
       "tweet_status_id": tweet[:status],
       "tweet_url": tweet[:url],
       "tweet_user_id": tweet[:user_id],
@@ -74,15 +74,15 @@ class CollectController < ApplicationController
   private
 
   def tweet_params
-    ActionController::Parameters.new(JSON.parse(params.require(:tweet))).permit(:user_name, :text, :status, :url, :user_id, :image_url)
+    ActionController::Parameters.new(JSON.parse(params.require(:tweet))).permit(:name, :text, :status, :url, :user_id, :image_url, :social_link)
   end
 
   def get_collected_tweets
     @collected_tweets = current_user.testimonials.tweets
   end
 
-  def collect_code
-    params.require(:collect_code)
+  def tag
+    params.require(:tag)
   end
 
 end

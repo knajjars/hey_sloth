@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_204942) do
+ActiveRecord::Schema.define(version: 2021_01_17_171227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 2021_01_18_204942) do
     t.string "provider"
     t.string "uid"
     t.bigint "user_id", null: false
-    t.string "token"
-    t.string "secret"
+    t.text "token_ciphertext"
+    t.text "secret_ciphertext"
     t.string "link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -56,26 +56,31 @@ ActiveRecord::Schema.define(version: 2021_01_18_204942) do
   end
 
   create_table "collect_links", force: :cascade do |t|
-    t.string "collect_code", null: false
+    t.string "tag", default: "f"
+    t.string "note"
+    t.boolean "social_link_required", default: false
+    t.boolean "email_required", default: false
+    t.boolean "job_required", default: false
+    t.integer "allowed_sources", default: 0
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["collect_code"], name: "index_collect_links_on_collect_code", unique: true
+    t.index ["tag"], name: "index_collect_links_on_tag", unique: true
     t.index ["user_id"], name: "index_collect_links_on_user_id"
   end
 
   create_table "testimonials", force: :cascade do |t|
-    t.string "user_name", null: false
-    t.string "user_company"
-    t.string "user_role"
-    t.string "user_link"
-    t.text "user_testimonial", default: "", null: false
+    t.string "name", null: false
+    t.string "company"
+    t.string "role"
+    t.string "social_link"
+    t.text "testimonial", default: "", null: false
     t.bigint "user_id", null: false
-    t.boolean "is_a_tweet", default: false, null: false
+    t.integer "source", default: 0
     t.string "tweet_status_id"
     t.text "tweet_url"
-    t.string "tweet_user_id"
     t.text "tweet_image_url"
+    t.string "tweet_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tweet_status_id"], name: "index_testimonials_on_tweet_status_id"
@@ -92,9 +97,9 @@ ActiveRecord::Schema.define(version: 2021_01_18_204942) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "company_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "company_name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

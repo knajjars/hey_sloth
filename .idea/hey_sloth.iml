@@ -45,7 +45,7 @@
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.5.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="buftok (v0.2.0, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, rbenv: 3.0.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.2.5, rbenv: 3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.2.3, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="byebug (v11.1.3, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.7, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, rbenv: 3.0.0) [gem]" level="application" />
@@ -68,6 +68,7 @@
     <orderEntry type="library" scope="PROVIDED" name="launchy (v2.5.0, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="letter_opener (v1.7.0, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="listen (v3.4.0, rbenv: 3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="lockbox (v0.6.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.8.0, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.7.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marcel (v0.3.3, rbenv: 3.0.0) [gem]" level="application" />
@@ -149,6 +150,7 @@
         <option value="integration_test" />
         <option value="jbuilder" />
         <option value="job" />
+        <option value="lockbox:audits" />
         <option value="mailbox" />
         <option value="mailer" />
         <option value="migration" />
@@ -195,6 +197,7 @@
         <option value="integration_test" />
         <option value="jbuilder" />
         <option value="job" />
+        <option value="lockbox:audits" />
         <option value="mailbox" />
         <option value="mailer" />
         <option value="migration" />

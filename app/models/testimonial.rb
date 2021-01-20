@@ -2,7 +2,9 @@ class Testimonial < ApplicationRecord
   belongs_to :user
   has_one_attached :video
 
+  enum source: %i[text video tweet]
+
   def self.tweets
-    where("is_a_tweet = true")
+    where(source: Testimonial.sources[:tweet])
   end
 end

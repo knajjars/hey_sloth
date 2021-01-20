@@ -4,29 +4,31 @@
 
 <table>
   <thead>
-    <tr>
-      <th>User name</th>
-      <th>User company</th>
-      <th>User role</th>
-      <th>User link</th>
-      <th>User testimonial</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Company</th>
+    <th>Role</th>
+    <th>Social link</th>
+    <th>Testimonial</th>
+    <th>Source</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @testimonials.each do |testimonial| %>
-      <tr>
-        <td><%= testimonial.user_name %></td>
-        <td><%= testimonial.user_company %></td>
-        <td><%= testimonial.user_role %></td>
-        <td><%= testimonial.user_link %></td>
-        <td><%= testimonial.user_testimonial %></td>
-        <td><%= link_to 'Show', testimonial %></td>
-        <td><%= link_to 'Edit', edit_testimonial_path(testimonial) %></td>
-        <td><%= link_to 'Destroy', testimonial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <% @testimonials.each do |testimonial| %>
+    <tr>
+      <td><%= testimonial.name %></td>
+      <td><%= testimonial.company %></td>
+      <td><%= testimonial.role %></td>
+      <td><%= testimonial.social_link %></td>
+      <td><%= testimonial.testimonial %></td>
+      <td><%= testimonial.source.capitalize %></td>
+      <td><%= link_to 'Show', testimonial %></td>
+      <td><%= link_to 'Edit', edit_testimonial_path(testimonial) %></td>
+      <td><%= link_to 'Destroy', testimonial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
   </tbody>
 </table>
 

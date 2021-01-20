@@ -1,28 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User name:</strong>
-  <%= @testimonial.user_name %>
+  <strong>Name:</strong>
+  <%= @testimonial.name %>
 </p>
 
 <p>
-  <strong>User company:</strong>
-  <%= @testimonial.user_company %>
+  <strong>Company:</strong>
+  <%= @testimonial.company %>
 </p>
 
 <p>
-  <strong>User role:</strong>
-  <%= @testimonial.user_role %>
+  <strong>Role:</strong>
+  <%= @testimonial.role %>
 </p>
 
 <p>
-  <strong>User link:</strong>
-  <%= @testimonial.user_link %>
+  <strong>Social link:</strong>
+  <%= @testimonial.social_link %>
 </p>
 
 <p>
-  <strong>User testimonial:</strong>
-  <%= @testimonial.user_testimonial %>
+  <strong>Testimonial:</strong>
+  <%= @testimonial.testimonial %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @testimonial.source.capitalize %>
 </p>
 
 <% if @testimonial.video.attached? %>

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
 
     scope '/collect', as: 'collect' do
-      get 'new/:collect_code', to: 'collect#new', as: "new"
+      get 'new/:tag', to: 'collect#new', as: "new"
       get '/', to: 'dashboard#collect'
       get 'send_email', to: 'collect#get_send_email'
       post 'send_email', to: 'collect#post_send_email'
