@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
     resources :hey_boxes
 
-    resources :testimonials do
+    resources :testimonials, except: [:edit, :update, :new, :create] do
       get 'video', to: 'testimonials#video_new', on: :new
       post 'video', to: 'testimonials#video_create', on: :collection
     end

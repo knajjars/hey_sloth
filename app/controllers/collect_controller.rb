@@ -1,19 +1,19 @@
 class CollectController < ApplicationController
   before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
+  before_action :set_hey_box, only: [:from_hey_box_new, :from_hey_box_create]
+  layout "page", only: :from_hey_box_new
 
   def get_send_email
   end
 
   def from_hey_box_new
     @testimonial = Testimonial.new
-    association = HeyBox.find_by("tag": tag)
-    return render_not_found if association.nil?
-    @testimonial.user_id = association.user.id
+    return render_not_found if @hey_box.nil?
+    @testimonial.user_id = @hey_box.user.id
   end
 
   def from_hey_box_create
-    hey_box = HeyBox.find_by("tag": tag)
-    return render_unauthorized if hey_box.nil?
+    return render_unauthorized if @hey_box.nil?
     @testimonial = Testimonial.new(testimonial_params)
     respond_to do |format|
       if @testimonial.save
@@ -82,6 +82,10 @@ class CollectController < ApplicationController
 
   def get_collected_tweets
     @collected_tweets = current_user.testimonials.tweets
+  end
+
+  def set_hey_box
+    @hey_box = HeyBox.find_by("tag": tag)
   end
 
   def tag

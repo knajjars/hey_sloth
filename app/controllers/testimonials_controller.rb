@@ -8,26 +8,6 @@ class TestimonialsController < ApplicationController
   def show
   end
 
-  # remove me
-  def new
-    @testimonial = Testimonial.new
-  end
-
-  # remove me
-  def edit
-  end
-
-  # remove me
-  def update
-    respond_to do |format|
-      if @testimonial.update(testimonial_params)
-        format.html { redirect_to @testimonial, notice: 'Testimonial was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
-    end
-  end
-
   def destroy
     @testimonial.destroy
     respond_to do |format|

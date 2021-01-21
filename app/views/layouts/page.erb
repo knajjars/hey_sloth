@@ -16,4 +16,12 @@
 <%= link_to 'Sign In', app_root_url(subdomain: :app) %>
 <%= yield %>
 </body>
+<script async src="https://cdn.panelbear.com/analytics.js?site=3C9rGaiMcfG"></script>
+<script>
+    window.panelbear = window.panelbear || function () {
+        (window.panelbear.q = window.panelbear.q || []).push(arguments);
+    };
+    panelbear('config', {site: '3C9rGaiMcfG'});
+</script>
+
 </html>

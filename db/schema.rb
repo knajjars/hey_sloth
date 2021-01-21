@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 2021_01_21_074154) do
     t.string "tag"
     t.text "note"
     t.boolean "social_link_required", default: false
-    t.boolean "email_required", default: false
     t.boolean "job_required", default: false
     t.integer "allowed_sources", default: 0
     t.bigint "user_id", null: false

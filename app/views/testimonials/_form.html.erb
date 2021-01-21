@@ -13,27 +13,41 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, required: true %>
   </div>
+
+
 
   <div class="field">
     <%= form.label :company %>
-    <%= form.text_field :company %>
+    <% if @hey_box.job_required %>
+      <%= form.text_field :company, required: true %>
+    <% else %>
+      <%= form.text_field :company, required: false %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :role %>
-    <%= form.text_field :role %>
+    <% if @hey_box.job_required %>
+      <%= form.text_field :role, required: true %>
+    <% else %>
+      <%= form.text_field :role, required: false %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :social_link %>
-    <%= form.text_field :social_link %>
+    <% if @hey_box.social_link_required %>
+      <%= form.text_field :social_link, required: true %>
+    <% else %>
+      <%= form.text_field :social_link, required: false %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :testimonial %>
-    <%= form.text_area :testimonial %>
+    <%= form.text_area :testimonial, required: true %>
   </div>
 
   <%= hidden_field_tag :tag, params[:tag] %>

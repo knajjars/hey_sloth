@@ -52,6 +52,6 @@ class HeyBoxesController < ApplicationController
   end
 
   def hey_box_params
-    params.require(:hey_box).permit(:tag, :note, :social_link_required, :email_required, :job_required, :allowed_sources)
+    params.require(:hey_box).permit(:tag, :note, :social_link_required, :job_required, :allowed_sources)
   end
 end
