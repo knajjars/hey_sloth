@@ -1,5 +1,7 @@
 <h1>Collect#video</h1>
 
+<%= tag.meta name: "direct-upload-url", content: rails_direct_uploads_path %>
+
 <%= form_with(model: @testimonial, url: video_testimonials_path, method: :post, id: "testimonial-video-form", local: false) do |form| %>
 
   <% if @testimonial.errors.any? %>

@@ -15,6 +15,7 @@ class CollectController < ApplicationController
   def from_hey_box_create
     return render_unauthorized if @hey_box.nil?
     @testimonial = Testimonial.new(testimonial_params)
+    @testimonial.video! if @testimonial.video.present?
     respond_to do |format|
       if @testimonial.save
         format.html { redirect_to root_path, notice: 'Testimonial was successfully created.' }
