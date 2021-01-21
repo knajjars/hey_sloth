@@ -1,8 +1,8 @@
-class CreateCollectLinks < ActiveRecord::Migration[6.1]
+class CreateHeyBoxes < ActiveRecord::Migration[6.1]
   def change
-    create_table :collect_links do |t|
-      t.string :tag, default: false
-      t.string :note
+    create_table :hey_boxes do |t|
+      t.string :tag
+      t.text :note
       t.boolean :social_link_required, default: false
       t.boolean :email_required, default: false
       t.boolean :job_required, default: false
@@ -11,6 +11,6 @@ class CreateCollectLinks < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :collect_links, :tag, unique: true
+    add_index :hey_boxes, :tag, unique: true
   end
 end

@@ -16,7 +16,7 @@ class TestimonialsController < ApplicationController
   end
 
   def create
-    code = CollectLink.find_by("tag": tag)
+    code = HeyBox.find_by("tag": tag)
     return render_unauthorized if code.nil?
     @testimonial = Testimonial.new(testimonial_params)
     respond_to do |format|

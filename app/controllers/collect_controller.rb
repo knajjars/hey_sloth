@@ -6,7 +6,7 @@ class CollectController < ApplicationController
 
   def new
     @testimonial = Testimonial.new
-    association = CollectLink.find_by("tag": tag)
+    association = HeyBox.find_by("tag": tag)
     return render_not_found if association.nil?
     @testimonial.user_id = association.user.id
   end
@@ -18,16 +18,6 @@ class CollectController < ApplicationController
     end
 
     redirect_to collect_send_email_path, notice: "Successfully sent email to recipients!"
-  end
-
-  def shareable_link
-    user_collect_link = current_user.collect_link
-    if user_collect_link.nil?
-      tag = Haikunator.haikunate
-      @collect_link = CollectLink.create("tag": tag, user: current_user)
-    else
-      @collect_link = current_user.collect_link
-    end
   end
 
   def twitter_search

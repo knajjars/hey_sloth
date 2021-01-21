@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>Use this shareable url to collect testimonials for your product:
+</p>
+<p>
+  <%= text_field_tag :weburl, collect_new_url(@hey_box.tag) %>
+  <%= button_tag "Copy", :type => "button", :id => "clipboard-btn", :data => { :clipboard_action => "copy", :clipboard_target => "#weburl" } %>
+</p>
+
+
+<p>
+  <strong>Tag:</strong>
+  <%= @hey_box.tag %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @hey_box.note %>
+</p>
+
+<p>
+  <strong>Social link required:</strong>
+  <%= @hey_box.social_link_required %>
+</p>
+
+<p>
+  <strong>Email required:</strong>
+  <%= @hey_box.email_required %>
+</p>
+
+<p>
+  <strong>Job required:</strong>
+  <%= @hey_box.job_required %>
+</p>
+
+<p>
+  <strong>Allowed sources:</strong>
+  <%= @hey_box.allowed_sources.humanize %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @hey_box.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_hey_box_path(@hey_box) %> |
+<%= link_to 'Back', hey_boxes_path %>
+
+<%= javascript_pack_tag 'copy_clipboard' %>

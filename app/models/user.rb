@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :testimonials
-  has_one :collect_link
+  has_many :testimonials, dependent: :destroy
+  has_many :hey_boxes, dependent: :destroy
   has_many :authorizations, dependent: :destroy
 
   devise :database_authenticatable, :registerable,

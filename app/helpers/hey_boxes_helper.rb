@@ -1,0 +1,2 @@
+module HeyBoxesHelper
+end

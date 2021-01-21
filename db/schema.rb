@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_17_171227) do
+ActiveRecord::Schema.define(version: 2021_01_21_074154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(version: 2021_01_17_171227) do
     t.index ["user_id"], name: "index_authorizations_on_user_id"
   end
 
-  create_table "collect_links", force: :cascade do |t|
-    t.string "tag", default: "f"
-    t.string "note"
+  create_table "hey_boxes", force: :cascade do |t|
+    t.string "tag"
+    t.text "note"
     t.boolean "social_link_required", default: false
     t.boolean "email_required", default: false
     t.boolean "job_required", default: false
@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2021_01_17_171227) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["tag"], name: "index_collect_links_on_tag", unique: true
-    t.index ["user_id"], name: "index_collect_links_on_user_id"
+    t.index ["tag"], name: "index_hey_boxes_on_tag", unique: true
+    t.index ["user_id"], name: "index_hey_boxes_on_user_id"
   end
 
   create_table "testimonials", force: :cascade do |t|
@@ -108,6 +108,6 @@ ActiveRecord::Schema.define(version: 2021_01_17_171227) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "authorizations", "users"
-  add_foreign_key "collect_links", "users"
+  add_foreign_key "hey_boxes", "users"
   add_foreign_key "testimonials", "users"
 end
