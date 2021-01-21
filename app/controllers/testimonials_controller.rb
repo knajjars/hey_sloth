@@ -8,26 +8,16 @@ class TestimonialsController < ApplicationController
   def show
   end
 
+  # remove me
   def new
     @testimonial = Testimonial.new
   end
 
+  # remove me
   def edit
   end
 
-  def create
-    code = HeyBox.find_by("tag": tag)
-    return render_unauthorized if code.nil?
-    @testimonial = Testimonial.new(testimonial_params)
-    respond_to do |format|
-      if @testimonial.save
-        format.html { redirect_to @testimonial, notice: 'Testimonial was successfully created.' }
-      else
-        format.html { render :collect_new }
-      end
-    end
-  end
-
+  # remove me
   def update
     respond_to do |format|
       if @testimonial.update(testimonial_params)
@@ -45,9 +35,9 @@ class TestimonialsController < ApplicationController
     end
   end
 
+  # move from here to collect
   def video_new
     @testimonial = Testimonial.new
-
   end
 
   def video_create

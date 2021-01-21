@@ -1,4 +1,4 @@
-<%= form_with(model: testimonial) do |form| %>
+<%= form_with(model: testimonial, url: collect_from_hey_box_create_path) do |form| %>
   <% if testimonial.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(testimonial.errors.count, "error") %> prohibited this testimonial from being saved:</h2>

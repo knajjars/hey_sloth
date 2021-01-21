@@ -4,11 +4,24 @@ class CollectController < ApplicationController
   def get_send_email
   end
 
-  def new
+  def from_hey_box_new
     @testimonial = Testimonial.new
     association = HeyBox.find_by("tag": tag)
     return render_not_found if association.nil?
     @testimonial.user_id = association.user.id
+  end
+
+  def from_hey_box_create
+    hey_box = HeyBox.find_by("tag": tag)
+    return render_unauthorized if hey_box.nil?
+    @testimonial = Testimonial.new(testimonial_params)
+    respond_to do |format|
+      if @testimonial.save
+        format.html { redirect_to root_path, notice: 'Testimonial was successfully created.' }
+      else
+        format.html { render :from_hey_box_new }
+      end
+    end
   end
 
   def post_send_email
@@ -73,6 +86,10 @@ class CollectController < ApplicationController
 
   def tag
     params.require(:tag)
+  end
+
+  def testimonial_params
+    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :user_id, :video)
   end
 
 end

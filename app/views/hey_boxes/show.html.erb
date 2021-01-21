@@ -3,7 +3,7 @@
 <p>Use this shareable url to collect testimonials for your product:
 </p>
 <p>
-  <%= text_field_tag :weburl, collect_new_url(@hey_box.tag) %>
+  <%= text_field_tag :weburl, collect_from_hey_box_new_url(@hey_box.tag, subdomain: false) %>
   <%= button_tag "Copy", :type => "button", :id => "clipboard-btn", :data => { :clipboard_action => "copy", :clipboard_target => "#weburl" } %>
 </p>
 

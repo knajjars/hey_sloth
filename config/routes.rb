@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   constraints subdomain: 'app' do
     devise_for :user, path: '',
                path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
@@ -7,14 +6,13 @@ Rails.application.routes.draw do
     delete 'disconnect_authorization/:provider', to: "users/authorization#disconnect", as: :disconnect_authorization
 
     resources :hey_boxes
-    
+
     resources :testimonials do
       get 'video', to: 'testimonials#video_new', on: :new
       post 'video', to: 'testimonials#video_create', on: :collection
     end
 
     scope '/collect', as: 'collect' do
-      get 'new/:tag', to: 'collect#new', as: "new"
       get '/', to: 'dashboard#collect'
       get 'send_email', to: 'collect#get_send_email'
       post 'send_email', to: 'collect#post_send_email'
@@ -30,4 +28,7 @@ Rails.application.routes.draw do
   end
 
   root to: 'page#index'
+
+  get '/:tag', to: 'collect#from_hey_box_new', as: "collect_from_hey_box_new"
+  post '/:tag', to: 'collect#from_hey_box_create', as: "collect_from_hey_box_create"
 end

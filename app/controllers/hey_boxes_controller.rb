@@ -2,7 +2,7 @@ class HeyBoxesController < ApplicationController
   before_action :set_hey_box, only: [:show, :edit, :update, :destroy]
 
   def index
-    @hey_boxes = HeyBox.all
+    @hey_boxes = current_user.hey_boxes.all
   end
 
   def show

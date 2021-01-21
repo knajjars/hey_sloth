@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:collect_new, :create]
+  before_action :authenticate_user!, except: [:from_hey_box_create, :from_hey_box_new, :create]
 
   def render_not_found
     render :file => "#{Rails.root}/public/404.html", :status => 404
