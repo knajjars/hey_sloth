@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_074154) do
+ActiveRecord::Schema.define(version: 2021_01_17_171227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_01_21_074154) do
     t.text "note"
     t.boolean "social_link_required", default: false
     t.boolean "job_required", default: false
+    t.boolean "image_required", default: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_01_21_074154) do
     t.string "social_link"
     t.text "testimonial", default: "", null: false
     t.bigint "user_id", null: false
+    t.bigint "shareable_link_id"
     t.integer "source", default: 0
     t.string "tweet_status_id"
     t.text "tweet_url"
@@ -82,6 +84,7 @@ ActiveRecord::Schema.define(version: 2021_01_21_074154) do
     t.boolean "showcase", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["shareable_link_id"], name: "index_testimonials_on_shareable_link_id"
     t.index ["tweet_status_id"], name: "index_testimonials_on_tweet_status_id"
     t.index ["user_id"], name: "index_testimonials_on_user_id"
   end
@@ -108,5 +111,6 @@ ActiveRecord::Schema.define(version: 2021_01_21_074154) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "authorizations", "users"
   add_foreign_key "shareable_links", "users"
+  add_foreign_key "testimonials", "shareable_links"
   add_foreign_key "testimonials", "users"
 end

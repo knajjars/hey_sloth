@@ -27,11 +27,17 @@
   <%= @shareable_link.job_required %>
 </p>
 
+<p>
+  <strong>Image required:</strong>
+  <%= @shareable_link.image_required %>
+</p>
 
 <p>
   <strong>User:</strong>
   <%= @shareable_link.user_id %>
 </p>
+
+<%= image_tag @shareable_link.logo if @shareable_link.logo.attached? %>
 
 <%= link_to 'Edit', edit_shareable_link_path(@shareable_link) %> |
 <%= link_to 'Back', shareable_links_path %>

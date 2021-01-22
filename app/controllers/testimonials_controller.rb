@@ -17,7 +17,7 @@ class TestimonialsController < ApplicationController
 
   def toggle_showcase
     @testimonial.showcase = !@testimonial.showcase
-    @testimonial.save
+    @testimonial.save!
 
     redirect_back fallback_location: app_root_path
   end

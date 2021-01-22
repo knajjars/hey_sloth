@@ -14,7 +14,7 @@ class CollectController < ApplicationController
 
   def from_shareable_link_create
     return render_unauthorized if @shareable_link.nil?
-    @testimonial = Testimonial.new(testimonial_params)
+    @testimonial = @shareable_link.testimonials.new(testimonial_params)
     respond_to do |format|
       if @testimonial.save
         format.html { redirect_to root_path, notice: 'Testimonial was successfully created.' }
@@ -53,7 +53,7 @@ class CollectController < ApplicationController
 
   def twitter_post_create
     tweet = tweet_params
-    Testimonial.create(
+    Testimonial.create!(
       "user": current_user,
       "name": tweet[:name],
       "testimonial": tweet[:text],
@@ -93,7 +93,7 @@ class CollectController < ApplicationController
   end
 
   def testimonial_params
-    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :user_id)
+    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :user_id, :image)
   end
 
 end

@@ -13,6 +13,8 @@
     </div>
   <% end %>
 
+  <%= image_tag @shareable_link.logo if @shareable_link.logo.attached? %>
+
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, required: true %>
@@ -42,6 +44,15 @@
       <%= form.text_field :social_link, required: true %>
     <% else %>
       <%= form.text_field :social_link, required: false %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <% if @shareable_link.image_required %>
+      <%= form.file_field :image, required: true, accept: "image/png, image/jpg, image/jpeg" %>
+    <% else %>
+      <%= form.file_field :image, accept: "image/png, image/jpg, image/jpeg" %>
     <% end %>
   </div>
 

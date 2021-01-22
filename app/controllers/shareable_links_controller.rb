@@ -52,6 +52,6 @@ class ShareableLinksController < ApplicationController
   end
 
   def shareable_link_params
-    params.require(:shareable_link).permit(:tag, :note, :social_link_required, :job_required)
+    params.require(:shareable_link).permit(:tag, :note, :social_link_required, :job_required, :image_required, :logo)
   end
 end

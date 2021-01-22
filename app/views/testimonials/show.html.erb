@@ -35,4 +35,6 @@
   <%= @testimonial.showcase %>
 </p>
 
+<%= image_tag @testimonial.image if @testimonial.image.attached? %>
+
 <%= link_to 'Back', testimonials_path %>
