@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2021_01_21_074154) do
     t.text "tweet_url"
     t.text "tweet_image_url"
     t.string "tweet_user_id"
+    t.boolean "showcase", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tweet_status_id"], name: "index_testimonials_on_tweet_status_id"

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
     resources :shareable_links
 
-    resources :testimonials, only: [:index, :show, :destroy]
+    resources :testimonials, only: [:index, :show, :destroy] do
+      post 'toggle_showcase', to: "testimonials#toggle_showcase", on: :member, as: "toggle_showcase"
+    end
 
     scope '/collect', as: 'collect' do
       get '/', to: 'dashboard#collect'

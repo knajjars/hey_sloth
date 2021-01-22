@@ -12,6 +12,7 @@ class CreateTestimonials < ActiveRecord::Migration[6.1]
       t.text :tweet_url
       t.text :tweet_image_url
       t.string :tweet_user_id
+      t.boolean :showcase, default: false
 
       t.timestamps
     end
