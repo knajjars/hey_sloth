@@ -5,12 +5,9 @@ Rails.application.routes.draw do
 
     delete 'disconnect_authorization/:provider', to: "users/authorization#disconnect", as: :disconnect_authorization
 
-    resources :hey_boxes
+    resources :shareable_links
 
-    resources :testimonials, except: [:edit, :update, :new, :create] do
-      get 'video', to: 'testimonials#video_new', on: :new
-      post 'video', to: 'testimonials#video_create', on: :collection
-    end
+    resources :testimonials, only: [:index, :show, :destroy]
 
     scope '/collect', as: 'collect' do
       get '/', to: 'dashboard#collect'
@@ -29,6 +26,6 @@ Rails.application.routes.draw do
 
   root to: 'page#index'
 
-  get '/:tag', to: 'collect#from_hey_box_new', as: "collect_from_hey_box_new"
-  post '/:tag', to: 'collect#from_hey_box_create', as: "collect_from_hey_box_create"
+  get '/:tag', to: 'collect#from_shareable_link_new', as: "collect_from_shareable_link_new"
+  post '/:tag', to: 'collect#from_shareable_link_create', as: "collect_from_shareable_link_create"
 end

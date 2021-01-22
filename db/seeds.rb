@@ -4,8 +4,8 @@ user.save!
 
 p "Created test user!"
 
-HeyBox.create! user: user, tag: 'awesome1', note: "My Awesome Note!", allowed_sources: 0
-HeyBox.create! user: user, tag: 'awesome2', note: "My Awesome Note!", allowed_sources: 1
-HeyBox.create! user: user, tag: 'awesome3', note: "My Awesome Note!", allowed_sources: 2
+ShareableLink.create! user: user, tag: 'awesome1', note: "My Awesome Note!", social_link_required: true
+ShareableLink.create! user: user, tag: 'awesome2', note: "My Awesome Note!", job_required: true
+ShareableLink.create! user: user, tag: 'awesome3', note: "My Awesome Note!", social_link_required: true, job_required: true
 
-p "Created HeyBoxes!"
+p "Created Shareable Links!"

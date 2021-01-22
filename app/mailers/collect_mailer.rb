@@ -3,7 +3,7 @@ class CollectMailer < ApplicationMailer
   def new_testimonial(email, current_user)
     @greeting = "Hi"
 
-    @hey_boxes = current_user.hey_boxes
+    @shareable_links = current_user.shareable_links
 
     mail to: email, subject: 'Your opinion matters.'
   end

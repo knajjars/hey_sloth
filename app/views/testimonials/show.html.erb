@@ -30,7 +30,4 @@
   <%= @testimonial.source.capitalize %>
 </p>
 
-<% if @testimonial.video.attached? %>
-  <%= video_tag url_for(@testimonial.video), style: "width: 100%; height: auto;", controls: true %>
-<% end %>
 <%= link_to 'Back', testimonials_path %>

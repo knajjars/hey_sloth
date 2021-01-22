@@ -25,9 +25,7 @@ group :development do
 end
 
 gem 'devise', '~> 4.7', '>= 4.7.3'
-gem 'haikunator', '~> 1.1'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter', '~> 7.0'
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'lockbox', '~> 0.6.1'
