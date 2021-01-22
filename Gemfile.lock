@@ -87,7 +87,6 @@ GEM
       rake
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    haikunator (1.1.0)
     hashie (4.1.0)
     http (4.4.1)
       addressable (~> 2.3)
@@ -253,7 +252,6 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   devise (~> 4.7, >= 4.7.3)
-  haikunator (~> 1.1)
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.3)
@@ -268,7 +266,6 @@ DEPENDENCIES
   spring
   turbolinks (~> 5)
   twitter (~> 7.0)
-  tzinfo-data
   web-console (>= 4.1.0)
   webpacker (~> 5.0)
 

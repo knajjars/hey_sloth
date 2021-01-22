@@ -1,7 +1,6 @@
 <h1>Collect New Testimonial</h1>
-<%= tag.meta name: "direct-upload-url", content: rails_direct_uploads_path %>
 
-<%= form_with(model: @testimonial, url: collect_from_hey_box_create_path, id: "testimonial-video-form", local: false) do |form| %>
+<%= form_with(model: @testimonial, url: collect_from_shareable_link_create_path) do |form| %>
   <% if @testimonial.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@testimonial.errors.count, "error") %> prohibited this testimonial from being saved:</h2>
@@ -21,7 +20,7 @@
 
   <div class="field">
     <%= form.label :company %>
-    <% if @hey_box.job_required %>
+    <% if @shareable_link.job_required %>
       <%= form.text_field :company, required: true %>
     <% else %>
       <%= form.text_field :company, required: false %>
@@ -30,7 +29,7 @@
 
   <div class="field">
     <%= form.label :role %>
-    <% if @hey_box.job_required %>
+    <% if @shareable_link.job_required %>
       <%= form.text_field :role, required: true %>
     <% else %>
       <%= form.text_field :role, required: false %>
@@ -39,37 +38,17 @@
 
   <div class="field">
     <%= form.label :social_link %>
-    <% if @hey_box.social_link_required %>
+    <% if @shareable_link.social_link_required %>
       <%= form.text_field :social_link, required: true %>
     <% else %>
       <%= form.text_field :social_link, required: false %>
     <% end %>
   </div>
 
-  <h1> investigate uppy form plugin!!!</h1>
-
-  <% if @hey_box.text? %>
-    <div class="field">
-      <%= form.label :testimonial %>
-      <%= form.text_area :testimonial, required: true %>
-    </div>
-  <% end %>
-
-  <% if @hey_box.video_or_text? %>
-    <div class="field">
-      <%= form.label :testimonial %>
-      <%= form.text_area :testimonial %>
-    </div>
-  <% end %>
-
-  <% unless @hey_box.text? %>
-    <div data-uppy="testimonial[video]">
-      <%= button_tag 'Select video', type: 'button', data: { behavior: "uppy-trigger" } %>
-    </div>
-
-    <%= javascript_pack_tag 'uppy_upload' %>
-  <% end %>
-
+  <div class="field">
+    <%= form.label :testimonial %>
+    <%= form.text_area :testimonial, required: true %>
+  </div>
 
   <%= hidden_field_tag :tag, params[:tag] %>
   <%= hidden_field :testimonial, :user_id %>

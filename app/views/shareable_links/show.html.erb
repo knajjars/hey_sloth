@@ -3,42 +3,37 @@
 <p>Use this shareable url to collect testimonials for your product:
 </p>
 <p>
-  <%= text_field_tag :weburl, collect_from_hey_box_new_url(@hey_box.tag, subdomain: false) %>
+  <%= text_field_tag :weburl, collect_from_shareable_link_new_url(@shareable_link.tag, subdomain: false) %>
   <%= button_tag "Copy", :type => "button", :id => "clipboard-btn", :data => { :clipboard_action => "copy", :clipboard_target => "#weburl" } %>
 </p>
 
-
 <p>
   <strong>Tag:</strong>
-  <%= @hey_box.tag %>
+  <%= @shareable_link.tag %>
 </p>
 
 <p>
   <strong>Note:</strong>
-  <%= @hey_box.note %>
+  <%= @shareable_link.note %>
 </p>
 
 <p>
   <strong>Social link required:</strong>
-  <%= @hey_box.social_link_required %>
+  <%= @shareable_link.social_link_required %>
 </p>
 
 <p>
   <strong>Job required:</strong>
-  <%= @hey_box.job_required %>
+  <%= @shareable_link.job_required %>
 </p>
 
-<p>
-  <strong>Allowed sources:</strong>
-  <%= @hey_box.allowed_sources.humanize %>
-</p>
 
 <p>
   <strong>User:</strong>
-  <%= @hey_box.user_id %>
+  <%= @shareable_link.user_id %>
 </p>
 
-<%= link_to 'Edit', edit_hey_box_path(@hey_box) %> |
-<%= link_to 'Back', hey_boxes_path %>
+<%= link_to 'Edit', edit_shareable_link_path(@shareable_link) %> |
+<%= link_to 'Back', shareable_links_path %>
 
 <%= javascript_pack_tag 'copy_clipboard' %>

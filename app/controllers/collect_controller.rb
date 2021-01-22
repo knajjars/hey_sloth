@@ -1,26 +1,25 @@
 class CollectController < ApplicationController
   before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
-  before_action :set_hey_box, only: [:from_hey_box_new, :from_hey_box_create]
-  layout "page", only: :from_hey_box_new
+  before_action :set_shareable_link, only: [:from_shareable_link_new, :from_shareable_link_create]
+  layout "page", only: :from_shareable_link_new
 
   def get_send_email
   end
 
-  def from_hey_box_new
+  def from_shareable_link_new
     @testimonial = Testimonial.new
-    return render_not_found if @hey_box.nil?
-    @testimonial.user_id = @hey_box.user.id
+    return render_not_found if @shareable_link.nil?
+    @testimonial.user_id = @shareable_link.user.id
   end
 
-  def from_hey_box_create
-    return render_unauthorized if @hey_box.nil?
+  def from_shareable_link_create
+    return render_unauthorized if @shareable_link.nil?
     @testimonial = Testimonial.new(testimonial_params)
-    @testimonial.video! if @testimonial.video.present?
     respond_to do |format|
       if @testimonial.save
         format.html { redirect_to root_path, notice: 'Testimonial was successfully created.' }
       else
-        format.html { render :from_hey_box_new }
+        format.html { render :from_shareable_link_new }
       end
     end
   end
@@ -85,8 +84,8 @@ class CollectController < ApplicationController
     @collected_tweets = current_user.testimonials.tweets
   end
 
-  def set_hey_box
-    @hey_box = HeyBox.find_by("tag": tag)
+  def set_shareable_link
+    @shareable_link = ShareableLink.find_by("tag": tag)
   end
 
   def tag
@@ -94,7 +93,7 @@ class CollectController < ApplicationController
   end
 
   def testimonial_params
-    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :user_id, :video)
+    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :user_id)
   end
 
 end

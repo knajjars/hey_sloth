@@ -1,10 +1,10 @@
-<%= form_with(model: hey_box) do |form| %>
-  <% if hey_box.errors.any? %>
+<%= form_with(model: shareable_link) do |form| %>
+  <% if shareable_link.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(hey_box.errors.count, "error") %> prohibited this hey_box from being saved:</h2>
+      <h2><%= pluralize(shareable_link.errors.count, "error") %> prohibited this shareable link from being saved:</h2>
 
       <ul>
-        <% hey_box.errors.each do |error| %>
+        <% shareable_link.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -29,17 +29,6 @@
   <div class="field">
     <%= form.label :job_required %>
     <%= form.check_box :job_required %>
-  </div>
-
-  <div class="field">
-    <%= form.label :allowed_sources_video_or_text, 'Video or Text' %>
-    <%= form.radio_button :allowed_sources, 'video_or_text' %>
-
-    <%= form.label :allowed_sources_video, 'Video' %>
-    <%= form.radio_button :allowed_sources, 'video' %>
-
-    <%= form.label :allowed_sources_text, 'Text' %>
-    <%= form.radio_button :allowed_sources, 'text' %>
   </div>
 
   <div class="actions">
