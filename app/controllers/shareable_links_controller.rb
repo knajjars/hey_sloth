@@ -1,5 +1,5 @@
 class ShareableLinksController < ApplicationController
-  before_action :set_shareable_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_shareable_link_and_authorize, only: [:show, :edit, :update, :destroy]
 
   def index
     @shareable_link = current_user.shareable_links.all
@@ -47,8 +47,10 @@ class ShareableLinksController < ApplicationController
 
   private
 
-  def set_shareable_link
+  def set_shareable_link_and_authorize
     @shareable_link = ShareableLink.friendly.find(params[:id])
+    return render_not_found if @shareable_link.nil?
+    authorize @shareable_link
   end
 
   def shareable_link_params

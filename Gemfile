@@ -32,3 +32,4 @@ gem 'lockbox', '~> 0.6.1'
 gem 'active_storage_validations', '~> 0.9.2'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem "hashid-rails", "~> 1.0"
+gem 'pundit', '~> 2.1'

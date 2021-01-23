@@ -1,5 +1,5 @@
 class TestimonialsController < ApplicationController
-  before_action :set_testimonial, only: [:show, :destroy, :toggle_showcase]
+  before_action :set_testimonial_and_authorize, only: [:show, :destroy, :toggle_showcase]
 
   def index
     @testimonials = current_user.testimonials
@@ -24,7 +24,9 @@ class TestimonialsController < ApplicationController
 
   private
 
-  def set_testimonial
+  def set_testimonial_and_authorize
     @testimonial = Testimonial.find_by_hashid(params[:id])
+    return render_not_found if @testimonial.nil?
+    authorize @testimonial
   end
 end

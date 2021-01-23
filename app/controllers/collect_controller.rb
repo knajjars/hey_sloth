@@ -1,17 +1,17 @@
 class CollectController < ApplicationController
   before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
-  before_action :set_shareable_link, only: [:from_shareable_link_new, :from_shareable_link_create, :send_email_create, :send_email_new]
+  before_action :set_shareable_link_and_authorize, only: [:from_shareable_link_new, :from_shareable_link_create, :send_email_create, :send_email_new]
   layout "page", only: :from_shareable_link_new
 
   def from_shareable_link_new
     @testimonial = Testimonial.new
-    return render_not_found if @shareable_link.nil?
-    @testimonial.user_id = @shareable_link.user.id
+    render_not_found if @shareable_link.nil?
   end
 
   def from_shareable_link_create
     return render_unauthorized if @shareable_link.nil?
-    @testimonial = @shareable_link.testimonials.new(testimonial_params)
+    testimonial_attrs = testimonial_params.merge({ user: @shareable_link.user })
+    @testimonial = @shareable_link.testimonials.new(testimonial_attrs)
     respond_to do |format|
       if @testimonial.save
         format.html { redirect_to root_path, notice: 'Testimonial was successfully created.' }
@@ -42,12 +42,12 @@ class CollectController < ApplicationController
       begin
         tweet_status = tweet_url.split("/").last
         @tweet = TwitterApi.client.status(tweet_status, tweet_mode: 'extended')
+        render :twitter_post_new
       rescue Twitter::Error::NotFound => e
-        return redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
+        redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
       rescue
-        return redirect_to collect_twitter_post_new_path, alert: 'Something went wrong.'
+        redirect_to collect_twitter_post_new_path, alert: 'Something went wrong.'
       end
-      render :twitter_post_new
     end
   end
 
@@ -69,7 +69,7 @@ class CollectController < ApplicationController
   end
 
   def delete_tweet
-    Testimonial.find_by(tweet_status_id: params["status_id"]).destroy
+    current_user.testimonials.find_by(tweet_status_id: params["status_id"]).destroy
 
     redirect_back fallback_location: app_root_path, notice: "Removed twitter post!"
   end
@@ -84,12 +84,13 @@ class CollectController < ApplicationController
     @collected_tweets = current_user.testimonials.tweets
   end
 
-  def set_shareable_link
+  def set_shareable_link_and_authorize
     @shareable_link = ShareableLink.friendly.find_by(slug: params[:shareable_link_id])
+    authorize @shareable_link
   end
 
   def testimonial_params
-    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :user_id, :image)
+    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :image)
   end
 
 end
