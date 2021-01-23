@@ -1,4 +1,5 @@
 class Testimonial < ApplicationRecord
+  include Hashid::Rails
   enum source: %i[text tweet]
 
   belongs_to :user

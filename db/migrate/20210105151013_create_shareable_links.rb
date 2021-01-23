@@ -10,6 +10,5 @@ class CreateShareableLinks < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :shareable_links, :tag, unique: true
   end
 end

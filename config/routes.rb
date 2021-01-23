@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
     scope '/collect', as: 'collect' do
       get '/', to: 'dashboard#collect'
-      get '/send_email/:tag', to: 'collect#send_email_new', as: "send_email_new"
-      post '/send_email/:tag', to: 'collect#send_email_create', as: "send_email_create"
+      get ':shareable_link_id/send_email', to: 'collect#send_email_new', as: "send_email_new"
+      post ':shareable_link_id/send_email', to: 'collect#send_email_create', as: "send_email_create"
 
       get 'twitter_search', to: 'collect#twitter_search'
       delete 'tweet/:status_id', to: 'collect#delete_tweet', as: 'delete_tweet'
@@ -28,6 +28,6 @@ Rails.application.routes.draw do
 
   root to: 'page#index'
 
-  get '/:tag', to: 'collect#from_shareable_link_new', as: "collect_from_shareable_link_new"
-  post '/:tag', to: 'collect#from_shareable_link_create', as: "collect_from_shareable_link_create"
+  get ':shareable_link_id', to: 'collect#from_shareable_link_new', as: "collect_from_shareable_link_new"
+  post ':shareable_link_id', to: 'collect#from_shareable_link_create', as: "collect_from_shareable_link_create"
 end

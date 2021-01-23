@@ -85,11 +85,7 @@ class CollectController < ApplicationController
   end
 
   def set_shareable_link
-    @shareable_link = ShareableLink.find_by("tag": tag)
-  end
-
-  def tag
-    params.require(:tag)
+    @shareable_link = ShareableLink.friendly.find_by(slug: params[:shareable_link_id])
   end
 
   def testimonial_params

@@ -3,7 +3,7 @@
 <p>Use this shareable url to collect testimonials for your product:
 </p>
 <p>
-  <%= text_field_tag :weburl, collect_from_shareable_link_new_url(@shareable_link.tag, subdomain: false) %>
+  <%= text_field_tag :weburl, collect_from_shareable_link_new_url(@shareable_link.slug, subdomain: false) %>
   <%= button_tag "Copy", :type => "button", :id => "clipboard-btn", :data => { :clipboard_action => "copy", :clipboard_target => "#weburl" } %>
 </p>
 
@@ -40,7 +40,7 @@
 <%= image_tag @shareable_link.logo if @shareable_link.logo.attached? %>
 
 
-<%= link_to collect_send_email_new_path(@shareable_link.tag) do %>
+<%= link_to collect_send_email_new_path(@shareable_link.slug) do %>
   <p>Send link in <strong>email</strong> for me 📬</p>
 <% end %>
 

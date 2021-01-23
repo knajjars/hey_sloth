@@ -1,6 +1,6 @@
 <h1>Collect#send_email</h1>
 
-<%= form_with url: collect_send_email_create_path(@shareable_link.tag), method: :post do |form| %>
+<%= form_with url: collect_send_email_create_path(@shareable_link.slug), method: :post do |form| %>
   <%= form.label :email_addresses, "Email addresses:" %>
   <%= form.text_field :email_addresses, required: true, autofocus: true, type: :email, multiple: true %>
   <%= form.text_field :email_addresses, required: false, autofocus: true, type: :email, multiple: true %>

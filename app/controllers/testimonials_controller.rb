@@ -25,6 +25,6 @@ class TestimonialsController < ApplicationController
   private
 
   def set_testimonial
-    @testimonial = Testimonial.find(params[:id])
+    @testimonial = Testimonial.find_by_hashid(params[:id])
   end
 end

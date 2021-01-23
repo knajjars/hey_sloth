@@ -48,7 +48,7 @@ class ShareableLinksController < ApplicationController
   private
 
   def set_shareable_link
-    @shareable_link = ShareableLink.find(params[:id])
+    @shareable_link = ShareableLink.friendly.find(params[:id])
   end
 
   def shareable_link_params
