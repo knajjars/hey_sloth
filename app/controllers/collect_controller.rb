@@ -1,10 +1,7 @@
 class CollectController < ApplicationController
   before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
-  before_action :set_shareable_link, only: [:from_shareable_link_new, :from_shareable_link_create]
+  before_action :set_shareable_link, only: [:from_shareable_link_new, :from_shareable_link_create, :send_email_create, :send_email_new]
   layout "page", only: :from_shareable_link_new
-
-  def get_send_email
-  end
 
   def from_shareable_link_new
     @testimonial = Testimonial.new
@@ -24,13 +21,16 @@ class CollectController < ApplicationController
     end
   end
 
-  def post_send_email
+  def send_email_new
+  end
+
+  def send_email_create
     email_addresses = params[:email_addresses].reject { |e| e.empty? }
     email_addresses.each do |email_address|
-      CollectMailer.new_testimonial(email_address, current_user).deliver
+      CollectMailer.new_testimonial(email_address, @shareable_link).deliver
     end
 
-    redirect_to collect_send_email_path, notice: "Successfully sent email to recipients!"
+    redirect_to @shareable_link, notice: "Successfully sent email to recipients!"
   end
 
   def twitter_search

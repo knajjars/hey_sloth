@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
     scope '/collect', as: 'collect' do
       get '/', to: 'dashboard#collect'
-      get 'send_email', to: 'collect#get_send_email'
-      post 'send_email', to: 'collect#post_send_email'
+      get '/send_email/:tag', to: 'collect#send_email_new', as: "send_email_new"
+      post '/send_email/:tag', to: 'collect#send_email_create', as: "send_email_create"
 
       get 'twitter_search', to: 'collect#twitter_search'
       delete 'tweet/:status_id', to: 'collect#delete_tweet', as: 'delete_tweet'

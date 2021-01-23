@@ -39,6 +39,11 @@
 
 <%= image_tag @shareable_link.logo if @shareable_link.logo.attached? %>
 
+
+<%= link_to collect_send_email_new_path(@shareable_link.tag) do %>
+  <p>Send link in <strong>email</strong> for me 📬</p>
+<% end %>
+
 <%= link_to 'Edit', edit_shareable_link_path(@shareable_link) %> |
 <%= link_to 'Back', shareable_links_path %>
 
