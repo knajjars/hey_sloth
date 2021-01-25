@@ -15,10 +15,13 @@ gem 'webpacker', '~> 5.0'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails', '~> 4.0', '>= 4.0.2'
+  gem 'pry-rails', '~> 0.3.9'
 end
 
 group :test do
   gem 'simplecov', '~> 0.21.2', require: false
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'faker', '~> 2.15', '>= 2.15.1'
 end
 
 group :development do
