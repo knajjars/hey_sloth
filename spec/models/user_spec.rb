@@ -1,23 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { described_class.new email: "test@test.com", password: 'password', password_confirmation: 'password' }
+  let(:user) { build(:user) }
+  
   it 'has email field' do
-    subject.email = nil
-    expect(subject).to_not be_valid
+    user.email = nil
+    expect(user).to_not be_valid
   end
 
   it 'has valid email field' do
-    subject.email = "not_an_email"
-    expect(subject).to_not be_valid
+    user.email = "not_an_email"
+    expect(user).to_not be_valid
 
-    subject.email = "test@test.com"
-    expect(subject).to be_valid
+    user.email = "test@test.com"
+    expect(user).to be_valid
   end
 
   it 'can have a company name field' do
-    subject.company_name = "Binary Sunset Inc."
-    expect(subject).to be_valid
+    expect(user).to be_valid
   end
 
   it 'can have many testimonials' do
