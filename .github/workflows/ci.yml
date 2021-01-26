@@ -3,7 +3,7 @@ on: push
 
 jobs:
   verify:
-    name: Build
+    name: Test
     runs-on: ubuntu-latest
     services:
       postgres:
