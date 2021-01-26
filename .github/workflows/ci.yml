@@ -41,10 +41,7 @@ jobs:
           REDIS_URL: redis://localhost:6379/0
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          PGHOST: localhost
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_PASSWORD: postgres
+          DATABASE_URL: postgres://rails_github_actions:postgres@localhost:5432/rails_github_actions_test
         run: |
           rails db:create db:migrate
       - name: Run tests
