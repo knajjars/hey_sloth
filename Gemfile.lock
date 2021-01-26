@@ -106,6 +106,7 @@ GEM
       hashids (~> 1.0)
     hashids (1.0.5)
     hashie (4.1.0)
+    honeybadger (4.7.2)
     http (4.4.1)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -305,6 +306,7 @@ DEPENDENCIES
   faker (~> 2.15, >= 2.15.1)
   friendly_id (~> 5.4, >= 5.4.2)
   hashid-rails (~> 1.0)
+  honeybadger (~> 4.0)
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.3)

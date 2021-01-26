@@ -41,3 +41,4 @@ gem 'active_storage_validations', '~> 0.9.2'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem "hashid-rails", "~> 1.0"
 gem 'pundit', '~> 2.1'
+gem "honeybadger", "~> 4.0"
