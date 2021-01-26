@@ -57,12 +57,28 @@ RSpec.describe ShareableLink, type: :model do
   end
 
   describe 'attached' do
-    pending 'can have a logo' do
-      expect(true).to be(false)
+    it 'can have a logo' do
+      logo = ActiveStorage::Blob.create_and_upload!(
+        io: File.open(Rails.root.join('spec', 'fixtures', 'logo.png'), 'rb'),
+        filename: 'logo.png',
+        content_type: 'image/png'
+      ).signed_id
+
+      shareable_link.logo.attach(logo)
+
+      expect(shareable_link).to be_valid
     end
 
-    pending 'is an image' do
-      expect(true).to be(false)
+    it 'is an image' do
+      logo = ActiveStorage::Blob.create_and_upload!(
+        io: File.open(Rails.root.join('spec', 'fixtures', 'file.js'), 'rb'),
+        filename: 'file.js',
+        content_type: 'text/javascript'
+      ).signed_id
+
+      shareable_link.logo.attach(logo)
+
+      expect(shareable_link).to be_invalid
     end
   end
 
