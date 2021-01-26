@@ -119,4 +119,14 @@ RSpec.describe Testimonial, type: :model do
       expect(shareable_link_association.options[:optional]).to eq true
     end
   end
+
+  describe '.hashid' do
+    it 'has a hashid' do
+      expect(testimonial.hashid).to be_an_instance_of String
+    end
+
+    it 'can be searched by hashid' do
+      expect(Testimonial.find_by_hashid(testimonial.hashid)).to eq(testimonial)
+    end
+  end
 end
