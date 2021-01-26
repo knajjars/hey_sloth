@@ -9,11 +9,7 @@ jobs:
     services:
       postgres:
         image: postgres:11
-        env:
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_PASSWORD: postgres
-        ports: [ "5432:5432" ]
+        ports: [ '5432:5432' ]
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -39,20 +35,16 @@ jobs:
           yarn install
       - name: Setup test database
         env:
+          DATABASE_URL: postgres://postgres:@localhost:5432/hey_sloth_test
+          REDIS_URL: redis://localhost:6379/0
           RAILS_ENV: test
-          PGHOST: localhost
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_PASSWORD: postgres
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
-          rake db:create db:migrate
+          rails db:create db:migrate
       - name: Run tests
         env:
-          PGHOST: localhost
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_PASSWORD: postgres
-          PGPORT: 5432
+          DATABASE_URL: postgres://postgres:@localhost:5432/hey_sloth_test
+          REDIS_URL: redis://localhost:6379/0
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: rspec
