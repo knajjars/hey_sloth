@@ -59,8 +59,8 @@ RSpec.describe ShareableLink, type: :model do
   describe 'attached' do
     it 'can have a logo' do
       logo = ActiveStorage::Blob.create_and_upload!(
-        io: File.open(Rails.root.join('spec', 'fixtures', 'logo.png'), 'rb'),
-        filename: 'logo.png',
+        io: File.open(Rails.root.join('spec', 'fixtures', 'image.png'), 'rb'),
+        filename: 'image.png',
         content_type: 'image/png'
       ).signed_id
 
