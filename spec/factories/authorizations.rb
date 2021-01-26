@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :authorization do
-    association :user
-    token { 'token' }
-    secret { 'secret' }
-    provider { "twitter" }
+    trait :with_user do
+      after(:build) do |authorization|
+        authorization.user = FactoryBot.build(:user)
+      end
+    end
   end
 end
