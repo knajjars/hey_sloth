@@ -1,14 +1,16 @@
 class TestimonialsController < ApplicationController
-  before_action :set_testimonial_and_authorize, only: [:show, :destroy, :toggle_showcase]
+  before_action :set_testimonial, only: [:show, :destroy, :toggle_showcase]
 
   def index
     @testimonials = current_user.testimonials
   end
 
   def show
+    authorize @testimonial
   end
 
   def destroy
+    authorize @testimonial
     @testimonial.destroy
     respond_to do |format|
       format.html { redirect_to testimonials_url, notice: 'Testimonial was successfully destroyed.' }
@@ -16,6 +18,7 @@ class TestimonialsController < ApplicationController
   end
 
   def toggle_showcase
+    authorize @testimonial
     @testimonial.showcase = !@testimonial.showcase
     @testimonial.save!
 
@@ -24,9 +27,8 @@ class TestimonialsController < ApplicationController
 
   private
 
-  def set_testimonial_and_authorize
+  def set_testimonial
     @testimonial = Testimonial.find_by_hashid(params[:id])
     return render_not_found if @testimonial.nil?
-    authorize @testimonial
   end
 end
