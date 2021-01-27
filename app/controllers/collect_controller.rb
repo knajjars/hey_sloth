@@ -1,6 +1,6 @@
 class CollectController < ApplicationController
   before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
-  before_action :set_shareable_link_and_authorize, only: [:from_shareable_link_new, :from_shareable_link_create, :send_email_create, :send_email_new]
+  before_action :set_shareable_link, only: [:from_shareable_link_new, :from_shareable_link_create, :send_email_create, :send_email_new]
   layout "page", only: :from_shareable_link_new
 
   def from_shareable_link_new
@@ -22,9 +22,11 @@ class CollectController < ApplicationController
   end
 
   def send_email_new
+    authorize @shareable_link
   end
 
   def send_email_create
+    authorize @shareable_link
     email_addresses = params[:email_addresses].reject { |e| e.empty? }
     email_addresses.each do |email_address|
       CollectMailer.new_testimonial(email_address, @shareable_link).deliver
@@ -84,9 +86,8 @@ class CollectController < ApplicationController
     @collected_tweets = current_user.testimonials.tweets
   end
 
-  def set_shareable_link_and_authorize
+  def set_shareable_link
     @shareable_link = ShareableLink.friendly.find_by(slug: params[:shareable_link_id])
-    authorize @shareable_link
   end
 
   def testimonial_params

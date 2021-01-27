@@ -11,13 +11,6 @@ class TestimonialPolicy < ApplicationPolicy
     true
   end
 
-  def update?
-    user == record.user
-  end
-
-  def edit?
-    update?
-  end
 
   def toggle_showcase?
     user == record.user

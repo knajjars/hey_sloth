@@ -33,6 +33,7 @@ group :development do
   gem 'web-console', '>= 4.1.0'
 end
 
+gem 'sib-api-v3-sdk', '~> 7.3'
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'omniauth'
 gem 'omniauth-twitter'
