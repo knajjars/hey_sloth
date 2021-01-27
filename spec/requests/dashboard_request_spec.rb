@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Dashboards", type: :request do
+  let(:user) { FactoryBot.create(:user) }
   describe '#index' do
     it 'redirects to login if not authenticated' do
       get app_root_url
@@ -9,7 +10,6 @@ RSpec.describe "Dashboards", type: :request do
     end
 
     it 'renders dashboard index for authenticated user' do
-      user = FactoryBot.create(:user)
       sign_in user
       get app_root_url
       expect(response).to have_http_status(200)
@@ -24,7 +24,6 @@ RSpec.describe "Dashboards", type: :request do
       end
 
       it 'renders collect view for authenticated user' do
-        user = FactoryBot.create(:user)
         sign_in user
         get collect_url
         expect(response).to have_http_status(200)
