@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ShareableLink, type: :model do
-  let(:shareable_link) { create(:shareable_link, :with_user, tag: "Some Tag") }
-  let(:shareable_links) { create_list(:shareable_link, 3, :with_user, tag: "Some Tag") }
+  let(:shareable_link) { create(:shareable_link, tag: "Some Tag") }
+  let(:shareable_links) { create_list(:shareable_link, 3, tag: "Some Tag") }
 
   describe 'tag' do
     it 'exists' do

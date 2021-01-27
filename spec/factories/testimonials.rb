@@ -4,17 +4,20 @@ FactoryBot.define do
     testimonial { Faker::Lorem.paragraph }
     source { 0 }
     association :user
+
+    after(:build) do |testimonial|
+      testimonial.user = FactoryBot.create(:user)
+    end
+
     trait :with_shareable_link do
       after(:build) do |testimonial|
-        testimonial.user = FactoryBot.create(:user)
-        testimonial.shareable_link = FactoryBot.create(:shareable_link, :with_user, image_required: false)
+        testimonial.shareable_link = FactoryBot.create(:shareable_link, image_required: false)
       end
     end
 
     trait :with_shareable_link_and_image_required do
       after(:build) do |testimonial|
-        testimonial.user = FactoryBot.create(:user)
-        testimonial.shareable_link = FactoryBot.create(:shareable_link, :with_user, image_required: true)
+        testimonial.shareable_link = FactoryBot.create(:shareable_link, image_required: true)
       end
     end
 
