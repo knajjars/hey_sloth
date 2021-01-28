@@ -1,18 +1,16 @@
 class ShareableLinksController < ApplicationController
-  before_action :set_shareable_link_and_authorize, only: [:show, :edit, :update, :destroy]
+  before_action :set_shareable_link, only: [:show, :edit, :update, :destroy]
 
   def index
     @shareable_link = current_user.shareable_links.all
   end
 
   def show
+    authorize @shareable_link
   end
 
   def new
     @shareable_link = ShareableLink.new
-  end
-
-  def edit
   end
 
   def create
@@ -28,7 +26,12 @@ class ShareableLinksController < ApplicationController
     end
   end
 
+  def edit
+    authorize @shareable_link
+  end
+
   def update
+    authorize @shareable_link
     respond_to do |format|
       if @shareable_link.update(shareable_link_params)
         format.html { redirect_to @shareable_link, notice: 'Shareable link was successfully updated.' }
@@ -39,6 +42,7 @@ class ShareableLinksController < ApplicationController
   end
 
   def destroy
+    authorize @shareable_link
     @shareable_link.destroy
     respond_to do |format|
       format.html { redirect_to shareable_links_url, notice: 'Shareable link was successfully destroyed.' }
@@ -47,10 +51,9 @@ class ShareableLinksController < ApplicationController
 
   private
 
-  def set_shareable_link_and_authorize
+  def set_shareable_link
     @shareable_link = ShareableLink.friendly.find(params[:id])
     return render_not_found if @shareable_link.nil?
-    authorize @shareable_link
   end
 
   def shareable_link_params

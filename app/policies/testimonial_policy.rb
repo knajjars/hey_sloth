@@ -3,15 +3,6 @@ class TestimonialPolicy < ApplicationPolicy
     user == record.user
   end
 
-  def create?
-    true
-  end
-
-  def new?
-    true
-  end
-
-
   def toggle_showcase?
     user == record.user
   end

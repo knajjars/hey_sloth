@@ -18,22 +18,6 @@ RSpec.describe TestimonialPolicy, type: :policy do
     end
   end
 
-  permissions :create? do
-    it 'allows every user' do
-      expect(TestimonialPolicy).to permit(other_user)
-      expect(TestimonialPolicy).to permit(current_user)
-      expect(TestimonialPolicy).to permit(nil)
-    end
-  end
-
-  permissions :new? do
-    it 'allows every user' do
-      expect(TestimonialPolicy).to permit(other_user)
-      expect(TestimonialPolicy).to permit(current_user)
-      expect(TestimonialPolicy).to permit(nil)
-    end
-  end
-
   permissions :toggle_showcase? do
     it 'allows owner to toggle showcase' do
       expect(TestimonialPolicy).to permit(current_user, current_user_testimonial)

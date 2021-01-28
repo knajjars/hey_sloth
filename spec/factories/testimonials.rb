@@ -22,13 +22,21 @@ FactoryBot.define do
     end
 
     trait :tweet do
-      after(:build) do |testimonial|
-        testimonial.tweet!
-        testimonial.tweet_status_id = Faker::Twitter.status
-        testimonial.tweet_url = Faker::Internet.url
-        testimonial.tweet_image_url = Faker::Internet.url
-        testimonial.tweet_user_id = Faker::Twitter.user
-      end
+      source { 1 }
+      tweet_status_id { Faker::Internet.uuid }
+      tweet_url { Faker::Internet.url }
+      tweet_image_url { Faker::Internet.url }
+      tweet_user_id { Faker::Internet.uuid }
     end
   end
+
+  # factory :tweet_testimonial, class: "Testimonial" do
+  #   name { Faker::Internet.username }
+  #   testimonial { Faker::Lorem.paragraph }
+  #   source { 1 }
+  #   tweet_status_id { Faker::Twitter.status }
+  #   tweet_url { Faker::Internet.url }
+  #   tweet_image_url { Faker::Internet.url }
+  #   tweet_user_id { Faker::Twitter.user }
+  # end
 end
