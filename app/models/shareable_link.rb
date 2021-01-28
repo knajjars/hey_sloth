@@ -6,11 +6,13 @@ class ShareableLink < ApplicationRecord
   has_many :testimonials
   has_one_attached :logo
 
+  before_validation { self.tag = self.tag.downcase }
+
   validates :tag,
             presence: true,
             length: { in: 4..30 },
             exclusion: %w[new edit index session login logout users admin
-                          stylesheets assets javascripts images]
+                          stylesheets assets javascripts javascript images]
   validates :logo, content_type: %i[png jpg jpeg]
 
   def slug_candidates

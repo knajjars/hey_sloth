@@ -43,8 +43,11 @@ RSpec.describe ShareableLink, type: :model do
 
     it 'does not allow reserved words' do
       %w[new edit index session login logout users admin
-         stylesheets assets javascripts images].each do |word|
+         stylesheets assets javascripts javascript images].each do |word|
         shareable_link.tag = word
+        expect(shareable_link).to_not be_valid
+
+        shareable_link.tag = word.upcase
         expect(shareable_link).to_not be_valid
       end
     end
