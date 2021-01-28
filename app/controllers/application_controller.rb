@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
-  before_action :authenticate_user!, except: [:from_shareable_link_create, :from_shareable_link_new, :create]
+  before_action :authenticate_user!, except: [:from_shareable_link_create, :from_shareable_link_new]
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
