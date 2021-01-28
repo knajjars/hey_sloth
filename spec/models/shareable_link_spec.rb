@@ -46,9 +46,6 @@ RSpec.describe ShareableLink, type: :model do
          stylesheets assets javascripts javascript images].each do |word|
         shareable_link.tag = word
         expect(shareable_link).to_not be_valid
-
-        shareable_link.tag = word.upcase
-        expect(shareable_link).to_not be_valid
       end
     end
   end

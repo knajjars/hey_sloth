@@ -6,8 +6,6 @@ class ShareableLink < ApplicationRecord
   has_many :testimonials
   has_one_attached :logo
 
-  before_validation { self.tag = self.tag.downcase }
-
   validates :tag,
             presence: true,
             length: { in: 4..30 },
