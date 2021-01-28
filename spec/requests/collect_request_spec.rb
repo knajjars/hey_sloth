@@ -179,12 +179,26 @@ RSpec.describe "Collects", type: :request do
 
   describe '#twitter_post_new' do
     it 'redirects to login if not authenticated' do
-      get collect_twitter_post_new_url(tweet_url: "random_url")
+      get collect_twitter_post_new_url(tweet_url: "https://twitter.com/knajjars/status/1345818236923863041")
       expect(response).to have_http_status(302)
       expect(response).to redirect_to('/login')
     end
 
-    xit '' do
+    it 'loads valid tweet and renders view' do
+      sign_in user
+      get collect_twitter_post_new_url(tweet_url: "https://twitter.com/knajjars/status/1345818236923863041")
+      expect(response).to have_http_status(200)
+      expect(response).to render_template("collect/twitter_post_new")
+      expect(response.body).to include("It took me 5 hipster years to give it a try to @rails for my side projects.")
+    end
+
+    it 'alerts of invalid Twitter post URL' do
+      sign_in user
+      get collect_twitter_post_new_url(tweet_url: "random")
+      expect(response).to have_http_status(302)
+      follow_redirect!
+      expect(response).to render_template("collect/twitter_post_new")
+      expect(response.body).to include("Please copy a valid twitter post URL.")
     end
   end
 end
