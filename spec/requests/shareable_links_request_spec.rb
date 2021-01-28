@@ -6,6 +6,8 @@ RSpec.describe "ShareableLinks", type: :request do
   let(:other_user) { FactoryBot.create(:user) }
   let(:valid_body) { (FactoryBot.attributes_for(:shareable_link)) }
   let(:invalid_body) { (FactoryBot.attributes_for(:shareable_link)).except(:tag) }
+  let(:valid_update_body) { (FactoryBot.attributes_for(:shareable_link)) }
+  let(:invalid_update_body) { (FactoryBot.attributes_for(:shareable_link)).merge({ random_attr: "random" }) }
 
   describe '#index' do
     it 'redirects to login if not authenticated' do
@@ -124,6 +126,70 @@ RSpec.describe "ShareableLinks", type: :request do
       expect(response).to redirect_to('/login')
     end
 
+    it 'updates shareable link for authenticated user' do
+      sign_in user
+      expect(ShareableLink.find(shareable_link.id).tag).to eq(shareable_link.tag)
+      expect {
+        patch shareable_link_url(shareable_link.id), params: { shareable_link: valid_update_body }
+      }.to_not change(ShareableLink, :count)
 
+      expect(response).to have_http_status(302)
+      follow_redirect!
+      expect(response).to render_template("shareable_links/show")
+      expect(ShareableLink.find(shareable_link.id).tag).to eq(valid_update_body[:tag])
+    end
+
+    it 'does not update shareable link with invalid attributes for authenticated user' do
+      sign_in user
+      expect(ShareableLink.find(shareable_link.id).tag).to eq(shareable_link.tag)
+      expect {
+        patch shareable_link_url(shareable_link.id), params: { shareable_link: invalid_update_body }
+      }.to_not change(ShareableLink, :count)
+      expect(response).to have_http_status(302)
+      follow_redirect!
+      expect(response).to render_template("shareable_links/show")
+      expect(ShareableLink.find(shareable_link.id)).to eq(shareable_link)
+    end
+
+    it 'redirects to not authorized for other authenticated user' do
+      sign_in other_user
+      patch shareable_link_url(shareable_link.id), params: { shareable_link: valid_update_body }
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to("/")
+      follow_redirect!
+      expect(response.body).to include("Not authorized")
+    end
+  end
+
+  describe '#destroy' do
+    it 'redirects to login if not authenticated' do
+      delete shareable_link_url(shareable_link.id)
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to('/login')
+    end
+
+    it 'deletes shareable link for authenticated user' do
+      sign_in user
+      id = shareable_link.id
+      expect {
+        delete shareable_link_url(id)
+      }.to change(ShareableLink, :count).by(-1)
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to('/shareable_links')
+      follow_redirect!
+      expect(response).to render_template("shareable_links/index")
+    end
+
+    it 'redirects to not authorized for other authenticated user' do
+      sign_in other_user
+      id = shareable_link.id
+      expect {
+        delete shareable_link_url(id)
+      }.to_not change(ShareableLink, :count)
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to('/')
+      follow_redirect!
+      expect(response.body).to include("Not authorized")
+    end
   end
 end
