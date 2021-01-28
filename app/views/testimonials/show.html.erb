@@ -27,12 +27,16 @@
 
 <p>
   <strong>Source:</strong>
-  <%= @testimonial.source.capitalize %>
+  <% if @testimonial.tweet? %>
+    Twitter
+  <% else %>
+  Shareable link: <%= link_to @testimonial.shareable_link.tag, @testimonial.shareable_link %>
+  <% end %>
 </p>
 
 <p>
   <strong>Showcase:</strong>
-  <%= @testimonial.showcase %>
+  <%= @testimonial.showcase.yesno %>
 </p>
 
 <%= image_tag @testimonial.image if @testimonial.image.attached? %>

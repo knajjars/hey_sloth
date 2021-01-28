@@ -19,22 +19,22 @@
 
 <p>
   <strong>Social link required:</strong>
-  <%= @shareable_link.social_link_required %>
+  <%= @shareable_link.social_link_required.yesno %>
 </p>
 
 <p>
   <strong>Job required:</strong>
-  <%= @shareable_link.job_required %>
+  <%= @shareable_link.job_required.yesno %>
 </p>
 
 <p>
   <strong>Image required:</strong>
-  <%= @shareable_link.image_required %>
+  <%= @shareable_link.image_required.yesno %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @shareable_link.user_id %>
+  <strong>Collected:</strong>
+  <%= @shareable_link.testimonials.count %> testimonial(s)
 </p>
 
 <%= image_tag @shareable_link.logo if @shareable_link.logo.attached? %>

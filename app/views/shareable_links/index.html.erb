@@ -19,9 +19,9 @@
     <tr>
       <td><%= shareable_link.tag %></td>
       <td><%= shareable_link.note %></td>
-      <td><%= shareable_link.social_link_required %></td>
-      <td><%= shareable_link.job_required %></td>
-      <td><%= shareable_link.image_required %></td>
+      <td><%= shareable_link.social_link_required.yesno %></td>
+      <td><%= shareable_link.job_required.yesno %></td>
+      <td><%= shareable_link.image_required.yesno %></td>
       <td><%= link_to 'Show', shareable_link %></td>
       <td><%= link_to 'Edit', edit_shareable_link_path(shareable_link) %></td>
       <td><%= link_to 'Destroy', shareable_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
