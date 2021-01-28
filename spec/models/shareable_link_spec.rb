@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ShareableLink, type: :model do
-  let(:shareable_link) { create(:shareable_link, tag: "Some Tag") }
-  let(:shareable_links) { create_list(:shareable_link, 3, tag: "Some Tag") }
+  let(:shareable_link) { create(:shareable_link, tag: 'Some Tag') }
+  let(:shareable_links) { create_list(:shareable_link, 3, tag: 'Some Tag') }
 
   describe 'tag' do
     it 'exists' do
@@ -25,11 +25,11 @@ RSpec.describe ShareableLink, type: :model do
     end
 
     it 'auto increment slug if tag already exists' do
-      slugs = shareable_links.map { |shareable_link| shareable_link.slug }
+      slugs = shareable_links.map(&:slug)
       expect(slugs).to contain_exactly(
-                         "some-tag",
-                         "some-tag-2",
-                         "some-tag-3"
+        'some-tag',
+        'some-tag-2',
+        'some-tag-3'
                        )
     end
 
@@ -39,6 +39,14 @@ RSpec.describe ShareableLink, type: :model do
 
       shareable_link.tag = '100000000020000000003000000000' + '4'
       expect(shareable_link).to_not be_valid
+    end
+
+    it 'does not allow reserved words' do
+      %w[new edit index session login logout users admin
+         stylesheets assets javascripts images].each do |word|
+        shareable_link.tag = word
+        expect(shareable_link).to_not be_valid
+      end
     end
   end
 

@@ -8,11 +8,13 @@ class ShareableLink < ApplicationRecord
 
   validates :tag,
             presence: true,
-            length: { in: 4..30 }
-  validates :logo, content_type: [:png, :jpg, :jpeg]
+            length: { in: 4..30 },
+            exclusion: %w[new edit index session login logout users admin
+                          stylesheets assets javascripts images]
+  validates :logo, content_type: %i[png jpg jpeg]
 
   def slug_candidates
-    [:tag, :tag_and_sequence]
+    %i[tag tag_and_sequence]
   end
 
   def tag_and_sequence
