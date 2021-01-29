@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe ShareableLink, type: :model do
   let(:shareable_link) { create(:shareable_link, tag: 'Some Tag') }
   let(:shareable_links) { create_list(:shareable_link, 3, tag: 'Some Tag') }
+  let(:shareable_link_with_testimonial) { FactoryBot.create(:shareable_link, :image_not_required) }
+  let(:testimonial) { FactoryBot.create(:testimonial, shareable_link: shareable_link_with_testimonial) }
 
   describe 'tag' do
     it 'exists' do
@@ -102,6 +104,18 @@ RSpec.describe ShareableLink, type: :model do
     it 'can have many testimonials' do
       testimonials = ShareableLink.reflect_on_association :testimonials
       expect(testimonials.macro).to eq :has_many
+    end
+
+    it 'removes association from testimonials when deleted' do
+      expect(testimonial.shareable_link).to_not be_nil
+      expect(shareable_link_with_testimonial.testimonials.count).to eq(1)
+
+      expect {
+        shareable_link_with_testimonial.destroy!
+      }.to change(ShareableLink, :count).by(-1)
+
+      testimonial.reload
+      expect(testimonial.shareable_link).to be_nil
     end
   end
 

@@ -3,7 +3,7 @@ class ShareableLink < ApplicationRecord
   friendly_id :slug_candidates, use: :slugged
 
   belongs_to :user
-  has_many :testimonials
+  has_many :testimonials, dependent: :nullify
   has_one_attached :logo
 
   validates :tag,

@@ -9,5 +9,9 @@ FactoryBot.define do
     after(:build) do |shareable_link|
       shareable_link.user = FactoryBot.build(:user)
     end
+
+    trait :image_not_required do
+      image_required { false }
+    end
   end
 end

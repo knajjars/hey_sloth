@@ -30,7 +30,7 @@
   <% if @testimonial.tweet? %>
     Twitter
   <% else %>
-    Shareable link: <%= link_to @testimonial.shareable_link.tag, @testimonial.shareable_link %>
+    <%= @testimonial.shareable_link.nil? ? 'Shareable link (deleted)' : "Shareable link (#{link_to(@testimonial.shareable_link.tag, @testimonial.shareable_link)})".html_safe %>
   <% end %>
 </p>
 
