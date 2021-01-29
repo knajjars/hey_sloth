@@ -97,6 +97,14 @@ RSpec.describe Testimonial, type: :model do
     end
   end
 
+  describe '#showcased' do
+    it 'filters all showcased testimonials' do
+      FactoryBot.create_list(:testimonial, 10, :tweet, showcase: true)
+      FactoryBot.create_list(:testimonial, 5, :tweet, showcase: false)
+      expect(Testimonial.showcased.count).to eq(10)
+    end
+  end
+
   describe 'source' do
     it 'can be tweet' do
       expect(testimonial_tweet.source).to eq('tweet')

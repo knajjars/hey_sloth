@@ -6,7 +6,7 @@ FactoryBot.define do
     association :user
 
     after(:build) do |testimonial|
-      testimonial.user = FactoryBot.create(:user)
+      testimonial.user = FactoryBot.create(:user) if testimonial.user.nil?
     end
 
     trait :with_shareable_link do
@@ -29,14 +29,4 @@ FactoryBot.define do
       tweet_user_id { Faker::Internet.uuid }
     end
   end
-
-  # factory :tweet_testimonial, class: "Testimonial" do
-  #   name { Faker::Internet.username }
-  #   testimonial { Faker::Lorem.paragraph }
-  #   source { 1 }
-  #   tweet_status_id { Faker::Twitter.status }
-  #   tweet_url { Faker::Internet.url }
-  #   tweet_image_url { Faker::Internet.url }
-  #   tweet_user_id { Faker::Twitter.user }
-  # end
 end

@@ -1,12 +1,16 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
-  before_action :authenticate_user!, except: [:from_shareable_link_create, :from_shareable_link_new]
+  before_action :authenticate_user!, except: [:from_shareable_link_create, :from_shareable_link_new, :list_testimonials]
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def render_not_found
     render :file => "#{Rails.root}/public/404.html", :status => 404
+  end
+
+  def render_not_found_json
+    render json: { "message": 'Not found' }, :status => 404
   end
 
   def render_bad_request
@@ -24,7 +28,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:alert] = "Not authorized"
+    flash[:alert] = 'Not authorized'
     redirect_to(request.referrer || root_path)
   end
 end
