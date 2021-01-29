@@ -30,13 +30,18 @@
   <% if @testimonial.tweet? %>
     Twitter
   <% else %>
-  Shareable link: <%= link_to @testimonial.shareable_link.tag, @testimonial.shareable_link %>
+    Shareable link: <%= link_to @testimonial.shareable_link.tag, @testimonial.shareable_link %>
   <% end %>
 </p>
 
 <p>
   <strong>Showcase:</strong>
   <%= @testimonial.showcase.yesno %>
+</p>
+
+<p>
+  <strong>Collected on:</strong>
+  <%= formatted_date @testimonial.created_at, with_time_passed: true %>
 </p>
 
 <%= image_tag @testimonial.image if @testimonial.image.attached? %>

@@ -16,4 +16,5 @@ class Testimonial < ApplicationRecord
   def self.tweets
     where(source: Testimonial.sources[:tweet])
   end
+
 end
