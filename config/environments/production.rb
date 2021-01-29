@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -70,11 +70,11 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp-relay.sendinblue.com",
+    address: 'smtp-relay.sendinblue.com',
     port: 587,
     user_name: Rails.application.credentials.sendinblue[:username],
     password: Rails.application.credentials.sendinblue[:password],
-    authentication: "login",
+    authentication: 'login',
     enable_starttls_auto: true
   }
 
@@ -100,7 +100,7 @@ Rails.application.configure do
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
@@ -131,6 +131,6 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
 
-  config.hosts << "heysloth.com" << "app.heysloth.com" << "www.heysloth.com" << "external.heysloth.com"
+  config.hosts << 'heysloth.com' << 'app.heysloth.com' << 'www.heysloth.com' << 'external.heysloth.com'
 
 end
