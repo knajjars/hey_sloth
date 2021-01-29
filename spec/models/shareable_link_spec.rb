@@ -27,9 +27,9 @@ RSpec.describe ShareableLink, type: :model do
     it 'auto increment slug if tag already exists' do
       slugs = shareable_links.map(&:slug)
       expect(slugs).to contain_exactly(
-        'some-tag',
-        'some-tag-2',
-        'some-tag-3'
+                         'some-tag',
+                         'some-tag-2',
+                         'some-tag-3'
                        )
     end
 
@@ -45,6 +45,9 @@ RSpec.describe ShareableLink, type: :model do
       %w[new edit index session login logout users admin
          stylesheets assets javascripts javascript images].each do |word|
         shareable_link.tag = word
+        expect(shareable_link).to_not be_valid
+
+        shareable_link.tag = word.upcase
         expect(shareable_link).to_not be_valid
       end
     end
