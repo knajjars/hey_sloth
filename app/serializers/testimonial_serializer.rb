@@ -5,8 +5,10 @@ class TestimonialSerializer < ApplicationSerializer
   def image_url
     if object.tweet?
       object.tweet_image_url
+    elsif object.image.attached?
+      rails_blob_path object.image
     else
-      url_for object.image if object.image.attached?
+      nil
     end
   end
 end
