@@ -5,7 +5,7 @@ class CreateTestimonials < ActiveRecord::Migration[6.1]
       t.string :company
       t.string :role
       t.string :social_link
-      t.text :testimonial, null: false, default: ""
+      t.text :content, null: false
       t.references :user, null: false, foreign_key: true
       t.references :shareable_link, null: true, foreign_key: true
       t.integer :source, default: 0
