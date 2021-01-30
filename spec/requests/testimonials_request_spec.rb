@@ -33,7 +33,7 @@ RSpec.describe 'Testimonials', type: :request do
       expect(response).to have_http_status(200)
       expect(response).to render_template('testimonials/show')
       expect(response.body).to include(testimonial.name)
-      expect(response.body).to include(testimonial.testimonial)
+      expect(response.body).to include(testimonial.content)
     end
 
     it 'redirects to not authorized for other authenticated user' do

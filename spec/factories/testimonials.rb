@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :testimonial do
     name { Faker::Internet.username }
-    testimonial { Faker::Lorem.paragraph }
+    content { Faker::Lorem.paragraph }
     source { 0 }
     association :user
 

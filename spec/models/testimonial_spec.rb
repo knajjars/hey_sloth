@@ -13,12 +13,30 @@ RSpec.describe Testimonial, type: :model do
     expect(testimonial).to be_valid
   end
 
-  it 'requires a testimonial' do
-    testimonial.testimonial = nil
+  it 'requires content' do
+    testimonial.content = nil
     expect(testimonial).to_not be_valid
 
-    testimonial.testimonial = Faker::Lorem.paragraph
+    testimonial.content = Faker::Lorem.paragraph
     expect(testimonial).to be_valid
+  end
+
+  describe '#text' do
+    it 'has text field' do
+      expect(testimonial.text).to eq(testimonial.content)
+    end
+
+    it 'prioritizes rich text over plain text' do
+      rich_text = '<div><strong>This is awesome!<br></strong><br></div><ul><li>I am a test</li><li><em>and this rocks!</em></li><li><del>truly.</del></li></ul>'
+      plain_text = "This is awesome!\n• I am a test\n• and this rocks!\n• truly."
+
+      expect(testimonial.text).to eq(testimonial.content)
+      testimonial.rich_text = rich_text
+      testimonial.save!
+      expect(testimonial.rich_text).to be_an_instance_of(ActionText::RichText)
+      expect(testimonial.content).to eq(plain_text)
+      expect(testimonial.text).to eq(testimonial.rich_text)
+    end
   end
 
   it 'can have a company' do
