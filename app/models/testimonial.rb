@@ -1,5 +1,6 @@
 class Testimonial < ApplicationRecord
   include Hashid::Rails
+
   enum source: %i[text tweet]
 
   belongs_to :user
@@ -21,8 +22,4 @@ class Testimonial < ApplicationRecord
     where(showcase: true)
   end
 
-  def self.select_external_fields
-    keys = %i[name company role social_link testimonial source tweet_status_id tweet_url tweet_image_url tweet_user_id created_at]
-    pluck(*keys).map { |pa| Hash[keys.zip(pa)] }
-  end
 end

@@ -5,12 +5,6 @@ RSpec.describe 'Externals', type: :request do
   let(:testimonial_attributes) { FactoryBot.attributes_for(:testimonial, :tweet, showcase: true) }
   let(:user) { testimonial_created.user }
   let(:other_user) { FactoryBot.create(:user) }
-  let(:testimonial) { select_external_fields(testimonial_created) }
-
-  def select_external_fields(testimonial)
-    testimonial.as_json.slice('name', 'company', 'role', 'social_link', 'testimonial', 'source', 'tweet_status_id',
-                              'tweet_url', 'tweet_image_url', 'tweet_user_id', 'created_at')
-  end
 
   describe '#list_testimonials' do
     describe 'for non-existent public_token' do
@@ -54,19 +48,20 @@ RSpec.describe 'Externals', type: :request do
         user.reload
         get get_testimonials_json_url(public_token: user.public_token)
         expect(response).to have_http_status(200)
-        expect(JSON.parse(response.body)).to eq(user.testimonials.showcased.select_external_fields.as_json)
+        expect(JSON.parse(response.body).count).to eq(user.testimonials.showcased.count)
       end
 
       it 'returns only external fields' do
         get get_testimonials_json_url(public_token: user.public_token)
         expect(response).to have_http_status(200)
-        expect(response.body).to eq([testimonial].to_json)
         body = JSON.parse(response.body).first
-        expect(body['user_id']).to be_nil
-        expect(body['id']).to be_nil
-        expect(body['shareable_link_id']).to be_nil
-        expect(body['showcase']).to be_nil
-        expect(body['updated_at']).to be_nil
+        %w[name company role social_link testimonial source tweet_status_id tweet_url tweet_user_id created_at image_url].each do |key|
+          expect(body).to have_key(key)
+        end
+
+        %w[user_id shareable_link_id showcase id updated_at tweet_image_url].each do |key|
+          expect(body).to_not have_key(key)
+        end
       end
     end
   end

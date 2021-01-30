@@ -14,15 +14,15 @@ gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', '~> 4.0', '>= 4.0.2'
-  gem 'pry-rails', '~> 0.3.9'
   gem 'factory_bot_rails', '~> 6.1'
+  gem 'pry-rails', '~> 0.3.9'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
+  gem 'rspec-rails', '~> 4.0', '>= 4.0.2'
 end
 
 group :test do
-  gem 'simplecov', '~> 0.21.2', require: false
   gem 'faker', '~> 2.15', '>= 2.15.1'
+  gem 'simplecov', '~> 0.21.2', require: false
 end
 
 group :development do
@@ -33,14 +33,15 @@ group :development do
   gem 'web-console', '>= 4.1.0'
 end
 
-gem 'sib-api-v3-sdk', '~> 7.3'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'active_storage_validations', '~> 0.9.2'
 gem 'devise', '~> 4.7', '>= 4.7.3'
+gem 'friendly_id', '~> 5.4', '>= 5.4.2'
+gem 'hashid-rails', '~> 1.0'
+gem 'honeybadger', '~> 4.0'
+gem 'lockbox', '~> 0.6.1'
 gem 'omniauth'
 gem 'omniauth-twitter'
-gem 'twitter', '~> 7.0'
-gem 'lockbox', '~> 0.6.1'
-gem 'active_storage_validations', '~> 0.9.2'
-gem 'friendly_id', '~> 5.4', '>= 5.4.2'
-gem "hashid-rails", "~> 1.0"
 gem 'pundit', '~> 2.1'
-gem "honeybadger", "~> 4.0"
+gem 'sib-api-v3-sdk', '~> 7.3'
+gem 'twitter', '~> 7.0'
