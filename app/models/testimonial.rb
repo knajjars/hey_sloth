@@ -18,6 +18,10 @@ class Testimonial < ApplicationRecord
             if: ->(testimonial) { !testimonial.tweet? && testimonial.shareable_link.image_required },
             content_type: %i[png jpg jpeg]
 
+  def self.with_rich_text
+    with_rich_text_rich_text
+  end
+
   def self.tweets
     where(source: Testimonial.sources[:tweet])
   end
