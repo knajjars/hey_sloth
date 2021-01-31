@@ -23,6 +23,10 @@ class User < ApplicationRecord
     end
   end
 
+  def twitter?
+    authorizations.where(provider: 'twitter').present?
+  end
+
   def twitter
     Twitter::REST::Client.new do |config|
       config.consumer_key = Rails.application.credentials.twitter[:api_key]

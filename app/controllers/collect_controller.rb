@@ -46,7 +46,10 @@ class CollectController < ApplicationController
     unless tweet_url.nil?
       begin
         tweet_status = tweet_url.split("/").last
-        @tweet = TwitterApi.client.status(tweet_status, tweet_mode: 'extended')
+
+        client = current_user.twitter? ? current_user.twitter : TwitterApi.client
+        @tweet = client.status(tweet_status, tweet_mode: 'extended')
+
         render :twitter_post_new
       rescue Twitter::Error::NotFound => e
         redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
@@ -61,7 +64,7 @@ class CollectController < ApplicationController
     Testimonial.create!(
       "user": current_user,
       "name": tweet[:name],
-      "testimonial": tweet[:testimonial],
+      "content": tweet[:content],
       "source": "tweet",
       "social_link": tweet[:social_link],
       "tweet_status_id": tweet[:tweet_status_id],
@@ -84,7 +87,7 @@ class CollectController < ApplicationController
   private
 
   def tweet_params
-    params.require(:testimonial).permit(:name, :testimonial, :social_link, :tweet_status_id, :tweet_url, :tweet_user_id, :tweet_image_url)
+    params.require(:testimonial).permit(:name, :content, :social_link, :tweet_status_id, :tweet_url, :tweet_user_id, :tweet_image_url)
   end
 
   def get_collected_tweets
@@ -96,7 +99,7 @@ class CollectController < ApplicationController
   end
 
   def testimonial_params
-    params.require(:testimonial).permit(:name, :company, :role, :social_link, :testimonial, :image)
+    params.require(:testimonial).permit(:name, :company, :role, :social_link, :rich_text, :image)
   end
 
 end

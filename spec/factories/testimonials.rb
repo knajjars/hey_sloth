@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :testimonial do
     name { Faker::Internet.username }
-    testimonial { Faker::Lorem.paragraph }
+    content { Faker::Lorem.paragraph }
     source { 0 }
     association :user
 
@@ -19,6 +19,11 @@ FactoryBot.define do
       after(:build) do |testimonial|
         testimonial.shareable_link = FactoryBot.create(:shareable_link, image_required: true)
       end
+    end
+
+    trait :with_rich_text do
+      rich_text { "<div><strong>This is awesome!<br></strong><br></div><ul><li>I am a test</li><li><em>and this rocks!</em></li><li><del>truly.</del></li></ul" }
+      content { nil }
     end
 
     trait :tweet do

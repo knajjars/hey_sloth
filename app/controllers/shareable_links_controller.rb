@@ -2,7 +2,7 @@ class ShareableLinksController < ApplicationController
   before_action :set_shareable_link, only: [:show, :edit, :update, :destroy]
 
   def index
-    @shareable_link = current_user.shareable_links.all
+    @shareable_link = current_user.shareable_links.with_rich_text_note
   end
 
   def show
