@@ -24,7 +24,7 @@
       <td><%= testimonial.company %></td>
       <td><%= testimonial.role %></td>
       <td><%= testimonial.social_link %></td>
-      <td><%= testimonial.text %></td>
+      <td><%= testimonial.rich_text_or_content %></td>
       <td><%= testimonial.source.capitalize %></td>
       <td><%= button_to "#{testimonial.showcase.yesno}", toggle_showcase_testimonial_path(testimonial), method: :post %></td>
       <td><%= formatted_date testimonial.created_at, with_time_passed: false %></td>

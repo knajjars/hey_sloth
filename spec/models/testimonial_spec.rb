@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Testimonial, type: :model do
   let(:testimonial) { FactoryBot.create(:testimonial, :with_shareable_link) }
+  let(:shareable_link) { FactoryBot.create(:shareable_link, :image_not_required) }
+  let(:testimonial_with_rich_text_params) { FactoryBot.attributes_for(:testimonial, :with_rich_text) }
+  let(:testimonial_params) { FactoryBot.attributes_for(:testimonial) }
   let(:testimonial_tweet) { FactoryBot.create(:testimonial, :tweet) }
   let(:testimonial_image_required) { FactoryBot.build(:testimonial, :with_shareable_link_and_image_required) }
 
@@ -21,21 +24,39 @@ RSpec.describe Testimonial, type: :model do
     expect(testimonial).to be_valid
   end
 
-  describe '#text' do
-    it 'has text field' do
-      expect(testimonial.text).to eq(testimonial.content)
+  describe '#rich_text_or_content' do
+    it 'has rich_text_or_content virtual field' do
+      expect(testimonial.rich_text_or_content).to eq(testimonial.content)
+    end
+
+    it 'can create testimonial without content but with rich_text' do
+      testimonial_with_rich_text = shareable_link.testimonials.new testimonial_with_rich_text_params.merge({ user: shareable_link.user })
+      expect(testimonial_with_rich_text).to be_valid
+
+      testimonial_without_rich_text = shareable_link.testimonials.new testimonial_params.merge({ user: shareable_link.user })
+      expect(testimonial_without_rich_text).to be_valid
+    end
+
+    it 'requires either content or rich_text' do
+      testimonial_without_rich_text_and_content = shareable_link.testimonials.new testimonial_params.merge({ user: shareable_link.user }).except(:content)
+      expect(testimonial_without_rich_text_and_content).to_not be_valid
     end
 
     it 'prioritizes rich text over plain text' do
       rich_text = '<div><strong>This is awesome!<br></strong><br></div><ul><li>I am a test</li><li><em>and this rocks!</em></li><li><del>truly.</del></li></ul>'
       plain_text = "This is awesome!\n• I am a test\n• and this rocks!\n• truly."
 
-      expect(testimonial.text).to eq(testimonial.content)
+      expect(testimonial.rich_text_or_content).to eq(testimonial.content)
       testimonial.rich_text = rich_text
       testimonial.save!
       expect(testimonial.rich_text).to be_an_instance_of(ActionText::RichText)
       expect(testimonial.content).to eq(plain_text)
-      expect(testimonial.text).to eq(testimonial.rich_text)
+      expect(testimonial.rich_text_or_content).to eq(testimonial.rich_text)
+    end
+
+    it 'displays content when there is no rich_text' do
+      expect(testimonial.rich_text).to be_nil
+      expect(testimonial.rich_text_or_content).to eq(testimonial.content)
     end
   end
 

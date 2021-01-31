@@ -21,6 +21,11 @@ FactoryBot.define do
       end
     end
 
+    trait :with_rich_text do
+      rich_text { "<div><strong>This is awesome!<br></strong><br></div><ul><li>I am a test</li><li><em>and this rocks!</em></li><li><del>truly.</del></li></ul" }
+      content { nil }
+    end
+
     trait :tweet do
       source { 1 }
       tweet_status_id { Faker::Internet.uuid }
