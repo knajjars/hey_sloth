@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 2021_01_30_170811) do
 
   create_table "shareable_links", force: :cascade do |t|
     t.string "tag"
-    t.text "note"
     t.boolean "social_link_required", default: false
     t.boolean "job_required", default: false
     t.boolean "image_required", default: false

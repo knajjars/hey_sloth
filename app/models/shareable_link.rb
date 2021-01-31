@@ -2,6 +2,8 @@ class ShareableLink < ApplicationRecord
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
+  has_rich_text :note
+
   belongs_to :user
   has_many :testimonials, dependent: :nullify
   has_one_attached :logo
