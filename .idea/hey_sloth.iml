@@ -139,6 +139,7 @@
     <orderEntry type="library" scope="PROVIDED" name="spring (v2.1.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.0.2, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.2.2, rbenv: 3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tailwindcss-rails (v0.3.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.0.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.6, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.0.10, rbenv: 3.0.0) [gem]" level="application" />
@@ -506,6 +507,19 @@
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="Report code statistics (KLOCs, etc) from the application or engine" fullCommand="stats" id="stats" />
+          <RakeTaskImpl id="tailwindcss">
+            <subtasks>
+              <RakeTaskImpl description="Install Tailwind CSS into the app" fullCommand="tailwindcss:install" id="install" />
+              <RakeTaskImpl id="install">
+                <subtasks>
+                  <RakeTaskImpl description="Install Tailwind CSS with the asset pipeline" fullCommand="tailwindcss:install:asset_pipeline" id="asset_pipeline" />
+                  <RakeTaskImpl description="Install Tailwind CSS with webpacker" fullCommand="tailwindcss:install:webpacker" id="webpacker" />
+                </subtasks>
+              </RakeTaskImpl>
+              <RakeTaskImpl description="Show the list of class names being kept in Tailwind CSS" fullCommand="tailwindcss:keeping_class_names" id="keeping_class_names" />
+              <RakeTaskImpl description="Show Tailwind CSS styles that are left after purging unused class names" fullCommand="tailwindcss:preview_purge" id="preview_purge" />
+            </subtasks>
+          </RakeTaskImpl>
           <RakeTaskImpl id="time">
             <subtasks>
               <RakeTaskImpl description="List all time zones, list by two-letter country code (`bin/rails time:zones[US]`), or list by UTC offset (`bin/rails time:zones[-8]`)" fullCommand="time:zones[country_or_offset]" id="zones[country_or_offset]" />

@@ -6,8 +6,11 @@
     "@rails/actiontext": "^6.1.0",
     "@rails/activestorage": "^6.1.1",
     "@rails/ujs": "^6.1.1",
-    "@rails/webpacker": "5.2.1",
+    "@rails/webpacker": "rails/webpacker#b6c2180",
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.4",
     "stimulus": "^2.0.0",
+    "tailwindcss": "^2.0.2",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },
