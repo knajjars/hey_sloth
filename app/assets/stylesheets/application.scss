@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+.clipboard-button {
+  display: none;
+}
+
+.clipboard--supported .clipboard-button {
+  display: initial;
+}
+
+.clipboard--success .clipboard-button {
+  background-color: palegreen;
+}

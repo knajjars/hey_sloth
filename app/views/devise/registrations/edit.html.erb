@@ -57,8 +57,7 @@
 <p>Use this token for the API: <strong><%= current_user.public_token %></strong></p>
 
 <p>
-  <%= text_field_tag :weburl, get_testimonials_json_url(current_user.public_token, subdomain: 'external') %>
-  <%= button_tag "Copy", :type => "button", :id => "clipboard-btn", :data => { :clipboard_action => 'copy', :clipboard_target => '#weburl' } %>
+  <%= render "shared/copy_clipboard", content: get_testimonials_json_url(current_user.public_token, subdomain: 'external') %>
 </p>
 
 
@@ -68,4 +67,3 @@
 
 <%= link_to "Back", :back %>
 
-<%= javascript_pack_tag 'copy_clipboard' %>

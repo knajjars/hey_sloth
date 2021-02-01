@@ -4,6 +4,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "trix"
 import "@rails/actiontext"
+import "controllers"
 
 import "./rich_text"
 

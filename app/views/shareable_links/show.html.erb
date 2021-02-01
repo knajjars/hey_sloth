@@ -1,11 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<p>Use this shareable url to collect testimonials for your product:
-</p>
-<p>
-  <%= text_field_tag :weburl, collect_from_shareable_link_new_url(@shareable_link.slug, subdomain: false) %>
-  <%= button_tag "Copy", :type => "button", :id => "clipboard-btn", :data => { :clipboard_action => "copy", :clipboard_target => "#weburl" } %>
-</p>
+<p>Use this shareable url to collect testimonials for your product:</p>
+<%= render "shared/copy_clipboard", content: collect_from_shareable_link_new_url(@shareable_link.slug, subdomain: false) %>
 
 <p>
   <strong>Tag:</strong>
@@ -47,4 +43,3 @@
 <%= link_to 'Edit', edit_shareable_link_path(@shareable_link) %> |
 <%= link_to 'Back', shareable_links_path %>
 
-<%= javascript_pack_tag 'copy_clipboard' %>
