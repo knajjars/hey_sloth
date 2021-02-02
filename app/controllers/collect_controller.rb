@@ -3,6 +3,9 @@ class CollectController < ApplicationController
   before_action :set_shareable_link, only: [:from_shareable_link_new, :from_shareable_link_create, :send_email_create, :send_email_new]
   layout "page", only: :from_shareable_link_new
 
+  def index
+  end
+
   def from_shareable_link_new
     @testimonial = Testimonial.new
     render_not_found if @shareable_link.nil?

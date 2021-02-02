@@ -5,10 +5,27 @@ RSpec.describe 'Collects', type: :request do
   let(:user) { shareable_link.user }
   let(:other_user) { FactoryBot.create(:user) }
   let(:tweet_testimonial) { FactoryBot.create(:testimonial, :tweet) }
-  let(:valid_body) { FactoryBot.attributes_for(:testimonial).except(:content).merge({ rich_text: "<div><strong>This is awesome!<br></strong><br></div><ul><li>I am a test</li><li><em>and this rocks!</em></li><li><del>truly.</del></li></ul>" }) }
+  let(:valid_body) do
+    FactoryBot.attributes_for(:testimonial).except(:content).merge({ rich_text: '<div><strong>This is awesome!<br></strong><br></div><ul><li>I am a test</li><li><em>and this rocks!</em></li><li><del>truly.</del></li></ul>' })
+  end
   let(:invalid_body) { FactoryBot.attributes_for(:testimonial).except(:content) }
   let(:valid_tweet_body) { FactoryBot.attributes_for(:testimonial, :tweet) }
   let(:invalid_tweet_body) { FactoryBot.attributes_for(:testimonial) }
+
+  describe '#collect' do
+    it 'redirects to login if not authenticated' do
+      get collect_url
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to('/login')
+    end
+
+    it 'renders collect view for authenticated user' do
+      sign_in user
+      get collect_url
+      expect(response).to have_http_status(200)
+      expect(response).to render_template('collect/index')
+    end
+  end
 
   describe '#from_shareable_link_new' do
     it 'renders for unauthenticated user' do
@@ -32,9 +49,9 @@ RSpec.describe 'Collects', type: :request do
     end
 
     it 'creates testimonial for owner of shareable link' do
-      expect {
+      expect do
         post collect_from_shareable_link_create_url(shareable_link.slug), params: { testimonial: valid_body }
-      }.to change(Testimonial, :count).by(1)
+      end.to change(Testimonial, :count).by(1)
       expect(user.testimonials.count).to be(1)
       expect(other_user.testimonials.count).to be(0)
       expect(response).to have_http_status(302)
@@ -44,9 +61,9 @@ RSpec.describe 'Collects', type: :request do
     end
 
     it 'renders errors for missing attributes of testimonial' do
-      expect {
+      expect do
         post collect_from_shareable_link_create_url(shareable_link.slug), params: { testimonial: invalid_body }
-      }.to_not change(Testimonial, :count)
+      end.to_not change(Testimonial, :count)
       expect(user.testimonials.count).to be(0)
       expect(response.body).to include('Content can&#39;t be blank')
       expect(response).to render_template('collect/from_shareable_link_new')
@@ -96,9 +113,10 @@ RSpec.describe 'Collects', type: :request do
 
     it 'sends emails for authenticated user' do
       sign_in user
-      expect {
-        post collect_send_email_create_url(shareable_link.slug), params: { email_addresses: ['example@example.com', 'otherexample@example.com'] }
-      }.to change { ActionMailer::Base.deliveries.count }.by(2)
+      expect do
+        post collect_send_email_create_url(shareable_link.slug),
+             params: { email_addresses: ['example@example.com', 'otherexample@example.com'] }
+      end.to change { ActionMailer::Base.deliveries.count }.by(2)
       expect(response).to have_http_status(302)
       expect(response).to redirect_to("/shareable_links/#{shareable_link.slug}")
       follow_redirect!
@@ -136,9 +154,9 @@ RSpec.describe 'Collects', type: :request do
 
     it 'collects tweet testimonial for user' do
       sign_in user
-      expect {
+      expect do
         post collect_twitter_post_create_url, params: { testimonial: valid_tweet_body }
-      }.to change(Testimonial, :count).by(1)
+      end.to change(Testimonial, :count).by(1)
 
       expect(user.testimonials.tweets.first.tweet_status_id).to eq(valid_tweet_body[:tweet_status_id])
       expect(user.testimonials.tweets.first.social_link).to eq(valid_tweet_body[:social_link])

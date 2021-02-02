@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   constraints subdomain: 'app' do
     devise_for :user, path: '',
-               path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+                      path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
     delete 'disconnect_authorization/:provider', to: 'users/authorization#disconnect', as: :disconnect_authorization
 
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
 
     scope '/collect', as: 'collect' do
-      get '/', to: 'dashboard#collect'
+      get '/', to: 'collect#index'
       get ':shareable_link_id/send_email', to: 'collect#send_email_new', as: 'send_email_new'
       post ':shareable_link_id/send_email', to: 'collect#send_email_create', as: 'send_email_create'
 
