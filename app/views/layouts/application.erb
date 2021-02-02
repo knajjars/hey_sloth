@@ -7,22 +7,17 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "tailwind" %>
+  <%= stylesheet_link_tag "inter-font" %>
+
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
 
 </head>
 
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
-
-<% if user_signed_in? %>
-  <%= link_to 'Home', app_root_path %>
-  <%= link_to 'Profile', edit_user_registration_path %>
-  <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Log in', new_user_session_path %>
-  <%= link_to 'Sign up', new_user_registration_path %>
-<% end %>
 <%= yield %>
 </body>
 </html>
