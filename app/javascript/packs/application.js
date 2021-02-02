@@ -11,4 +11,6 @@ import "./rich_text"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require.context('../images', true)
 require("stylesheets/application.scss")

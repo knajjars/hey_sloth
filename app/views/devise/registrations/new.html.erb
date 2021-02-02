@@ -1,29 +1,61 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<%= render "shared/confetti" %>
+<div class="flex flex-col justify-start items-center min-h-screen p-6 bg-gray-50 relative">
+  <div class="mt-5 mb-12 md:my-40 font-black text-3xl md:text-6xl text-purple-600 underline ">
+    <h1>Good to have you!</h1>
   </div>
+  <div class="flex max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-2xl">
+    <div class="flex flex-col overflow-y-auto md:flex-row">
+      <div class="flex items-center justify-center p-6 sm:p-8 md:w-3/5">
+        <div class="w-full">
+          <h1
+            class="mb-4 text-xl font-bold text-gray-700"
+          >
+            Create a new account
+          </h1>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+            <label class="block text-sm">
+              <%= f.label :email, class: "text-gray-700" %>
+              <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input border border-gray-300 p-3 rounded", placeholder: "Jane Doe" %>
+            </label>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+            <label class="block mt-4 text-sm">
+              <%= f.label :password, class: "text-gray-700" %>
+              <% if @minimum_password_length %>
+                <em class="text-gray-400">(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br/>
+              <%= f.password_field :password, required: true, autocomplete: "new-password", class: "block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input border border-gray-300 p-3 rounded", placeholder: "***************" %>
+            </label>
+
+            <label class="block mt-4 text-sm">
+              <%= f.label :password_confirmation, class: "text-gray-700" %>
+              <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input border border-gray-300 p-3 rounded", placeholder: "***************" %>
+            </label>
+
+            <%= f.submit "Sign up", class: "block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" %>
+          <% end %>
+
+          <p class="mt-5">
+            <span class="font-light fon">Already have an account?</span>
+            <%= link_to "Log in", new_user_session_path, class: "text-md font-medium text-purple-600 hover:underline" %>
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col items-start justify-end p-6 sm:p-8 md:w-2/5">
+
+        <div class="w-60 self-center justify-start m-2 hidden md:block">
+          <%= image_pack_tag 'media/images/hey_sloth_icon.png' %>
+        </div>
+        <div class="mt-1">
+          <p><%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-sm font-medium text-purple-600 hover:underline" %></p>
+          <p><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "text-sm font-medium text-purple-600 hover:underline" %></p>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="w-full bottom-0 absolute">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#7c3aed" fill-opacity="1" d="M0,64L14.1,106.7C28.2,149,56,235,85,234.7C112.9,235,141,149,169,117.3C197.6,85,226,107,254,138.7C282.4,171,311,213,339,229.3C367.1,245,395,235,424,213.3C451.8,192,480,160,508,128C536.5,96,565,64,593,48C621.2,32,649,32,678,53.3C705.9,75,734,117,762,128C790.6,139,819,117,847,106.7C875.3,96,904,96,932,128C960,160,988,224,1016,256C1044.7,288,1073,288,1101,272C1129.4,256,1158,224,1186,218.7C1214.1,213,1242,235,1271,250.7C1298.8,267,1327,277,1355,250.7C1383.5,224,1412,160,1426,128L1440,96L1440,320L1425.9,320C1411.8,320,1384,320,1355,320C1327.1,320,1299,320,1271,320C1242.4,320,1214,320,1186,320C1157.6,320,1129,320,1101,320C1072.9,320,1045,320,1016,320C988.2,320,960,320,932,320C903.5,320,875,320,847,320C818.8,320,791,320,762,320C734.1,320,706,320,678,320C649.4,320,621,320,593,320C564.7,320,536,320,508,320C480,320,452,320,424,320C395.3,320,367,320,339,320C310.6,320,282,320,254,320C225.9,320,198,320,169,320C141.2,320,113,320,85,320C56.5,320,28,320,14,320L0,320Z"></path>
+    </svg>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
