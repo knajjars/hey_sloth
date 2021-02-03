@@ -17,6 +17,13 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 <% end %>
-<%= yield %>
+
+<% if dashboard_partial? %>
+  <%= render "shared/dashboard" do %>
+    <%= yield %>
+  <% end %>
+<% else %>
+  <%= yield %>
+<% end %>
 </body>
 </html>

@@ -8,4 +8,11 @@ module ApplicationHelper
   def current_controller?(name)
     name == controller.controller_name
   end
+
+  def dashboard_partial?
+    return true if (controller_name == 'registrations') && (action_name == 'edit')
+
+    controllers_whitelist = %w[testimonials collect shareable_links dashboard]
+    controllers_whitelist.include?(controller_name)
+  end
 end
