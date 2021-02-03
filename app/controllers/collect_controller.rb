@@ -1,10 +1,9 @@
 class CollectController < ApplicationController
-  before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
-  before_action :set_shareable_link, only: [:from_shareable_link_new, :from_shareable_link_create, :send_email_create, :send_email_new]
-  layout "page", only: [:from_shareable_link_new, :from_shareable_link_create]
+  before_action :set_collected_tweets, only: %i[twitter_search twitter_post_new]
+  before_action :set_shareable_link, only: %i[from_shareable_link_new from_shareable_link_create send_email_create send_email_new]
+  layout 'page', only: %i[from_shareable_link_new from_shareable_link_create]
 
-  def index
-  end
+  def index; end
 
   def from_shareable_link_new
     @testimonial = Testimonial.new
@@ -38,17 +37,16 @@ class CollectController < ApplicationController
       CollectMailer.new_testimonial(email_address, @shareable_link).deliver
     end
 
-    redirect_to @shareable_link, notice: "Successfully sent email to recipients!"
+    redirect_to @shareable_link, notice: 'Successfully sent email to recipients!'
   end
 
-  def twitter_search
-  end
+  def twitter_search; end
 
   def twitter_post_new
     tweet_url = params[:tweet_url]
     unless tweet_url.nil?
       begin
-        tweet_status = tweet_url.split("/").last
+        tweet_status = tweet_url.split('/').last
 
         client = current_user.twitter? ? current_user.twitter : TwitterApi.client
         @tweet = client.status(tweet_status, tweet_mode: 'extended')
@@ -68,7 +66,7 @@ class CollectController < ApplicationController
       "user": current_user,
       "name": tweet[:name],
       "content": tweet[:content],
-      "source": "tweet",
+      "source": 'tweet',
       "social_link": tweet[:social_link],
       "tweet_status_id": tweet[:tweet_status_id],
       "tweet_url": tweet[:tweet_url],
@@ -76,15 +74,15 @@ class CollectController < ApplicationController
       "tweet_image_url": tweet[:tweet_image_url]
     )
 
-    redirect_back fallback_location: app_root_path, notice: "Successfully collected twitter post!"
+    redirect_back fallback_location: app_root_path, notice: 'Successfully collected twitter post!'
   end
 
   def delete_tweet
-    record = current_user.testimonials.find_by(tweet_status_id: params["status_id"])
+    record = current_user.testimonials.find_by(tweet_status_id: params['status_id'])
     return render_bad_request if record.nil?
 
     record.destroy
-    redirect_back fallback_location: app_root_path, notice: "Removed twitter post!"
+    redirect_back fallback_location: app_root_path, notice: 'Removed twitter post!'
   end
 
   private
@@ -93,7 +91,7 @@ class CollectController < ApplicationController
     params.require(:testimonial).permit(:name, :content, :social_link, :tweet_status_id, :tweet_url, :tweet_user_id, :tweet_image_url)
   end
 
-  def get_collected_tweets
+  def set_collected_tweets
     @collected_tweets = current_user.testimonials.tweets
   end
 
