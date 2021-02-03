@@ -1,7 +1,7 @@
 class CollectController < ApplicationController
   before_action :get_collected_tweets, only: [:twitter_search, :twitter_post_new]
   before_action :set_shareable_link, only: [:from_shareable_link_new, :from_shareable_link_create, :send_email_create, :send_email_new]
-  layout "page", only: :from_shareable_link_new
+  layout "page", only: [:from_shareable_link_new, :from_shareable_link_create]
 
   def index
   end
