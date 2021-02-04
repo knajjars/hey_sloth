@@ -32,7 +32,7 @@ class CollectController < ApplicationController
     authorize @shareable_link
     return render_bad_request if params[:email_addresses].nil?
 
-    email_addresses = params[:email_addresses].reject { |e| e.empty? }
+    email_addresses = params[:email_addresses].reject(&:empty?)
     email_addresses.each do |email_address|
       CollectMailer.new_testimonial(email_address, @shareable_link).deliver
     end
