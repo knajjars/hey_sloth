@@ -173,6 +173,7 @@ GEM
       omniauth-oauth (~> 1.1)
       rack
     orm_adapter (0.5.0)
+    pagy (3.10.0)
     pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -339,6 +340,7 @@ DEPENDENCIES
   lockbox (~> 0.6.1)
   omniauth
   omniauth-twitter
+  pagy (~> 3.10)
   pg (~> 1.1)
   pry-rails (~> 0.3.9)
   puma (~> 5.0)

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   include DeviseWhitelist
+  include Pagy::Backend
 
   before_action :authenticate_user!, except: [:from_shareable_link_create, :from_shareable_link_new, :list_testimonials]
 

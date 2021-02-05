@@ -1,0 +1,46 @@
+.pagy-nav,
+.pagy-nav-js,
+.pagy-combo-nav-js {
+  @apply flex h-8 m-5
+}
+
+.pagy-nav .page,
+.pagy-nav-js .page,
+.pagy-combo-nav-js .page,
+.pagy-combo-nav-js .pagy-combo-input {
+  @apply mx-6 w-8 flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full;
+}
+
+.pagy-nav .page:hover,
+.pagy-nav-js .page:hover {
+  @apply text-purple-600;
+}
+
+.pagy-nav .active,
+.pagy-nav-js .active {
+  @apply bg-purple-600 text-white;
+}
+
+.pagy-nav .prev,
+.pagy-nav-js .prev,
+.pagy-combo-nav-js .prev {
+  @apply text-gray-900;
+}
+
+.pagy-nav .next,
+.pagy-nav-js .next,
+.pagy-combo-nav-js .next {
+  @apply text-gray-900 border-r border-transparent;
+}
+
+.pagy-nav .disabled,
+.pagy-nav-js .disabled,
+.pagy-combo-nav-js .disabled {
+  @apply cursor-not-allowed text-gray-500;
+}
+
+.pagy-nav .disabled:hover,
+.pagy-nav-js .disabled:hover,
+.pagy-combo-nav-js .disabled:hover {
+  @apply cursor-not-allowed text-gray-500;
+}
