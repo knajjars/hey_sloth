@@ -29,8 +29,17 @@
           <% @testimonials.each do |testimonial| %>
             <tr class="hover:bg-purple-100">
               <td class="px-6 py-4">
-                <div class="text-sm text-gray-900">
-                  <%= testimonial.name %>
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10">
+
+                    <%= display_image testimonial, class_names: "h-10 w-10 rounded-full", alt: "Testimonial user" %>
+
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm text-gray-900">
+                      <%= testimonial.name %>
+                    </div>
+                  </div>
                 </div>
               </td>
               <td class="px-6 py-4 ">
@@ -49,17 +58,11 @@
                 </div>
               </td>
 
-              <td class="px-6 py-4 content-center text-right text-sm font-medium">
+              <td class="px-6 py-4 content-center text-left text-sm font-medium">
                 <%= link_to toggle_showcase_testimonial_path(testimonial), method: :post, class: "cursor-pointer" do %>
-                  <% if testimonial.showcase %>
-                    <svg class="h-6 w-6 text-green-600 hover:text-green-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                  <% else %>
-                    <svg class="h-6 w-6 text-red-500 hover:text-red-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                    </svg>
-                  <% end %>
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= testimonial.showcase ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800" %>">
+                    <%= testimonial.showcase.yesno %>
+                  </span>
                 <% end %>
               </td>
 

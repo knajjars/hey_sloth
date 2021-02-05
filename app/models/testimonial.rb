@@ -26,12 +26,11 @@ class Testimonial < ApplicationRecord
     where(source: Testimonial.sources[:tweet])
   end
 
-  def rich_text_or_content
-    rich_text.nil? ? content : rich_text
-  end
-
   def self.showcased
     where(showcase: true)
   end
 
+  def rich_text_or_content
+    rich_text.nil? ? content : rich_text
+  end
 end

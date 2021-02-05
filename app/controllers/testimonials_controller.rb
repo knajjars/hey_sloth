@@ -2,7 +2,7 @@ class TestimonialsController < ApplicationController
   before_action :set_testimonial, only: [:show, :destroy, :toggle_showcase]
 
   def index
-    @testimonials = current_user.testimonials.with_rich_text
+    @testimonials = current_user.testimonials.with_attached_image
   end
 
   def show
