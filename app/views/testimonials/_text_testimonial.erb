@@ -7,7 +7,7 @@
     <% end %>
     <div class="text-purple-600 md:w-3/4">
       <h3 class="uppercase text-black text-2xl font-medium"><%= @testimonial.name %></h3>
-      <small class="text-black text-justify text-lg"><%= @testimonial.content %></small>
+      <small class="text-black text-justify text-lg"><%= @testimonial.rich_text_or_content %></small>
       <div class="flex gap-0.5 mt-4">
         <%= link_to @testimonial.social_link, target: "_blank", class: "bg-blue-400 p-4 flex justify-center items-center rounded-full" do %>
           <svg class="w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

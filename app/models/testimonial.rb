@@ -1,7 +1,7 @@
 class Testimonial < ApplicationRecord
   include Hashid::Rails
 
-  enum source: %i[text tweet]
+  enum source: %i[link tweet]
 
   has_rich_text :rich_text
 

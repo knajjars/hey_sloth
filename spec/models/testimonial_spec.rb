@@ -149,8 +149,8 @@ RSpec.describe Testimonial, type: :model do
       expect(testimonial_tweet.source).to eq('tweet')
     end
 
-    it 'can be text' do
-      expect(testimonial.source).to eq('text')
+    it 'can be link' do
+      expect(testimonial.source).to eq('link')
     end
   end
 
