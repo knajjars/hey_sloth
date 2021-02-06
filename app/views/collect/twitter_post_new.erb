@@ -7,9 +7,7 @@
   <%= form.submit "Search" %>
 <% end %>
 
-<% if @tweet %>
-  <%= render 'tweet/collect_tweet' %>
-<% end %>
+<%= render 'tweet/collect_tweet' if @tweet %>
 
 
 <%= link_to 'Back', collect_path %>

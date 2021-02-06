@@ -3,7 +3,7 @@ module ApplicationHelper
 
   def formatted_date(date, with_time_passed:)
     formatted_date = date.strftime('%B %d, %Y').to_s
-    formatted_date << "(#{time_ago_in_words date} ago)" if with_time_passed
+    formatted_date << " (#{time_ago_in_words date} ago)" if with_time_passed
     formatted_date
   end
 
@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def embed_tweet(t)
-    tweet = TwitterApi.client.oembed(t)
+    tweet = TwitterApi.client.oembed(t, hide_thread: true)
     raw(tweet.html)
   end
 end
