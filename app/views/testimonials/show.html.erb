@@ -27,5 +27,8 @@
       <%= render 'text_testimonial' %>
     <% end %>
   </div>
-  <%= link_to 'Back', testimonials_path, class: "bg-gray-700 hover:bg-gray-900 focus:outline-none transition text-white p-2 rounded" %>
+  <div class="flex flex-row gap-4">
+    <%= link_to 'Back', testimonials_path, class: "bg-gray-500 hover:bg-gray-900 focus:outline-none transition text-white px-2 py-1 rounded" %>
+    <%= link_to 'Remove', @testimonial, class: "bg-red-400 hover:bg-red-600 focus:outline-none transition text-white px-2 py-1 rounded", method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
 </main>
