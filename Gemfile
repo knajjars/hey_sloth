@@ -31,6 +31,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
+  gem 'better_errors', '~> 2.9', '>= 2.9.1'
 end
 
 gem 'active_model_serializers', '~> 0.10.0'

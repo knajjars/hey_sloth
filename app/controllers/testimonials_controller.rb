@@ -2,7 +2,7 @@ class TestimonialsController < ApplicationController
   before_action :set_testimonial, only: %i[show destroy toggle_showcase]
 
   def index
-    @pagy, @testimonials = pagy(current_user.testimonials.with_attached_image, items: 10)
+    @pagy, @testimonials = pagy(current_user.testimonials.with_attached_image.order(:created_at), items: 10)
   end
 
   def show

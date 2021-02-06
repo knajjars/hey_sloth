@@ -1,49 +1,31 @@
-<p id="notice"><%= notice %></p>
+<main class="flex flex-col justify-center items-start">
+  <p>
+    <strong>Showcase:</strong>
+    <span class="px-2 inline-flex leading-5 font-semibold rounded-full <%= @testimonial.showcase ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800" %>">
+    <%= @testimonial.showcase.yesno %>
+    </span>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @testimonial.name %>
-</p>
+  <p>
+    <strong>Collected from:</strong>
+    <% if @testimonial.tweet? %>
+      <%= link_to 'Twitter', @testimonial.tweet_url, target: "_blank", class: "underline text-purple-500 font-bold" %>
+    <% else %>
+      <%= @testimonial.shareable_link.nil? ? 'Shareable link (deleted)' : "Shareable link #{link_to(@testimonial.shareable_link.tag, @testimonial.shareable_link, target: "_blank", class: "underline text-purple-500 font-bold")}".html_safe %>
+    <% end %>
+  </p>
 
-<p>
-  <strong>Company:</strong>
-  <%= @testimonial.company %>
-</p>
+  <p>
+    <strong>Collected on:</strong>
+    <%= formatted_date @testimonial.created_at, with_time_passed: true %>
+  </p>
 
-<p>
-  <strong>Role:</strong>
-  <%= @testimonial.role %>
-</p>
-
-<p>
-  <strong>Social link:</strong>
-  <%= @testimonial.social_link %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @testimonial.rich_text_or_content %>
-</p>
-
-<p>
-  <strong>Source:</strong>
-  <% if @testimonial.tweet? %>
-    Twitter
-  <% else %>
-    <%= @testimonial.shareable_link.nil? ? 'Shareable link (deleted)' : "Shareable link (#{link_to(@testimonial.shareable_link.tag, @testimonial.shareable_link)})".html_safe %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Showcase:</strong>
-  <%= @testimonial.showcase.yesno %>
-</p>
-
-<p>
-  <strong>Collected on:</strong>
-  <%= formatted_date @testimonial.created_at, with_time_passed: true %>
-</p>
-
-<%= image_tag @testimonial.image if @testimonial.image.attached? %>
-
-<%= link_to 'Back', testimonials_path %>
+  <div class="my-8">
+    <% if @testimonial.tweet? %>
+      <%= render 'tweet_testimonial' %>
+    <% else %>
+      <%= render 'text_testimonial' %>
+    <% end %>
+  </div>
+  <%= link_to 'Back', testimonials_path, class: "bg-gray-700 hover:bg-gray-900 focus:outline-none transition text-white p-2 rounded" %>
+</main>

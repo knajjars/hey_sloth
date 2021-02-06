@@ -30,6 +30,10 @@ class Testimonial < ApplicationRecord
     where(showcase: true)
   end
 
+  def has_image?
+    tweet_image_url.present? || image.attached?
+  end
+
   def rich_text_or_content
     rich_text.nil? ? content : rich_text
   end

@@ -8,7 +8,7 @@
 
 <div data-controller="dashboard" data-dashboard-hidden-class="hidden">
   <nav class="md:w-3/4 md:mx-auto md:mt-5 bg-gray-800 md:rounded-2xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="md:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center w-full">
           <div class="flex-shrink-0">
@@ -82,7 +82,7 @@
   </nav>
 
   <% unless current_user.company_name.nil? %>
-    <header class="hidden md:block">
+    <header>
       <div class="md:w-3/4 md:mx-auto md:mt-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold leading-tight text-gray-700">
           <%= current_user.company_name %>
@@ -91,7 +91,7 @@
     </header>
   <% end %>
   <main>
-    <div class="md:w-3/4 md:mx-auto md:mt-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-16">
+    <div class="md:w-3/4 md:mx-auto md:mt-5 md:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2">
       <%= yield %>
     </div>
   </main>

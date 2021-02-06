@@ -8,7 +8,11 @@
 .pagy-nav-js .page,
 .pagy-combo-nav-js .page,
 .pagy-combo-nav-js .pagy-combo-input {
-  @apply mx-6 w-8 flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded-full;
+  @apply mx-6 w-8 flex justify-center items-center cursor-pointer leading-5 transition duration-150 ease-in rounded;
+}
+
+.pagy-nav .page > a {
+  @apply w-full h-full flex justify-center items-center
 }
 
 .pagy-nav .page:hover,
@@ -20,6 +24,12 @@
 .pagy-nav-js .active {
   @apply bg-purple-600 text-white;
 }
+
+.pagy-nav .active:hover,
+.pagy-nav-js .active:hover {
+  @apply text-white;
+}
+
 
 .pagy-nav .prev,
 .pagy-nav-js .prev,
