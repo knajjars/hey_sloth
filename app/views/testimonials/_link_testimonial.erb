@@ -1,4 +1,4 @@
-<div class="rounded shadow-2xl px-6 py-4 max-w-md">
+<div class="rounded shadow-2xl px-8 py-4 max-w-md">
   <div class="flex items-center">
     <% if @testimonial.has_image? %>
       <%= link_to @testimonial.social_link, target: :_blank, class: "mr-4" do %>
@@ -6,7 +6,7 @@
       <% end %>
     <% end %>
     <div class="flex flex-col">
-      <%= link_to @testimonial.name, @testimonial.social_link, class: "font-bold text-gray-900 hover:text-blue-500", target: :blank %>
+      <%= link_to @testimonial.name, @testimonial.social_link, class: "font-bold text-gray-900 hover:text-purple-600", target: :blank %>
       <%= content_tag :p, "#{@testimonial.role.titlecap} at #{@testimonial.company.titlecap}", class: "text-gray-600 text-sm" if @testimonial.role.present? && @testimonial.company.present? %>
     </div>
   </div>
