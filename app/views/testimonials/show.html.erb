@@ -80,7 +80,8 @@
               This testimonial is being showcased to others.
             </span>
               <p class="mt-1">
-                Don't to showcase? <%= link_to 'No', toggle_showcase_testimonial_path(@testimonial), method: :post, class: "mt-1 text-sm sm:mt-0 sm:col-span-2 hover:underline text-red-400" %>
+                Don't to
+                showcase? <%= link_to 'No', toggle_showcase_testimonial_path(@testimonial), method: :post, class: "mt-1 text-sm sm:mt-0 sm:col-span-2 hover:underline text-red-400" %>
               </p>
             <% else %>
             <span class="p-1 inline-flex text-sm font-light rounded bg-yellow-200 text-gray-900">
@@ -115,7 +116,7 @@
         <% if @testimonial.tweet? %>
           <%= render 'tweet_testimonial' %>
         <% else %>
-          <%= render 'text_testimonial' %>
+          <%= render 'link_testimonial' %>
         <% end %>
       </div>
     </div>
