@@ -6,7 +6,7 @@
       <% end %>
     <% end %>
     <div class="flex flex-col">
-      <%= link_to @testimonial.name, @testimonial.social_link, class: "font-bold text-gray-900 hover:text-purple-600", target: :blank %>
+      <%= link_to @testimonial.name, @testimonial.social_link, class: "font-bold text-gray-900 hover:text-purple-600", target: :_blank %>
       <%= content_tag :p, "#{@testimonial.role.titlecap} at #{@testimonial.company.titlecap}", class: "text-gray-600 text-sm" if @testimonial.role.present? && @testimonial.company.present? %>
     </div>
   </div>
