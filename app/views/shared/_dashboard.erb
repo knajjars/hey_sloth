@@ -1,6 +1,6 @@
-<% active_class = 'bg-purple-600 text-white' %>
+<% active_class = 'bg-purple-600' %>
 <% non_active_class = 'text-gray-50 hover:bg-purple-900 hover:text-white' %>
-<% nav_item_class = 'px-3 py-2 rounded-md text-sm font-medium' %>
+<% nav_item_class = 'px-3 py-2 rounded-md text-sm font-medium text-white' %>
 
 <% mobile_active_class = 'bg-purple-600 text-white' %>
 <% mobile_non_active_class = 'text-gray-300 hover:bg-purple-900 hover:text-white ' %>
@@ -17,9 +17,28 @@
           <div class="hidden md:block w-full">
             <div class="flex justify-center space-x-5">
               <%= link_to "Dashboard", app_root_path, class: "#{current_controller?('dashboard') ? active_class : non_active_class } #{nav_item_class}" %>
-              <%= link_to "Collect", collect_path, class: "#{current_controller?('collect') | current_controller?('shareable_links') ? active_class : non_active_class } #{nav_item_class}" %>
               <%= link_to "View collected", testimonials_path, class: "#{current_controller?('testimonials') ? active_class : non_active_class } #{nav_item_class}" %>
               <%= link_to "HeyWall", app_root_path, class: "#{current_controller?('heywall') ? active_class : non_active_class } #{nav_item_class}" %>
+              <div data-dashboard-target="collectButton">
+                <div data-action="click@window->dashboard#clickOutsideCollect" class="flex items-center">
+                  <div class="relative">
+                    <div>
+                      <button data-action="click->dashboard#toggleCollect"
+                              class="<%= "#{current_controller?('collect') | current_controller?('shareable_links') ? active_class : non_active_class} #{nav_item_class}  focus:bg-purple-900 focus:text-white" %>"
+                              id="user-menu" aria-haspopup="true">
+                        <span class="sr-only">Open collect menu</span>
+                        Collect
+                      </button>
+                    </div>
+                    <div data-dashboard-target="collectOptions" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                      <%= link_to 'From shareable link', shareable_links_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-purple-600 focus:text-white", role: "menuitem" %>
+                      <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-purple-600 focus:text-white", role: "menuitem" %>
+                      <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-purple-600 focus:text-white", role: "menuitem" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -91,7 +110,7 @@
     </header>
   <% end %>
   <main>
-    <div class="md:w-3/4 md:mx-auto md:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+    <div class="md:w-3/4 md:mx-auto md:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center md:mt-10 mt-5">
       <%= yield %>
     </div>
   </main>
