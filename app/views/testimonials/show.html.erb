@@ -56,7 +56,7 @@
             <% if @testimonial.tweet? %>
               <%= link_to 'Twitter', @testimonial.tweet_url, target: "_blank", class: "hover:underline text-purple-500" %>
             <% else %>
-              <%= @testimonial.shareable_link.nil? ? 'Shareable link (deleted)' : "Shareable link #{link_to(@testimonial.shareable_link.tag, @testimonial.shareable_link, target: "_blank", class: "hover:underline text-purple-500")}".html_safe %>
+              <%= @testimonial.shareable_link.nil? ? 'Shareable link (deleted)' : "Shareable link #{link_to(@testimonial.shareable_link.tag, @testimonial.shareable_link, class: "hover:underline text-purple-500")}".html_safe %>
             <% end %>
           </dd>
         </div>

@@ -12,21 +12,6 @@ RSpec.describe 'Collects', type: :request do
   let(:valid_tweet_body) { FactoryBot.attributes_for(:testimonial, :tweet) }
   let(:invalid_tweet_body) { FactoryBot.attributes_for(:testimonial) }
 
-  describe '#collect' do
-    it 'redirects to login if not authenticated' do
-      get collect_url
-      expect(response).to have_http_status(302)
-      expect(response).to redirect_to('/login')
-    end
-
-    it 'renders collect view for authenticated user' do
-      sign_in user
-      get collect_url
-      expect(response).to have_http_status(200)
-      expect(response).to render_template('collect/index')
-    end
-  end
-
   describe '#from_shareable_link_new' do
     it 'renders for unauthenticated user' do
       get collect_from_shareable_link_new_url(shareable_link.slug)
