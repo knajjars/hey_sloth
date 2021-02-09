@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>Use this shareable url to collect testimonials for your product:</p>
-<%= render "shared/copy_clipboard", content: collect_from_shareable_link_new_url(@shareable_link.slug, subdomain: false) %>
+<%= render "shared/copy_clipboard", key: @shareable_link.slug, content: collect_from_shareable_link_new_url(@shareable_link.slug, subdomain: false) %>
 
 <p>
   <strong>Tag:</strong>
