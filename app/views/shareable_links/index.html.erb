@@ -4,7 +4,7 @@
   <% @shareable_link.each do |shareable_link| %>
     <div class="bg-white rounded shadow-lg p-6 w-full flex flex-col justify-between items-between space-y-3">
       <h1 class="font-black text-purple-600"><%= shareable_link.tag %></h1>
-      <%= render "shared/copy_clipboard", content: collect_from_shareable_link_new_url(shareable_link.slug, subdomain: false) %>
+      <%= render "shared/copy_clipboard", key: shareable_link.slug, content: collect_from_shareable_link_new_url(shareable_link.slug, subdomain: false) %>
       <%= shareable_link.note if shareable_link.note.present? %>
       <div class="flex flex-col ">
         <% [{ "Social link required?": shareable_link.social_link_required }, { "Job & Company required?": shareable_link.job_required }, { "Image required": shareable_link.image_required }].each do |item| %>
