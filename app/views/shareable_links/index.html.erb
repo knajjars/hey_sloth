@@ -2,39 +2,32 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16">
   <% @shareable_link.each do |shareable_link| %>
-    <div class="bg-white rounded shadow-lg p-6 w-full">
-      <div class="mb-4">
-        <h1 class="font-black text-purple-600"><%= shareable_link.tag %></h1>
-        <div class="flex flex-col space-y-2 mt-4">
-          <%= render "shared/copy_clipboard", content: collect_from_shareable_link_new_url(shareable_link.slug, subdomain: false) %>
-          <%= content_tag :p, shareable_link.note, class: "text-gray-700" if shareable_link.note.present? %>
-        </div>
-      </div>
-      <div>
-        <div class="flex flex-col space-y-2">
-          <% [{ "Social link required?": shareable_link.social_link_required }, { "Job & Company required?": shareable_link.job_required }, { "Image required": shareable_link.image_required }].each do |item| %>
-            <% item.each do |key, required| %>
-              <div class="flex flex-row justify-between items-center">
-                <p class="font-bold text-gray-800"><%= key %></p>
-                <% if required %>
-                  <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                <% else %>
-                  <svg class="w-5 h-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd"/>
-                  </svg>
-                <% end %>
-            <% end %>
-            </div>
+    <div class="bg-white rounded shadow-lg p-6 w-full flex flex-col justify-between items-between space-y-3">
+      <h1 class="font-black text-purple-600"><%= shareable_link.tag %></h1>
+      <%= render "shared/copy_clipboard", content: collect_from_shareable_link_new_url(shareable_link.slug, subdomain: false) %>
+      <%= shareable_link.note if shareable_link.note.present? %>
+      <div class="flex flex-col ">
+        <% [{ "Social link required?": shareable_link.social_link_required }, { "Job & Company required?": shareable_link.job_required }, { "Image required": shareable_link.image_required }].each do |item| %>
+          <% item.each do |key, required| %>
+            <div class="flex flex-row justify-between items-center">
+              <p class="font-bold text-gray-800"><%= key %></p>
+              <% if required %>
+                <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              <% else %>
+                <svg class="w-5 h-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd"/>
+                </svg>
+              <% end %>
           <% end %>
-          <div class="flex flex-row space-x-3 justify-end items-center pt-5">
-            <%= link_to 'Show', shareable_link, class: "px-2 py-1 bg-purple-500 text-white rounded" %>
-            <%= link_to 'Edit', edit_shareable_link_path(shareable_link), class: "px-2 py-1 bg-yellow-400 text-white rounded" %>
-            <%= link_to 'Destroy', shareable_link, method: :delete, data: { confirm: 'Are you sure?' }, class: "px-2 py-1 bg-red-400 text-white rounded" %>
           </div>
-
-        </div>
+        <% end %>
+      </div>
+      <div class="flex flex-row space-x-3 justify-end items-center pt-5">
+        <%= link_to 'Show', shareable_link, class: "px-2 py-1 bg-purple-500 text-white rounded" %>
+        <%= link_to 'Edit', edit_shareable_link_path(shareable_link), class: "px-2 py-1 bg-yellow-400 text-white rounded" %>
+        <%= link_to 'Destroy', shareable_link, method: :delete, data: { confirm: 'Are you sure?' }, class: "px-2 py-1 bg-red-400 text-white rounded" %>
       </div>
     </div>
   <% end %>
