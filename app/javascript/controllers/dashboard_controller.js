@@ -2,7 +2,7 @@ import {Controller} from "stimulus"
 
 export default class extends Controller {
     static get targets() {
-        return ['profileOptions', 'profileButton', 'mobileMenu', 'menuOpenIcon', 'menuCloseIcon']
+        return ['profileOptions', 'profileButton', 'mobileMenu', 'menuOpenIcon', 'menuCloseIcon', 'collectButton', 'collectOptions']
     }
 
     static classes = ["hidden"]
@@ -24,4 +24,16 @@ export default class extends Controller {
         this.menuOpenIconTarget.classList.toggle(this.hiddenClass)
         this.menuCloseIconTarget.classList.toggle(this.hiddenClass)
     }
+
+    clickOutsideCollect(event) {
+        if (this.collectButtonTarget === event.target || this.collectButtonTarget.contains(event.target)) return;
+        if (!this.collectOptionsTarget.classList.contains(this.hiddenClass)) {
+            this.collectOptionsTarget.classList.add(this.hiddenClass)
+        }
+    }
+
+    toggleCollect() {
+        this.collectOptionsTarget.classList.toggle(this.hiddenClass)
+    }
+
 }

@@ -1,6 +1,6 @@
-<% active_class = 'bg-purple-600 text-white' %>
+<% active_class = 'bg-purple-600 text-white hover:bg-purple-600' %>
 <% non_active_class = 'text-gray-50 hover:bg-purple-900 hover:text-white' %>
-<% nav_item_class = 'px-3 py-2 rounded-md text-sm font-medium' %>
+<% nav_item_class = 'px-3 py-2 rounded-md text-sm font-medium text-white' %>
 
 <% mobile_active_class = 'bg-purple-600 text-white' %>
 <% mobile_non_active_class = 'text-gray-300 hover:bg-purple-900 hover:text-white ' %>
@@ -17,9 +17,28 @@
           <div class="hidden md:block w-full">
             <div class="flex justify-center space-x-5">
               <%= link_to "Dashboard", app_root_path, class: "#{current_controller?('dashboard') ? active_class : non_active_class } #{nav_item_class}" %>
-              <%= link_to "Collect", collect_path, class: "#{current_controller?('collect') | current_controller?('shareable_links') ? active_class : non_active_class } #{nav_item_class}" %>
               <%= link_to "View collected", testimonials_path, class: "#{current_controller?('testimonials') ? active_class : non_active_class } #{nav_item_class}" %>
               <%= link_to "HeyWall", app_root_path, class: "#{current_controller?('heywall') ? active_class : non_active_class } #{nav_item_class}" %>
+              <div data-dashboard-target="collectButton">
+                <div data-action="click@window->dashboard#clickOutsideCollect" class="flex items-center">
+                  <div class="relative">
+                    <div>
+                      <button data-action="click->dashboard#toggleCollect"
+                              class="<%= "#{current_controller?('collect') | current_controller?('shareable_links') ? active_class : non_active_class} #{nav_item_class}  focus:bg-purple-900 focus:text-white" %>"
+                              id="user-menu" aria-haspopup="true">
+                        <span class="sr-only">Open collect menu</span>
+                        Collect
+                      </button>
+                    </div>
+                    <div data-dashboard-target="collectOptions" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 text-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                      <%= link_to 'From shareable link', shareable_links_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if current_controller?('shareable_links')}", role: "menuitem" %>
+                      <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if controller_and_action?('collect', 'twitter_post_new')}", role: "menuitem" %>
+                      <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if controller_and_action?('collect', 'twitter_search')}", role: "menuitem" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -34,9 +53,9 @@
                   <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                 </button>
               </div>
-              <div data-dashboard-target="profileOptions" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                <%= link_to 'Account settings', edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
-                <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem" %>
+              <div data-dashboard-target="profileOptions" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 text-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                <%= link_to 'Account settings', edit_user_registration_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if controller_and_action?('registrations', 'edit')}", role: "menuitem" %>
+                <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm hover:bg-gray-200", role: "menuitem" %>
               </div>
             </div>
           </div>
@@ -59,10 +78,18 @@
 
     <div data-dashboard-target="mobileMenu" class="hidden md:hidden mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <%= link_to "Dashboard", app_root_path, class: "#{current_controller?('dashboard') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}" %>
-        <%= link_to "Collect", collect_path, class: "#{current_controller?('collect') | current_controller?('shareable_links') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}" %>
-        <%= link_to "View collected", testimonials_path, class: "#{current_controller?('testimonials') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}" %>
-        <%= link_to "HeyWall", app_root_path, class: "#{current_controller?('heywall') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}" %>
+        <%= link_to "Dashboard", app_root_path, class: "#{current_controller?('dashboard') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+        <%= link_to "View collected", testimonials_path, class: "#{current_controller?('testimonials') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+        <%= link_to "HeyWall", app_root_path, class: "#{current_controller?('heywall') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+        <div class="pt-4 border-t border-gray-600"></div>
+        <p class="<%= "#{mobile_nav_item_class}" %> text-gray-400">
+          Collect
+        </p>
+        <div class="mt-3 px-2 space-y-1">
+          <%= link_to 'From shareable link', shareable_links_path, class: "#{current_controller?('shareable_links') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+          <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "#{controller_and_action?('collect', 'twitter_post_new') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+          <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "#{controller_and_action?('collect', 'twitter_search') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+        </div>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-600">
         <div class="flex items-center px-5">
@@ -74,8 +101,8 @@
           </div>
         </div>
         <div class="mt-3 px-2 space-y-1">
-          <%= link_to 'Account settings', edit_user_registration_path, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700", role: "menuitem" %>
-          <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700", role: "menuitem" %>
+          <%= link_to 'Account settings', edit_user_registration_path, class: "#{controller_and_action?('registrations', 'edit') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: "menuitem" %>
+          <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "#{mobile_non_active_class } #{mobile_nav_item_class}", role: "menuitem" %>
         </div>
       </div>
     </div>
@@ -91,7 +118,7 @@
     </header>
   <% end %>
   <main>
-    <div class="md:w-3/4 md:mx-auto md:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+    <div class="md:w-3/4 md:mx-auto md:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center md:mt-10 mt-5">
       <%= yield %>
     </div>
   </main>
