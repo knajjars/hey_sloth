@@ -15,7 +15,7 @@ class Testimonial < ApplicationRecord
   validates_presence_of :content
   validates :image,
             attached: true,
-            if: ->(testimonial) { !testimonial.tweet? && testimonial.shareable_link.image_required },
+            if: ->(testimonial) { !testimonial.tweet? && (testimonial.shareable_link.present? && testimonial.shareable_link.image_required) },
             content_type: %i[png jpg jpeg]
 
   def self.with_rich_text
@@ -37,4 +37,5 @@ class Testimonial < ApplicationRecord
   def rich_text_or_content
     rich_text.nil? ? content : rich_text
   end
+
 end

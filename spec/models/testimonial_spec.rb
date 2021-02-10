@@ -165,6 +165,17 @@ RSpec.describe Testimonial, type: :model do
       expect(shareable_link_association.macro).to eq :belongs_to
       expect(shareable_link_association.options[:optional]).to eq true
     end
+
+    it 'can be updated when shareable_link is destroyed' do
+      testimonial.shareable_link.destroy
+      testimonial.save!
+      testimonial.reload
+
+      expect {
+        testimonial.showcase = !testimonial.showcase
+        testimonial.save!
+      }.to_not raise_error
+    end
   end
 
   describe '.hashid' do
