@@ -6,6 +6,9 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
+  <%= yield :head %>
+  <%= turbo_include_tags %>
+
   <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>

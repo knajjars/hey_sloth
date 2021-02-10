@@ -72,6 +72,7 @@
     <orderEntry type="library" scope="PROVIDED" name="hashids (v1.0.5, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hashie (v4.1.0, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="honeybadger (v4.7.2, rbenv: 3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="hotwire-rails (v0.1.3, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http (v4.4.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-cookie (v1.0.3, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-form_data (v2.3.0, rbenv: 3.0.0) [gem]" level="application" />
@@ -123,6 +124,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.3, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.10.4, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-inotify (v0.10.1, rbenv: 3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="redis (v4.2.5, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="responders (v3.0.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.10.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.10.1, rbenv: 3.0.0) [gem]" level="application" />
@@ -141,12 +143,12 @@
     <orderEntry type="library" scope="PROVIDED" name="spring (v2.1.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.0.2, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.2.2, rbenv: 3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="stimulus-rails (v0.2.3, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tailwindcss-rails (v0.3.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.0.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.6, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.0.10, rbenv: 3.0.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="turbolinks (v5.2.1, rbenv: 3.0.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="turbolinks-source (v5.2.0, rbenv: 3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="turbo-rails (v0.5.9, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="twitter (v7.0.0, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="typhoeus (v1.4.0, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.4, rbenv: 3.0.0) [gem]" level="application" />
@@ -490,6 +492,11 @@
               <RakeTaskImpl description="Verify your gem installation by sending a test exception to the honeybadger service" fullCommand="honeybadger:test" id="test" />
             </subtasks>
           </RakeTaskImpl>
+          <RakeTaskImpl id="hotwire">
+            <subtasks>
+              <RakeTaskImpl description="Install Hotwire into the app" fullCommand="hotwire:install" id="install" />
+            </subtasks>
+          </RakeTaskImpl>
           <RakeTaskImpl id="log">
             <subtasks>
               <RakeTaskImpl description="Truncates all/specified *.log files in log/ to zero bytes (specify which logs with LOGS=test,development)" fullCommand="log:clear" id="clear" />
@@ -509,6 +516,17 @@
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="Report code statistics (KLOCs, etc) from the application or engine" fullCommand="stats" id="stats" />
+          <RakeTaskImpl id="stimulus">
+            <subtasks>
+              <RakeTaskImpl description="Install Stimulus into the app" fullCommand="stimulus:install" id="install" />
+              <RakeTaskImpl id="install">
+                <subtasks>
+                  <RakeTaskImpl description="Install Stimulus on the app with the asset pipeline" fullCommand="stimulus:install:asset_pipeline" id="asset_pipeline" />
+                  <RakeTaskImpl description="Install Stimulus on the app with webpacker" fullCommand="stimulus:install:webpacker" id="webpacker" />
+                </subtasks>
+              </RakeTaskImpl>
+            </subtasks>
+          </RakeTaskImpl>
           <RakeTaskImpl id="tailwindcss">
             <subtasks>
               <RakeTaskImpl description="Install Tailwind CSS into the app" fullCommand="tailwindcss:install" id="install" />
@@ -557,6 +575,17 @@
               <RakeTaskImpl id="sockets">
                 <subtasks>
                   <RakeTaskImpl description="" fullCommand="tmp:sockets:clear" id="clear" />
+                </subtasks>
+              </RakeTaskImpl>
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="turbo">
+            <subtasks>
+              <RakeTaskImpl description="Install Turbo into the app" fullCommand="turbo:install" id="install" />
+              <RakeTaskImpl id="install">
+                <subtasks>
+                  <RakeTaskImpl description="Install Turbo into the app with asset pipeline" fullCommand="turbo:install:asset_pipeline" id="asset_pipeline" />
+                  <RakeTaskImpl description="Install Turbo into the app with webpacker" fullCommand="turbo:install:webpacker" id="webpacker" />
                 </subtasks>
               </RakeTaskImpl>
             </subtasks>

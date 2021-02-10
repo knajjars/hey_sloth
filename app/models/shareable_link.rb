@@ -14,6 +14,10 @@ class ShareableLink < ApplicationRecord
             tag_exclusion: true
   validates :logo, content_type: %i[png jpg jpeg]
 
+  after_create_commit { broadcast_prepend_to :shareable_links }
+  after_update_commit { broadcast_replace_to :shareable_links }
+  after_destroy_commit { broadcast_remove_to :shareable_links }
+
   def slug_candidates
     %i[tag tag_and_sequence]
   end

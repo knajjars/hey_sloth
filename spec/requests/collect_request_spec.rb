@@ -103,7 +103,7 @@ RSpec.describe 'Collects', type: :request do
              params: { email_addresses: ['example@example.com', 'otherexample@example.com'] }
       end.to change { ActionMailer::Base.deliveries.count }.by(2)
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to("/shareable_links")
+      expect(response).to redirect_to("/shareable_links/#{shareable_link.slug}")
       follow_redirect!
       expect(response.body).to include('Successfully sent email to recipients!')
     end

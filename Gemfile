@@ -9,7 +9,7 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.0'
 gem 'sass-rails', '>= 6'
-gem 'turbolinks', '~> 5'
+
 gem 'webpacker', '~> 5.0'
 
 group :development, :test do
@@ -48,3 +48,5 @@ gem 'sib-api-v3-sdk', '~> 7.3'
 gem 'twitter', '~> 7.0'
 gem "tailwindcss-rails", "~> 0.3.1"
 gem 'pagy', '~> 3.10'
+gem 'hotwire-rails'
+gem 'redis', '~> 4.2', '>= 4.2.5'
