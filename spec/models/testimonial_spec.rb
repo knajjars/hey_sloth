@@ -165,6 +165,17 @@ RSpec.describe Testimonial, type: :model do
       expect(shareable_link_association.macro).to eq :belongs_to
       expect(shareable_link_association.options[:optional]).to eq true
     end
+
+    it 'can be updated when shareable_link is destroyed' do
+      testimonial.shareable_link.destroy
+      testimonial.save!
+      testimonial.reload
+
+      expect {
+        testimonial.showcase = !testimonial.showcase
+        testimonial.save!
+      }.to_not raise_error
+    end
   end
 
   describe '.hashid' do
@@ -174,6 +185,28 @@ RSpec.describe Testimonial, type: :model do
 
     it 'can be searched by hashid' do
       expect(Testimonial.find_by_hashid(testimonial.hashid)).to eq(testimonial)
+    end
+  end
+
+  describe '#has_image?' do
+    it 'should return true if has tweet image' do
+      expect(testimonial_tweet.has_image?).to be(true)
+    end
+
+    it 'should return true if it has image attached' do
+      image = ActiveStorage::Blob.create_and_upload!(
+        io: File.open(Rails.root.join('spec', 'fixtures', 'image.png'), 'rb'),
+        filename: 'image.png',
+        content_type: 'image/png'
+      ).signed_id
+
+      testimonial.image.attach(image)
+
+      expect(testimonial.has_image?).to be(true)
+    end
+
+    it 'should return false if has no tweet_image or image attached' do
+      expect(testimonial.has_image?).to be(false)
     end
   end
 end

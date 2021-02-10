@@ -1,8 +1,4 @@
 class ShareableLinkPolicy < ApplicationPolicy
-  def show?
-    user == record.user
-  end
-
   def update?
     user == record.user
   end

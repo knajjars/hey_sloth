@@ -2,7 +2,7 @@ class CollectController < ApplicationController
   before_action :set_collected_tweets, only: %i[twitter_search twitter_post_new]
   before_action :set_shareable_link, only: %i[from_shareable_link_new from_shareable_link_create send_email_create send_email_new]
   layout 'page', only: %i[from_shareable_link_new from_shareable_link_create]
-  
+
   def from_shareable_link_new
     @testimonial = Testimonial.new
     render_not_found if @shareable_link.nil?
@@ -35,7 +35,7 @@ class CollectController < ApplicationController
       CollectMailer.new_testimonial(email_address, @shareable_link).deliver
     end
 
-    redirect_to @shareable_link, notice: 'Successfully sent email to recipients!'
+    redirect_to shareable_links_path, notice: 'Successfully sent email to recipients!'
   end
 
   def twitter_search; end
