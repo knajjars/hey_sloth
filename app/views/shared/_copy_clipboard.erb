@@ -1,6 +1,7 @@
 <div data-controller="clipboard"
      class="flex flex-row justify-between items-center"
 >
+  <% key ||= 'weburl' %>
   <%= text_field_tag key, content, data: { "clipboard-target": "source", "action": "focus->clipboard#copy" }, readonly: "readonly", class: 'flex-grow px-2 py-1 text-center bg-gray-300 text-gray-800 rounded' %>
 
 </div>
