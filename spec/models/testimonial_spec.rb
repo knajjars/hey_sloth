@@ -176,4 +176,26 @@ RSpec.describe Testimonial, type: :model do
       expect(Testimonial.find_by_hashid(testimonial.hashid)).to eq(testimonial)
     end
   end
+
+  describe '#has_image?' do
+    it 'should return true if has tweet image' do
+      expect(testimonial_tweet.has_image?).to be(true)
+    end
+
+    it 'should return true if it has image attached' do
+      image = ActiveStorage::Blob.create_and_upload!(
+        io: File.open(Rails.root.join('spec', 'fixtures', 'image.png'), 'rb'),
+        filename: 'image.png',
+        content_type: 'image/png'
+      ).signed_id
+
+      testimonial.image.attach(image)
+
+      expect(testimonial.has_image?).to be(true)
+    end
+
+    it 'should return false if has no tweet_image or image attached' do
+      expect(testimonial.has_image?).to be(false)
+    end
+  end
 end
