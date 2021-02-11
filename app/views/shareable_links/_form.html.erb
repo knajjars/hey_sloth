@@ -72,7 +72,7 @@
               <div class="flex text-sm text-gray-600">
                 <%= form.label :logo, class: "relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500" do %>
                   <span>Upload a file</span>
-                  <%= form.file_field :logo, accept: "image/png, image/jpg, image/jpeg", class: "sr-only", required: !shareable_link.logo.attached? %>
+                  <%= form.file_field :logo, accept: "image/png, image/jpg, image/jpeg", class: "sr-only" %>
                 <% end %>
                 <p class="pl-1"> PNG, JPG, JPEG</p>
               </div>
