@@ -1,12 +1,17 @@
 class ShareableLinksController < ApplicationController
-  before_action :set_shareable_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_shareable_link, only: [:edit, :update, :destroy]
 
+<<<<<<< HEAD
   def show
     authorize @shareable_link
   end
 
   def index
     @shareable_links = current_user.shareable_links.with_rich_text_note
+=======
+  def index
+    @shareable_link = current_user.shareable_links.with_rich_text_note
+>>>>>>> 25aca334a649808160b36750cc670ed0e33b3809
   end
 
   def new
@@ -34,7 +39,7 @@ class ShareableLinksController < ApplicationController
     authorize @shareable_link
     respond_to do |format|
       if @shareable_link.update(shareable_link_params)
-        format.html { redirect_to @shareable_link, notice: 'Shareable link was successfully updated.' }
+        format.html { redirect_to shareable_links_path, notice: 'Shareable link was successfully updated.' }
       else
         format.html { render :edit }
       end

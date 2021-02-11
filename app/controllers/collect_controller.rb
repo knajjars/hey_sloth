@@ -35,7 +35,7 @@ class CollectController < ApplicationController
       CollectMailer.new_testimonial(email_address, @shareable_link).deliver
     end
 
-    redirect_to @shareable_link, notice: 'Successfully sent email to recipients!'
+    redirect_to shareable_links_path, notice: 'Successfully sent email to recipients!'
   end
 
   def twitter_search; end

@@ -6,6 +6,7 @@ RSpec.describe ShareableLinkPolicy, type: :policy do
   let(:current_user) { current_user_shareable_link.user }
   let(:other_user) { other_user_shareable_link.user }
 
+<<<<<<< HEAD
   permissions :show? do
     it 'allows owner of shareable_link to see it' do
       expect(ShareableLinkPolicy).to permit(current_user, current_user_shareable_link)
@@ -18,6 +19,8 @@ RSpec.describe ShareableLinkPolicy, type: :policy do
     end
   end
 
+=======
+>>>>>>> 25aca334a649808160b36750cc670ed0e33b3809
   permissions :update? do
     it 'allows owner of shareable_link to update it' do
       expect(ShareableLinkPolicy).to permit(current_user, current_user_shareable_link)

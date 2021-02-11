@@ -179,7 +179,7 @@ RSpec.describe Testimonial, type: :model do
   end
 
   describe '.hashid' do
-    it 'has a hashid' do
+    it git 'has a hashid' do
       expect(testimonial.hashid).to be_an_instance_of String
     end
 
