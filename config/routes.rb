@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
     delete 'disconnect_authorization/:provider', to: 'users/authorization#disconnect', as: :disconnect_authorization
 
-    resources :shareable_links
+    resources :shareable_links, except: :show
 
     resources :testimonials, only: %i[index show destroy] do
       post 'toggle_showcase', to: 'testimonials#toggle_showcase', on: :member, as: 'toggle_showcase'
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         post 'create', to: 'collect#twitter_post_create'
       end
     end
+    get '*path' => redirect('/')
     root to: 'dashboard#index', as: :app_root
   end
 
