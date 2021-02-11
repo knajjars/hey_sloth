@@ -32,7 +32,6 @@ class ShareableLinksController < ApplicationController
       if @shareable_link.update(shareable_link_params)
         format.html { redirect_to shareable_links_path, notice: 'Shareable link was successfully updated.' }
       else
-        byebug
         format.html { render :edit }
       end
     end
