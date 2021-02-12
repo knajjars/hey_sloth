@@ -1,5 +1,8 @@
 <div class="shadow-xl rounded sm:overflow-hidden">
   <div class="px-4 py-6 sm:px-6">
+
+    <h1 class="text-purple-600 font-black text-2xl mb-5 underline"><%= current_action?("create") || current_action?("new") ? "Create a shareable link" : "Update shareable link" %></h1>
+
     <%= form_with(model: shareable_link) do |form| %>
       <% if shareable_link.errors.any? %>
         <div class="flex flex-col m-4 items-start justify-between">
@@ -42,7 +45,8 @@
               </div>
               <div class="ml-3 text-sm">
                 <%= form.label :job_required, "Job & Company", class: "font-medium text-gray-700" %>
-                <p class="text-gray-500">This will require the user to provide both her/his current job and company.</p>
+                <p class="text-gray-500">This will require the user to provide both her/his current job and
+                  company.</p>
               </div>
             </div>
             <div class="flex items-start">
@@ -81,7 +85,7 @@
         </div>
 
       </div>
-      <div class="flex justify-between items-center px-4 py-3 bg-gray-50 text-right sm:px-6">
+      <div class="flex justify-between items-center px-4 py-3 sm:px-6">
         <%= link_to "Back", shareable_links_path, class: "uppercase cursor-pointer inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-gray-500" %>
         <%= form.submit "Save", class: "uppercase cursor-pointer inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-800" %>
       </div>
