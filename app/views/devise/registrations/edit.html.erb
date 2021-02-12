@@ -3,48 +3,26 @@
     <h1 class="text-purple-600 font-black text-2xl mb-5 underline">Account settings</h1>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <div class="p-4 border-2 rounded">
+      <div class="p-4 bg-gray-100 rounded">
         <%= render "devise/shared/error_messages", resource: resource %>
-        <div class="flex space-y-6 flex-col justify-center items-start w-full">
-          <h2 class="font-bold">Profile details</h2>
-          <div class="w-full bg-gray-200 rounded p-4">
-            <div class="flex flex-col md:flex-row flex space-y-6 md:space-y-0 md:space-x-4 lg:space-x-10 xl:space-x-20 w-full">
-              <div class="flex space-x-4 items-end w-full">
-                <%= f.label :email, "Email", class: "text-base text-gray-700 font-bold" %>
-                <div class="w-full flex flex-col space-y-2">
-                  <%= f.email_field :email, class: "rounded px-2 py-1 block w-full", autocomplete: "email" %>
-                </div>
-              </div>
+        <div class="flex space-y-4 flex-col justify-center items-start w-full">
+          <h2 class="font-bold text-lg">Profile details</h2>
+          <%= f.label :email, "Email", class: "text-base text-gray-700 font-bold" %>
+          <%= f.email_field :email, class: "rounded px-2 py-1 w-full", autocomplete: "email" %>
 
-              <div class="flex space-x-4 items-end w-full">
-                <%= f.label :company_name, "Company", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
-                <div class="w-full flex flex-col space-y-2">
-                  <%= f.text_field :company_name, class: "rounded px-2 py-1 block w-full", autocomplete: "company-name" %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="w-full bg-gray-200 rounded p-4">
-            <div class="flex flex-col md:flex-row flex space-y-6 md:space-y-0 md:space-x-4 lg:space-x-10 xl:space-x-20 w-full">
-              <div class="flex space-x-4 items-end w-full">
-                <%= f.label :password, "Password", class: "text-base text-gray-700 font-bold" %>
-                <div class="w-full flex flex-col space-y-2">
-                  <%= f.email_field :password, class: " rounded px-2 py-1 block w-full", autocomplete: "new-password" %>
-                </div>
-              </div>
+          <%= f.label :company_name, "Company", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
+          <%= f.text_field :company_name, class: "rounded px-2 py-1 w-full", autocomplete: "company-name" %>
 
-              <div class="flex space-x-4 items-end w-full">
-                <%= f.label :password_confirmation, "Confirm", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
-                <div class="w-full flex flex-col space-y-2">
-                  <%= f.text_field :password_confirmation, class: "rounded px-2 py-1 block w-full", autocomplete: "new-password" %>
-                </div>
-              </div>
-            </div>
-            <p class="mt-2 text-gray-500 text-xs">Leave password blank if you don't want to change it.</p>
-          </div>
-          <div class="flex flex-row items-center space-x-4 ml-auto items-end w-full lg:w-2/3 xl:w-2/5 p-4 bg-gray-700 rounded">
-            <%= f.password_field :current_password, placeholder: "Enter current password", autocomplete: "current-password", class: "rounded px-2 py-1 w-full", required: true %>
-            <%= f.submit "Save", class: "uppercase cursor-pointer inline-flex justify-center p-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-500" %>
+          <%= f.label :password, "New password", class: "text-base text-gray-700 font-bold" %>
+          <p class="text-gray-500 text-xs">Leave password blank if you don't want to change it.</p>
+          <%= f.email_field :password, class: " rounded px-2 py-1 w-full", autocomplete: "new-password" %>
+
+          <%= f.label :password_confirmation, "Confirm new password", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
+          <%= f.text_field :password_confirmation, class: "rounded px-2 py-1 w-full", autocomplete: "new-password" %>
+
+          <div class="flex flex-row items-center space-x-4 w-full bg-gray-700 p-4 rounded">
+            <%= f.password_field :current_password, placeholder: "Enter current password to apply changes.", autocomplete: "current-password", class: "rounded px-2 py-1 w-full", required: true %>
+            <%= f.submit "Save", class: "uppercase cursor-pointer inline-flex justify-center py-1.5 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-500" %>
           </div>
         </div>
       </div>
