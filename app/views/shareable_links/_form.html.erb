@@ -5,7 +5,7 @@
 
     <%= form_with(model: shareable_link) do |form| %>
       <% if shareable_link.errors.any? %>
-        <div class="flex flex-col m-4 items-start justify-between">
+        <div class="flex flex-col my-4 items-start justify-between">
           <% shareable_link.errors.each do |error| %>
             <p class="text-red-600 text-sm font-black"><%= error.full_message %></p>
           <% end %>

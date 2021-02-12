@@ -1,7 +1,7 @@
 <% if resource.errors.any? %>
-  <div id="error_explanation">
+  <div class="flex flex-col my-4 items-start justify-between">
     <% resource.errors.full_messages.each do |message| %>
-      <p class="text-pink-600 my-1 text-sm"><%= message %></p>
+      <p class="text-red-600 text-sm font-black"><%= message %></p>
     <% end %>
   </div>
 <% end %>

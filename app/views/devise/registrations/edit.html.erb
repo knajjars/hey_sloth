@@ -14,10 +14,10 @@
 
           <%= f.label :password, "New password", class: "text-base text-gray-700 font-bold" %>
           <p class="text-gray-500 text-xs">Leave password blank if you don't want to change it.</p>
-          <%= f.email_field :password, class: " rounded px-2 py-1 w-full", autocomplete: "new-password" %>
+          <%= f.password_field :password, class: " rounded px-2 py-1 w-full", autocomplete: "new-password" %>
 
           <%= f.label :password_confirmation, "Confirm new password", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
-          <%= f.text_field :password_confirmation, class: "rounded px-2 py-1 w-full", autocomplete: "new-password" %>
+          <%= f.password_field :password_confirmation, class: "rounded px-2 py-1 w-full", autocomplete: "new-password" %>
 
           <div class="flex flex-row items-center space-x-4 w-full bg-gray-700 p-4 rounded">
             <%= f.password_field :current_password, placeholder: "Enter current password to apply changes.", autocomplete: "current-password", class: "rounded px-2 py-1 w-full", required: true %>
