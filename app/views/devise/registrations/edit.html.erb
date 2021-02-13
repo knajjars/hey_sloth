@@ -32,9 +32,16 @@
       <h2 class="font-bold text-lg border-b-2 pb-4">Linked accounts</h2>
       <% authorizations = current_user.authorizations %>
       <% if authorizations.empty? %>
-        <p class="mt-6">You don't have a linked account yet.
-          <%= link_to 'Link Twitter', user_twitter_omniauth_authorize_path, class: "underline text-purple-600 font-bold" %>
-        </p>
+        <div class=" flex items-center space-x-3 mt-6">
+          <p>You don't have a linked account
+            yet. <%= link_to 'Link Twitter', user_twitter_omniauth_authorize_path, class: "underline text-purple-600 font-bold" %>
+          </p>
+          <% if params[:link_twitter].present? %>
+            <svg class="w-12 h-12 blink text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+            </svg>
+          <% end %>
+        </div>
       <% else %>
         <% authorizations.each do |auth| %>
           <span class="flex items-center space-x-2 mt-6">
