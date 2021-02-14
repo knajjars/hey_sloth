@@ -1,8 +1,14 @@
-<% if @testimonials.any? %>
-  <div class="grid auto-cols-min grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16">
-    <% @testimonials.each do |t| %>
-      <% @testimonial = t %>
-      <%= render 'tweet/collect_tweet' %>
+<div class="shadow-xl rounded sm:overflow-hidden">
+  <div class="px-4 py-6 sm:px-6 flex flex-col space-y-6">
+    <%= link_to "Timeline tweets for #{@twitter_handle}", edit_user_registration_path, class: "text-purple-600 font-black text-2xl mb-5 underline" %>
+
+    <% if @testimonials.any? %>
+      <div class="grid auto-cols-auto grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16">
+        <% @testimonials.each do |t| %>
+          <% @testimonial = t %>
+          <%= render 'tweet/collect_tweet' %>
+        <% end %>
+      </div>
     <% end %>
   </div>
-<% end %>
+</div>

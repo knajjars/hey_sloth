@@ -42,6 +42,7 @@ class CollectController < ApplicationController
 
   def twitter_search
     if current_user.twitter?
+      @twitter_handle = current_user.authorizations.first.twitter_handle
       tweets = current_user.twitter.mentions_timeline(tweet_mode: 'extended')
       @testimonials = []
       tweets.each do |t|
