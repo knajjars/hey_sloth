@@ -41,14 +41,14 @@ class CollectController < ApplicationController
   end
 
   def twitter_search
-    if current_user.twitter?
-      @twitter_handle = current_user.authorizations.first.twitter_handle
-      tweets = current_user.twitter.mentions_timeline(tweet_mode: 'extended')
-      @testimonials = []
-      tweets.each do |t|
-        testimonial = Testimonial.new map_tweet_to_testimonial(t)
-        @testimonials << testimonial
-      end
+    @testimonials = []
+    return unless current_user.twitter?
+
+    @twitter_handle = current_user.authorizations.first.twitter_handle
+    tweets = current_user.twitter.mentions_timeline(tweet_mode: 'extended')
+    tweets.each do |t|
+      testimonial = Testimonial.new map_tweet_to_testimonial(t)
+      @testimonials << testimonial
     end
 
   end
