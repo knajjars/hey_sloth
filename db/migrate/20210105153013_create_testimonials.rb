@@ -12,7 +12,10 @@ class CreateTestimonials < ActiveRecord::Migration[6.1]
       t.string :tweet_status_id
       t.text :tweet_url
       t.text :tweet_image_url
+      t.date :tweet_date
       t.string :tweet_user_id
+      t.integer :tweet_retweet_count
+      t.integer :tweet_favorite_count
       t.boolean :showcase, default: false
 
       t.timestamps

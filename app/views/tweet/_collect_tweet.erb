@@ -9,6 +9,10 @@
       <%= form.hidden_field :tweet_url, value: @tweet.url.to_s %>
       <%= form.hidden_field :tweet_user_id, value: @tweet.user.id %>
       <%= form.hidden_field :tweet_image_url, value: @tweet.user.profile_image_url_https(:original).to_s %>
+      <%= form.hidden_field :tweet_date, value: @tweet.created_at %>
+      <%= form.hidden_field :tweet_retweet_count, value: @tweet.retweet_count %>
+      <%= form.hidden_field :tweet_favorite_count, value: @tweet.favorite_count %>
+
       <%= form.submit "Collect", class: "py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-purple-600 text-white uppercase cursor-pointer hover:bg-purple-800" %>
     <% end %>
   <% else %>

@@ -101,7 +101,10 @@ ActiveRecord::Schema.define(version: 2021_01_30_170811) do
     t.string "tweet_status_id"
     t.text "tweet_url"
     t.text "tweet_image_url"
+    t.date "tweet_date"
     t.string "tweet_user_id"
+    t.integer "tweet_retweet_count"
+    t.integer "tweet_favorite_count"
     t.boolean "showcase", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

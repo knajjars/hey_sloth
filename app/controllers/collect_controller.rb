@@ -49,11 +49,6 @@ class CollectController < ApplicationController
 
       client = current_user.twitter? ? current_user.twitter : TwitterApi.client
       @tweet = client.status(tweet_status, tweet_mode: 'extended')
-      
-      # :media_url_https=
-      # :created_at=
-      # :retweet_count=
-      # favorite_count
     rescue Twitter::Error::NotFound => e
       redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
     rescue StandardError
@@ -72,7 +67,10 @@ class CollectController < ApplicationController
       "tweet_status_id": tweet[:tweet_status_id],
       "tweet_url": tweet[:tweet_url],
       "tweet_user_id": tweet[:tweet_user_id],
-      "tweet_image_url": tweet[:tweet_image_url]
+      "tweet_image_url": tweet[:tweet_image_url],
+      "tweet_date": tweet[:tweet_date],
+      "tweet_retweet_count": tweet[:tweet_retweet_count],
+      "tweet_favorite_count": tweet[:tweet_favorite_count]
     )
 
     redirect_back fallback_location: app_root_path, notice: 'Successfully collected twitter post!'
@@ -89,7 +87,8 @@ class CollectController < ApplicationController
   private
 
   def tweet_params
-    params.require(:testimonial).permit(:name, :content, :social_link, :tweet_status_id, :tweet_url, :tweet_user_id, :tweet_image_url)
+    params.require(:testimonial).permit(:name, :content, :social_link, :tweet_status_id, :tweet_url, :tweet_user_id,
+                                        :tweet_image_url, :tweet_date, :tweet_retweet_count, :tweet_favorite_count)
   end
 
   def set_collected_tweets
