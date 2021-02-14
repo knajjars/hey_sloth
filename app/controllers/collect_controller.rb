@@ -42,19 +42,22 @@ class CollectController < ApplicationController
 
   def twitter_post_new
     tweet_url = params[:tweet_url]
-    unless tweet_url.nil?
-      begin
-        tweet_status = tweet_url.split('/').last
+    return unless tweet_url.present?
 
-        client = current_user.twitter? ? current_user.twitter : TwitterApi.client
-        @tweet = client.status(tweet_status, tweet_mode: 'extended')
+    begin
+      tweet_status = tweet_url.split('/').last
 
-        render :twitter_post_new
-      rescue Twitter::Error::NotFound => e
-        redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
-      rescue
-        redirect_to collect_twitter_post_new_path, alert: 'Something went wrong.'
-      end
+      client = current_user.twitter? ? current_user.twitter : TwitterApi.client
+      @tweet = client.status(tweet_status, tweet_mode: 'extended')
+      
+      # :media_url_https=
+      # :created_at=
+      # :retweet_count=
+      # favorite_count
+    rescue Twitter::Error::NotFound => e
+      redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
+    rescue StandardError
+      redirect_to collect_twitter_post_new_path, alert: 'Something went wrong.'
     end
   end
 
