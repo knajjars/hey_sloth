@@ -1,6 +1,11 @@
-<%= render 'testimonials/tweet_testimonial' %>
-<div class="flex flex-col items-start space-y-3">
-  <% if @collected_tweets.find_by(tweet_status_id: @testimonial.tweet_status_id).nil? %>
+<% collected_class = 'bg-blue-400 hover:bg-red-400 hover:opacity-30' %>
+<% not_collected_class = 'hover:bg-blue-400 hover:opacity-30' %>
+
+<% styling = @collected_tweets.find_by(tweet_status_id: @testimonial.tweet_status_id).nil? ? not_collected_class : collected_class %>
+
+<div class="flex items-center justify-center p-3 rounded-md <%= styling %>">
+  <%= render 'testimonials/tweet_testimonial' %>
+  <div class="hidden">
     <%= form_with url: collect_twitter_post_create_path, method: :post, model: @testimonial do |form| %>
       <%= form.hidden_field :name, value: @testimonial.name %>
       <%= form.hidden_field :content, value: @testimonial.content %>
@@ -14,7 +19,6 @@
       <%= form.hidden_field :tweet_favorite_count, value: @testimonial.tweet_favorite_count %>
       <%= form.submit "Collect", class: "py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-purple-600 text-white uppercase cursor-pointer hover:bg-purple-800" %>
     <% end %>
-  <% else %>
     <%= button_to "Remove", collect_delete_tweet_path(@testimonial.tweet_status_id), method: :delete, class: "py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-red-400 text-white uppercase cursor-pointer hover:bg-red-600" %>
-  <% end %>
+  </div>
 </div>

@@ -1,4 +1,8 @@
-<h1>Collect#twitter_search</h1>
-<%= tweets_timeline %>
-
-<%= link_to 'Back', app_root_path %>
+<% if @testimonials.any? %>
+  <div class="grid auto-cols-min grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16">
+    <% @testimonials.each do |t| %>
+      <% @testimonial = t %>
+      <%= render 'tweet/collect_tweet' %>
+    <% end %>
+  </div>
+<% end %>

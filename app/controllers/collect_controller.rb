@@ -40,7 +40,17 @@ class CollectController < ApplicationController
     redirect_to shareable_links_path, notice: 'Successfully sent email to recipients!'
   end
 
-  def twitter_search; end
+  def twitter_search
+    if current_user.twitter?
+      tweets = current_user.twitter.mentions_timeline(tweet_mode: 'extended')
+      @testimonials = []
+      tweets.each do |t|
+        testimonial = Testimonial.new map_tweet_to_testimonial(t)
+        @testimonials << testimonial
+      end
+    end
+
+  end
 
   def twitter_post_new
     tweet_url = params[:tweet_url]
