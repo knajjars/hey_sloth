@@ -1,4 +1,6 @@
 class CollectController < ApplicationController
+  include MapTweetToTestimonial
+
   before_action :set_collected_tweets, only: %i[twitter_search twitter_post_new]
   before_action :set_shareable_link, only: %i[from_shareable_link_new from_shareable_link_create send_email_create send_email_new]
   layout 'page', only: %i[from_shareable_link_new from_shareable_link_create]
@@ -48,7 +50,9 @@ class CollectController < ApplicationController
       tweet_status = tweet_url.split('/').last
 
       client = current_user.twitter? ? current_user.twitter : TwitterApi.client
-      @tweet = client.status(tweet_status, tweet_mode: 'extended')
+      tweet = client.status(tweet_status, tweet_mode: 'extended')
+      @testimonial = Testimonial.new map_tweet_to_testimonial(tweet)
+
     rescue Twitter::Error::NotFound => e
       redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
     rescue StandardError

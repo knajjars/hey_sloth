@@ -1,21 +1,13 @@
+<%= render 'testimonials/tweet_testimonial' %>
 <div class="flex flex-col items-start space-y-3">
-  <strong>Add mapper from tweet to testimonial format</strong>
-  <% if @collected_tweets.find_by(tweet_status_id: @tweet.id).nil? %>
-    <%= form_with url: collect_twitter_post_create_path, method: :post, model: Testimonial do |form| %>
-      <%= form.hidden_field :name, value: @tweet.user.name %>
-      <%= form.hidden_field :content, value: @tweet.full_text %>
-      <%= form.hidden_field :social_link, value: @tweet.user.url.to_s %>
-      <%= form.hidden_field :tweet_status_id, value: @tweet.id %>
-      <%= form.hidden_field :tweet_url, value: @tweet.url.to_s %>
-      <%= form.hidden_field :tweet_user_id, value: @tweet.user.id %>
-      <%= form.hidden_field :tweet_image_url, value: @tweet.user.profile_image_url_https(:original).to_s %>
-      <%= form.hidden_field :tweet_date, value: @tweet.created_at %>
-      <%= form.hidden_field :tweet_retweet_count, value: @tweet.retweet_count %>
-      <%= form.hidden_field :tweet_favorite_count, value: @tweet.favorite_count %>
-
+  <% if @collected_tweets.find_by(tweet_status_id: @testimonial.tweet_status_id).nil? %>
+    <%= form_with url: collect_twitter_post_create_path, method: :post, model: @testimonial do |form| %>
+      <%# @testimonial.each do |key, value| %>
+      <%#= form.hidden_field key, value: value %>
+      <%# end %>
       <%= form.submit "Collect", class: "py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-purple-600 text-white uppercase cursor-pointer hover:bg-purple-800" %>
     <% end %>
   <% else %>
-    <%= button_to "Remove", collect_delete_tweet_path(@tweet.id), method: :delete, class: "py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-red-400 text-white uppercase cursor-pointer hover:bg-red-600" %>
+    <%= button_to "Remove", collect_delete_tweet_path(@testimonial.tweet_status_id), method: :delete, class: "py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-red-400 text-white uppercase cursor-pointer hover:bg-red-600" %>
   <% end %>
 </div>
