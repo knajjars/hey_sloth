@@ -1,17 +1,29 @@
-<div class="flex flex-col items-start space-y-3">
-  <%= embed_tweet(@tweet) %>
-  <% if @collected_tweets.find_by(tweet_status_id: @tweet.id).nil? %>
-    <%= form_with url: collect_twitter_post_create_path, method: :post, model: Testimonial do |form| %>
-      <%= form.hidden_field :name, value: @tweet.user.name %>
-      <%= form.hidden_field :content, value: @tweet.full_text %>
-      <%= form.hidden_field :social_link, value: @tweet.user.url.to_s %>
-      <%= form.hidden_field :tweet_status_id, value: @tweet.id %>
-      <%= form.hidden_field :tweet_url, value: @tweet.url.to_s %>
-      <%= form.hidden_field :tweet_user_id, value: @tweet.user.id %>
-      <%= form.hidden_field :tweet_image_url, value: @tweet.user.profile_image_url_https(:original).to_s %>
-      <%= form.submit "Collect", class: "py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-purple-600 text-white uppercase cursor-pointer hover:bg-purple-800" %>
-    <% end %>
-  <% else %>
-    <%= button_to "Remove", collect_delete_tweet_path(@tweet.id), method: :delete, class: "py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md bg-red-400 text-white uppercase cursor-pointer hover:bg-red-600" %>
-  <% end %>
+<% is_collected = @collected_tweets.find_by(tweet_status_id: @testimonial.tweet_status_id).present? %>
+
+<div class=" flip-card <%= is_collected ? "bg-blue-400" : "bg-gray-400" %> rounded-xl">
+  <div class="flip-card-inner flex items-center justify-center relative p-3 rounded-md">
+    <span class="flip-card-front">
+      <%= render 'testimonials/tweet_testimonial' %>
+    </span>
+
+    <div class="absolute flex justify-center items-center w-full h-full flip-card-back">
+      <% if is_collected %>
+        <%= button_to "Remove", collect_delete_tweet_path(@testimonial.tweet_status_id), method: :delete, class: "py-6 px-8 text-2xl rounded-xl bg-red-400 text-white uppercase cursor-pointer hover:bg-red-500" %>
+      <% else %>
+        <%= form_with url: collect_twitter_post_create_path, method: :post, model: @testimonial do |form| %>
+          <%= form.hidden_field :name, value: @testimonial.name %>
+          <%= form.hidden_field :content, value: @testimonial.content %>
+          <%= form.hidden_field :social_link, value: @testimonial.social_link %>
+          <%= form.hidden_field :tweet_status_id, value: @testimonial.tweet_status_id %>
+          <%= form.hidden_field :tweet_url, value: @testimonial.tweet_url %>
+          <%= form.hidden_field :tweet_user_id, value: @testimonial.tweet_user_id %>
+          <%= form.hidden_field :tweet_image_url, value: @testimonial.tweet_image_url %>
+          <%= form.hidden_field :tweet_date, value: @testimonial.tweet_date %>
+          <%= form.hidden_field :tweet_retweet_count, value: @testimonial.tweet_retweet_count %>
+          <%= form.hidden_field :tweet_favorite_count, value: @testimonial.tweet_favorite_count %>
+          <%= form.submit "Collect", class: "py-6 px-8 text-2xl rounded-xl bg-blue-400 text-white uppercase cursor-pointer hover:bg-blue-500" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -48,3 +48,4 @@ gem 'sib-api-v3-sdk', '~> 7.3'
 gem 'twitter', '~> 7.0'
 gem "tailwindcss-rails", "~> 0.3.1"
 gem 'pagy', '~> 3.10'
+gem 'twitter-text', '~> 3.1'

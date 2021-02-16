@@ -1,4 +1,6 @@
 class CollectController < ApplicationController
+  include MapTweetToTestimonial
+
   before_action :set_collected_tweets, only: %i[twitter_search twitter_post_new]
   before_action :set_shareable_link, only: %i[from_shareable_link_new from_shareable_link_create send_email_create send_email_new]
   layout 'page', only: %i[from_shareable_link_new from_shareable_link_create]
@@ -38,23 +40,34 @@ class CollectController < ApplicationController
     redirect_to shareable_links_path, notice: 'Successfully sent email to recipients!'
   end
 
-  def twitter_search; end
+  def twitter_search
+    @testimonials = []
+    return unless current_user.twitter?
+
+    @twitter_handle = current_user.authorizations.first.twitter_handle
+    tweets = current_user.twitter.mentions_timeline(tweet_mode: 'extended')
+    tweets.each do |t|
+      testimonial = Testimonial.new map_tweet_to_testimonial(t)
+      @testimonials << testimonial
+    end
+
+  end
 
   def twitter_post_new
     tweet_url = params[:tweet_url]
-    unless tweet_url.nil?
-      begin
-        tweet_status = tweet_url.split('/').last
+    return unless tweet_url.present?
 
-        client = current_user.twitter? ? current_user.twitter : TwitterApi.client
-        @tweet = client.status(tweet_status, tweet_mode: 'extended')
+    begin
+      tweet_status = tweet_url.split('/').last
 
-        render :twitter_post_new
-      rescue Twitter::Error::NotFound => e
-        redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
-      rescue
-        redirect_to collect_twitter_post_new_path, alert: 'Something went wrong.'
-      end
+      client = current_user.twitter? ? current_user.twitter : TwitterApi.client
+      tweet = client.status(tweet_status, tweet_mode: 'extended')
+      @testimonial = Testimonial.new map_tweet_to_testimonial(tweet)
+
+    rescue Twitter::Error::NotFound => e
+      redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
+    rescue StandardError
+      redirect_to collect_twitter_post_new_path, alert: 'Something went wrong.'
     end
   end
 
@@ -69,7 +82,10 @@ class CollectController < ApplicationController
       "tweet_status_id": tweet[:tweet_status_id],
       "tweet_url": tweet[:tweet_url],
       "tweet_user_id": tweet[:tweet_user_id],
-      "tweet_image_url": tweet[:tweet_image_url]
+      "tweet_image_url": tweet[:tweet_image_url],
+      "tweet_date": tweet[:tweet_date],
+      "tweet_retweet_count": tweet[:tweet_retweet_count],
+      "tweet_favorite_count": tweet[:tweet_favorite_count]
     )
 
     redirect_back fallback_location: app_root_path, notice: 'Successfully collected twitter post!'
@@ -86,7 +102,8 @@ class CollectController < ApplicationController
   private
 
   def tweet_params
-    params.require(:testimonial).permit(:name, :content, :social_link, :tweet_status_id, :tweet_url, :tweet_user_id, :tweet_image_url)
+    params.require(:testimonial).permit(:name, :content, :social_link, :tweet_status_id, :tweet_url, :tweet_user_id,
+                                        :tweet_image_url, :tweet_date, :tweet_retweet_count, :tweet_favorite_count)
   end
 
   def set_collected_tweets

@@ -1,5 +1,6 @@
 module ApplicationHelper
   include Pagy::Frontend
+  include Twitter::TwitterText::Autolink
 
   def formatted_date(date, with_time_passed:)
     formatted_date = date.strftime('%B %d, %Y').to_s
@@ -24,10 +25,5 @@ module ApplicationHelper
 
     controllers_whitelist = %w[testimonials collect shareable_links dashboard]
     controllers_whitelist.include?(controller_name)
-  end
-
-  def embed_tweet(t)
-    tweet = TwitterApi.client.oembed(t, hide_thread: true)
-    raw(tweet.html)
   end
 end
