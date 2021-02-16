@@ -1,1 +1,61 @@
-I am a test
+<div class="shadow-xl rounded sm:overflow-hidden">
+  <div class="px-4 py-6 sm:px-6 flex flex-col space-y-6">
+    <h1 class="text-purple-600 font-black text-3xl mb-5 underline">Hi there!</h1>
+    <div class="grid auto-cols-auto grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16 text-gray-800">
+      <div class="p-4 bg-gray-200 rounded flex flex-col justify-center items-center text-2xl">
+        <p>You have</p>
+        <p class="text-9xl font-black"><%= @testimonials.count %></p>
+        <p>testimonials collected in total</p>
+      </div>
+
+      <div class="p-4 bg-gray-200 rounded flex flex-col justify-center items-center text-2xl">
+        <p>Of which</p>
+        <p class="text-9xl font-black"><%= @testimonials.showcased.count %></p>
+        <p>are being showcased</p>
+      </div>
+
+      <%= link_to testimonials_path, class: "p-4 bg-purple-500 rounded text-white" do %>
+        <div class="flex justify-center items-center space-x-2 h-full">
+          <p class="text-xl">View all testimonials</p>
+          <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"/>
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-3 gap-2">
+        <div class="col-span-full p-4 bg-gray-200 rounded text-gray-800 text-center font-black">
+          Collect more
+        </div>
+        <%= link_to shareable_links_path, class: "p-4 bg-yellow-400 rounded text-white" do %>
+          <div class="flex flex-col justify-center items-center space-y-2">
+            <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"/>
+            </svg>
+            Use link
+          </div>
+        <% end %>
+
+        <%= link_to collect_twitter_post_new_url, class: "p-4 bg-yellow-400 rounded text-white" do %>
+          <div class="flex flex-col justify-center items-center space-y-2">
+            <svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path>
+            </svg>
+            I have a tweet
+          </div>
+        <% end %>
+
+        <%= link_to collect_twitter_search_path, class: "p-4 bg-yellow-400 rounded text-white" do %>
+          <div class="flex flex-col justify-center items-center space-y-2">
+            <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Tweet mentions
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

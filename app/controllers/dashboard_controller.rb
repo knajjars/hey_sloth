@@ -1,7 +1,5 @@
 class DashboardController < ApplicationController
   def index
-  end
-
-  def collect
+    @testimonials = current_user.testimonials
   end
 end
