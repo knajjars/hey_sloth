@@ -1,61 +1,144 @@
-<div class="shadow-xl rounded sm:overflow-hidden">
-  <div class="px-4 py-6 sm:px-6 flex flex-col space-y-6">
-    <h1 class="text-purple-600 font-black text-3xl mb-5 underline">Hi there!</h1>
-    <div class="grid auto-cols-auto grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16 text-gray-800">
-      <div class="p-4 bg-gray-200 rounded flex flex-col justify-center items-center text-2xl">
-        <p>You have</p>
-        <p class="text-9xl font-black"><%= @testimonials.count %></p>
-        <p>testimonials collected in total</p>
-      </div>
+<div class="flex-1 flex flex-col overflow-hidden">
+  <header class="flex justify-between items-center py-4 px-2 md:px-0 bg-white border-b-4 border-purple-600">
+    <div class="flex items-center w-full">
+      <div class="relative w-full">
+        <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+            <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                </path>
+            </svg>
+        </span>
 
-      <div class="p-4 bg-gray-200 rounded flex flex-col justify-center items-center text-2xl">
-        <p>Of which</p>
-        <p class="text-9xl font-black"><%= @testimonials.showcased.count %></p>
-        <p>are being showcased</p>
+        <input class="form-input w-full py-3 pl-10 pr-4 rounded-2xl shadow text-white" type="text"
+               placeholder="Search">
       </div>
+    </div>
+  </header>
+  <main class="flex-1 overflow-x-hidden overflow-y-auto">
+    <div class="mx-auto px-2 md:px-6 py-8 bg-gray-200 flex flex-col space-y-6">
+      <h3 class="text-gray-700 text-3xl font-medium">Dashboard</h3>
 
-      <%= link_to testimonials_path, class: "p-4 bg-purple-500 rounded text-white" do %>
-        <div class="flex justify-center items-center space-x-2 h-full">
-          <p class="text-xl">View all testimonials</p>
-          <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"/>
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"/>
-          </svg>
+      <div class="mt-4">
+        <div class="flex flex-wrap -mx-6">
+          <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+            <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+              <div class="p-3 rounded-full bg-purple-600 bg-opacity-75">
+                <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+
+              <div class="mx-5">
+                <h4 class="text-2xl font-semibold text-gray-700"><%= @pagy.count %></h4>
+                <div class="text-gray-500">Total testimonials</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+            <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+              <div class="p-3 rounded-full bg-purple-600 bg-opacity-75">
+                <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+
+              <div class="mx-5">
+                <h4 class="text-2xl font-semibold text-gray-700"><%= @showcased_testimonials %></h4>
+                <div class="text-gray-500">Are being showcased</div>
+              </div>
+            </div>
+          </div>
+
         </div>
-      <% end %>
-
-      <div class="grid grid-cols-3 gap-2">
-        <div class="col-span-full p-4 bg-gray-200 rounded text-gray-800 text-center font-black">
-          Collect more
-        </div>
-        <%= link_to shareable_links_path, class: "p-4 bg-yellow-400 rounded text-white" do %>
-          <div class="flex flex-col justify-center items-center space-y-2">
-            <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"/>
-            </svg>
-            Use link
-          </div>
-        <% end %>
-
-        <%= link_to collect_twitter_post_new_url, class: "p-4 bg-yellow-400 rounded text-white" do %>
-          <div class="flex flex-col justify-center items-center space-y-2">
-            <svg class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path>
-            </svg>
-            I have a tweet
-          </div>
-        <% end %>
-
-        <%= link_to collect_twitter_search_path, class: "p-4 bg-yellow-400 rounded text-white" do %>
-          <div class="flex flex-col justify-center items-center space-y-2">
-            <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            Tweet mentions
-          </div>
-        <% end %>
       </div>
+
+      <div data-controller="testimonials" class="flex flex-col items-center w-full">
+        <div class="overflow-x-auto w-full">
+          <div class="py-2 align-middle inline-block w-full">
+            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <table class="w-full divide-y divide-purple-200">
+                <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="md:px-3 lg:px-6 px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th scope="col" class="hidden md:table-cell md:px-3 lg:px-6 px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Content
+                  </th>
+                  <th scope="col" class="md:px-3 lg:px-6 px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Source
+                  </th>
+                  <th scope="col" class="hidden lg:table-cell md:px-3 lg:px-6 px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Collected on
+                  </th>
+                  <th scope="col" class="md:px-3 lg:px-6 px-1 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Showcase
+                  </th>
+                  <th scope="col" class="relative md:px-3 lg:px-6 px-1 py-3">
+                    <span class="sr-only">View</span>
+                  </th>
+                </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                <% @testimonials.each do |testimonial| %>
+                  <tr class="hover:bg-purple-100">
+                    <td class="md:px-3 lg:px-6 px-1 py-4">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-10">
+                          <%= display_image testimonial, class_names: "h-10 w-10 rounded-full", alt: "Testimonial user" %>
+                        </div>
+                        <div class="ml-4">
+                          <div class="text-sm text-gray-900">
+                            <%= testimonial.name %>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="hidden md:table-cell md:px-3 lg:px-6 px-1 py-4 ">
+                      <div class="text-sm text-gray-900">
+                        <%= testimonial.content.truncate(100, separator: ' ') %>
+                      </div>
+                    </td>
+                    <td class="md:px-3 lg:px-6 px-1 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-900">
+                        <%= testimonial.source.capitalize %>
+                      </div>
+                    </td>
+                    <td class="hidden lg:table-cell md:px-3 lg:px-6 px-1 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-900">
+                        <%= formatted_date testimonial.created_at, with_time_passed: false %>
+                      </div>
+                    </td>
+
+                    <td class="md:px-3 lg:px-6 px-1 py-4 content-center text-left text-sm font-medium">
+                      <%= link_to toggle_showcase_testimonial_path(testimonial), method: :post, class: "cursor-pointer" do %>
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= testimonial.showcase ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800" %>">
+                    <%= testimonial.showcase.yesno %>
+                  </span>
+                      <% end %>
+                    </td>
+
+                    <td class="md:px-3 lg:px-6 px-1 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <%= link_to testimonial, class: "text-purple-600 hover:text-purple-800 cursor-pointer" do %>
+                        <svg class=" h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <%== pagy_nav(@pagy) %>
+      </div>
+
 
     </div>
-  </div>
+  </main>
 </div>

@@ -5,21 +5,6 @@ RSpec.describe 'Testimonials', type: :request do
   let(:user) { testimonial.user }
   let(:other_user) { FactoryBot.create(:user) }
 
-  describe '#index' do
-    it 'redirects to login if not authenticated' do
-      get testimonials_url
-      expect(response).to have_http_status(302)
-      expect(response).to redirect_to('/login')
-    end
-
-    it 'renders testimonials for authenticated user' do
-      sign_in user
-      get testimonials_url
-      expect(response).to have_http_status(200)
-      expect(response).to render_template('testimonials/index')
-    end
-  end
-
   describe '#show' do
     it 'redirects to login if not authenticated' do
       get testimonial_url(testimonial.hashid)

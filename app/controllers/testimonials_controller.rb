@@ -1,10 +1,6 @@
 class TestimonialsController < ApplicationController
   before_action :set_testimonial, only: %i[show destroy toggle_showcase]
 
-  def index
-    @pagy, @testimonials = pagy(current_user.testimonials.with_attached_image.order(created_at: :desc), items: 10)
-  end
-
   def show
     authorize @testimonial
   end
@@ -13,7 +9,7 @@ class TestimonialsController < ApplicationController
     authorize @testimonial
     @testimonial.destroy
     respond_to do |format|
-      format.html { redirect_to testimonials_url, notice: 'Testimonial was successfully destroyed.' }
+      format.html { redirect_to app_root_path, notice: 'Testimonial was successfully destroyed.' }
     end
   end
 

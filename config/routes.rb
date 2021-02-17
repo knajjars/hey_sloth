@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
     resources :shareable_links, except: :show
 
-    resources :testimonials, only: %i[index show destroy] do
+    resources :testimonials, only: %i[show destroy] do
       post 'toggle_showcase', to: 'testimonials#toggle_showcase', on: :member, as: 'toggle_showcase'
     end
 
