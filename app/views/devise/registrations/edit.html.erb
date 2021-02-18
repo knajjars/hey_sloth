@@ -1,6 +1,6 @@
 <div class="shadow-xl rounded sm:overflow-hidden">
   <div class="px-4 py-6 sm:px-6 flex flex-col space-y-6">
-    <h1 class="text-purple-600 font-black text-2xl mb-5 underline">Account settings</h1>
+    <h1 class="text-purple-600 font-black text-3xl mb-5">Account settings</h1>
     <div class="p-4 bg-gray-100 rounded">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
