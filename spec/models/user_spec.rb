@@ -59,9 +59,9 @@ RSpec.describe User, type: :model do
     expect(testimonials.macro).to eq :has_many
   end
 
-  it 'can have many shareable_links' do
-    shareable_links = User.reflect_on_association :shareable_links
-    expect(shareable_links.macro).to eq :has_many
+  it 'can have one fire_link' do
+    fire_link = User.reflect_on_association :fire_link
+    expect(fire_link.macro).to eq :has_one
   end
 
   it 'can have many authorizations' do

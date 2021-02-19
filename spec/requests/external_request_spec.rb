@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Externals', type: :request do
-  let(:testimonial_created) { FactoryBot.create(:testimonial, :with_shareable_link, showcase: true) }
+  let(:testimonial_created) { FactoryBot.create(:testimonial, :with_fire_link, showcase: true) }
   let(:testimonial_attributes) { FactoryBot.attributes_for(:testimonial, :tweet, showcase: true) }
   let(:user) { testimonial_created.user }
   let(:other_user) { FactoryBot.create(:user) }
@@ -59,7 +59,7 @@ RSpec.describe 'Externals', type: :request do
           expect(body).to have_key(key)
         end
 
-        %w[user_id shareable_link_id showcase id updated_at tweet_image_url].each do |key|
+        %w[user_id fire_link_id showcase id updated_at tweet_image_url].each do |key|
           expect(body).to_not have_key(key)
         end
       end

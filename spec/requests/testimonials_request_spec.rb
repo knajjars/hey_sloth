@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Testimonials', type: :request do
-  let(:testimonial) { FactoryBot.create(:testimonial, :with_shareable_link) }
+  let(:testimonial) { FactoryBot.create(:testimonial, :with_fire_link) }
   let(:user) { testimonial.user }
   let(:other_user) { FactoryBot.create(:user) }
 

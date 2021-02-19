@@ -7,7 +7,7 @@ class CreateTestimonials < ActiveRecord::Migration[6.1]
       t.string :social_link
       t.text :content, null: false
       t.references :user, null: false, foreign_key: true
-      t.references :shareable_link, null: true, foreign_key: true
+      t.references :fire_link, null: true, foreign_key: true
       t.integer :source, default: 0
       t.string :tweet_status_id
       t.text :tweet_url

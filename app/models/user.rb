@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   include ActiveRecord::SecureToken::ClassMethods
 
+  has_one :fire_link, dependent: :destroy
   has_many :testimonials, dependent: :destroy
-  has_many :shareable_links, dependent: :destroy
   has_many :authorizations, dependent: :destroy
 
   before_validation { self.public_token = generate_unique_secure_token if self.public_token.nil? }

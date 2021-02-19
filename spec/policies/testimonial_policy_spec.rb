@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe TestimonialPolicy, type: :policy do
-  let(:current_user_testimonial) { create(:testimonial, :with_shareable_link) }
-  let(:other_user_testimonial) { create(:testimonial, :with_shareable_link) }
-  let(:current_user) {current_user_testimonial.user}
-  let(:other_user) {other_user_testimonial.user}
+  let(:current_user_testimonial) { create(:testimonial, :with_fire_link) }
+  let(:other_user_testimonial) { create(:testimonial, :with_fire_link) }
+  let(:current_user) { current_user_testimonial.user }
+  let(:other_user) { other_user_testimonial.user }
 
   permissions :show? do
     it 'allows owner of testimonial to see it' do

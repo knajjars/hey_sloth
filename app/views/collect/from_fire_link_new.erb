@@ -1,6 +1,6 @@
 <h1>Collect New Testimonial</h1>
 
-<%= form_with(model: @testimonial, url: collect_from_shareable_link_create_path) do |form| %>
+<%= form_with(model: @testimonial, url: collect_from_fire_link_create_path) do |form| %>
   <% if @testimonial.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@testimonial.errors.count, "error") %> prohibited this testimonial from being saved:</h2>
@@ -13,8 +13,8 @@
     </div>
   <% end %>
 
-  <%= image_tag @shareable_link.logo if @shareable_link.logo.attached? %>
-  <%= content_tag :p, @shareable_link.note unless @shareable_link.note.empty? %>
+  <%= image_tag @fire_link.logo if @fire_link.logo.attached? %>
+  <%= content_tag :p, @fire_link.note unless @fire_link.note.empty? %>
 
   <div class="field">
     <%= form.label :name %>
@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :company %>
-    <% if @shareable_link.job_required %>
+    <% if @fire_link.job_required %>
       <%= form.text_field :company, required: true %>
     <% else %>
       <%= form.text_field :company, required: false %>
@@ -32,7 +32,7 @@
 
   <div class="field">
     <%= form.label :role %>
-    <% if @shareable_link.job_required %>
+    <% if @fire_link.job_required %>
       <%= form.text_field :role, required: true %>
     <% else %>
       <%= form.text_field :role, required: false %>
@@ -41,7 +41,7 @@
 
   <div class="field">
     <%= form.label :social_link %>
-    <% if @shareable_link.social_link_required %>
+    <% if @fire_link.social_link_required %>
       <%= form.text_field :social_link, required: true %>
     <% else %>
       <%= form.text_field :social_link, required: false %>
@@ -50,7 +50,7 @@
 
   <div class="field">
     <%= form.label :image %>
-    <% if @shareable_link.image_required %>
+    <% if @fire_link.image_required %>
       <%= form.file_field :image, required: true, accept: "image/png, image/jpg, image/jpeg" %>
     <% else %>
       <%= form.file_field :image, accept: "image/png, image/jpg, image/jpeg" %>

@@ -2,42 +2,42 @@ class CollectController < ApplicationController
   include MapTweetToTestimonial
 
   before_action :set_collected_tweets, only: %i[twitter_search twitter_post_new]
-  before_action :set_shareable_link, only: %i[from_shareable_link_new from_shareable_link_create send_email_create send_email_new]
-  layout 'page', only: %i[from_shareable_link_new from_shareable_link_create]
+  before_action :set_fire_link, only: %i[from_fire_link_new from_fire_link_create send_email_create send_email_new]
+  layout 'page', only: %i[from_fire_link_new from_fire_link_create]
 
-  def from_shareable_link_new
+  def from_fire_link_new
     @testimonial = Testimonial.new
-    render_not_found if @shareable_link.nil?
+    render_not_found if @fire_link.nil?
   end
 
-  def from_shareable_link_create
-    return render_bad_request if @shareable_link.nil?
+  def from_fire_link_create
+    return render_bad_request if @fire_link.nil?
 
-    testimonial_attrs = testimonial_params.merge({ user: @shareable_link.user })
-    @testimonial = @shareable_link.testimonials.new(testimonial_attrs)
+    testimonial_attrs = testimonial_params.merge({ user: @fire_link.user })
+    @testimonial = @fire_link.testimonials.new(testimonial_attrs)
     respond_to do |format|
       if @testimonial.save
         format.html { redirect_to root_path, notice: 'Testimonial was successfully created.' }
       else
-        format.html { render :from_shareable_link_new }
+        format.html { render :from_fire_link_new }
       end
     end
   end
 
   def send_email_new
-    authorize @shareable_link
+    authorize @fire_link
   end
 
   def send_email_create
-    authorize @shareable_link
+    authorize @fire_link
     return render_bad_request if params[:email_addresses].nil?
 
     email_addresses = params[:email_addresses].reject(&:empty?)
     email_addresses.each do |email_address|
-      CollectMailer.new_testimonial(email_address, @shareable_link).deliver
+      CollectMailer.new_testimonial(email_address, @fire_link).deliver
     end
 
-    redirect_to shareable_links_path, notice: 'Successfully sent email to recipients!'
+    redirect_to fire_link_index_path, notice: 'Successfully sent email to recipients!'
   end
 
   def twitter_search
@@ -110,8 +110,8 @@ class CollectController < ApplicationController
     @collected_tweets = current_user.testimonials.tweets
   end
 
-  def set_shareable_link
-    @shareable_link = ShareableLink.friendly.find_by(slug: params[:shareable_link_id])
+  def set_fire_link
+    @fire_link = FireLink.friendly.find_by(slug: params[:fire_link_id])
   end
 
   def testimonial_params

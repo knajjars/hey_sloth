@@ -9,15 +9,15 @@ FactoryBot.define do
       testimonial.user = FactoryBot.create(:user) if testimonial.user.nil?
     end
 
-    trait :with_shareable_link do
+    trait :with_fire_link do
       after(:build) do |testimonial|
-        testimonial.shareable_link = FactoryBot.create(:shareable_link, image_required: false)
+        testimonial.fire_link = FactoryBot.create(:fire_link, image_required: false)
       end
     end
 
-    trait :with_shareable_link_and_image_required do
+    trait :with_fire_link_and_image_required do
       after(:build) do |testimonial|
-        testimonial.shareable_link = FactoryBot.create(:shareable_link, image_required: true)
+        testimonial.fire_link = FactoryBot.create(:fire_link, image_required: true)
       end
     end
 
