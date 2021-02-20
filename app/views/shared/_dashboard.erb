@@ -23,14 +23,14 @@
                   <div class="relative">
                     <div>
                       <button data-action="click->dashboard#toggleCollect"
-                              class="<%= "#{current_controller?('collect') | current_controller?('shareable_links') ? active_class : non_active_class} #{nav_item_class}  focus:bg-purple-900 focus:text-white" %>"
+                              class="<%= "#{current_controller?('collect') | current_controller?('fire_link') ? active_class : non_active_class} #{nav_item_class}  focus:bg-purple-900 focus:text-white" %>"
                               id="user-menu" aria-haspopup="true">
                         <span class="sr-only">Open collect menu</span>
                         Collect
                       </button>
                     </div>
                     <div data-dashboard-target="collectOptions" class="z-50 hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 text-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                      <%= link_to 'From shareable link', shareable_links_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if current_controller?('shareable_links')}", role: "menuitem" %>
+                      <%= link_to 'From Fire link', fire_link_index_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if current_controller?('fire_link')}", role: "menuitem" %>
                       <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if controller_and_action?('collect', 'twitter_post_new')}", role: "menuitem" %>
                       <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if controller_and_action?('collect', 'twitter_search')}", role: "menuitem" %>
                     </div>
@@ -84,7 +84,7 @@
           Collect
         </p>
         <div class="mt-3 px-2 space-y-1">
-          <%= link_to 'From shareable link', shareable_links_path, class: "#{current_controller?('shareable_links') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+          <%= link_to 'From Fire link', fire_link_index_path, class: "#{current_controller?('fire_link') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
           <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "#{controller_and_action?('collect', 'twitter_post_new') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
           <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "#{controller_and_action?('collect', 'twitter_search') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
         </div>

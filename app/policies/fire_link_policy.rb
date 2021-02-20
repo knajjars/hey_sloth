@@ -1,4 +1,4 @@
-class ShareableLinkPolicy < ApplicationPolicy
+class FireLinkPolicy < ApplicationPolicy
   def update?
     user == record.user
   end
@@ -19,11 +19,11 @@ class ShareableLinkPolicy < ApplicationPolicy
     user == record.user
   end
 
-  def from_shareable_link_new?
+  def from_fire_link_new?
     true
   end
 
-  def from_shareable_link_create?
+  def from_fire_link_create?
     true
   end
 

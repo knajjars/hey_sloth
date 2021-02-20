@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Collects', type: :request do
-  let(:shareable_link) { FactoryBot.create(:shareable_link, image_required: false) }
-  let(:user) { shareable_link.user }
+  let(:fire_link) { FactoryBot.create(:fire_link, image_required: false) }
+  let(:user) { fire_link.user }
   let(:other_user) { FactoryBot.create(:user) }
   let(:tweet_testimonial) { FactoryBot.create(:testimonial, :tweet) }
   let(:valid_body) do
@@ -12,30 +12,30 @@ RSpec.describe 'Collects', type: :request do
   let(:valid_tweet_body) { FactoryBot.attributes_for(:testimonial, :tweet) }
   let(:invalid_tweet_body) { FactoryBot.attributes_for(:testimonial) }
 
-  describe '#from_shareable_link_new' do
+  describe '#from_fire_link_new' do
     it 'renders for unauthenticated user' do
-      get collect_from_shareable_link_new_url(shareable_link.slug)
+      get collect_from_fire_link_new_url(fire_link.slug)
       expect(response).to have_http_status(200)
-      expect(response).to render_template('collect/from_shareable_link_new')
+      expect(response).to render_template('collect/from_fire_link_new')
     end
 
-    it 'redirects to not found if wrong shareable link' do
-      get collect_from_shareable_link_new_url("#{shareable_link.slug}_invalid")
+    it 'redirects to not found if wrong fire link' do
+      get collect_from_fire_link_new_url("#{fire_link.slug}_invalid")
       expect(response).to have_http_status(404)
       expect(response.body).to include("The page you were looking for doesn't exist.")
     end
   end
 
-  describe '#from_shareable_link_create' do
-    it 'redirects to not found if wrong shareable link' do
-      post collect_from_shareable_link_create_url("#{shareable_link.slug}_invalid"), params: { testimonial: valid_body }
+  describe '#from_fire_link_create' do
+    it 'redirects to not found if wrong fire link' do
+      post collect_from_fire_link_create_url("#{fire_link.slug}_invalid"), params: { testimonial: valid_body }
       expect(response).to have_http_status(400)
       expect(response.body).to include('Your request has something wrong')
     end
 
-    it 'creates testimonial for owner of shareable link' do
+    it 'creates testimonial for owner of fire link' do
       expect do
-        post collect_from_shareable_link_create_url(shareable_link.slug), params: { testimonial: valid_body }
+        post collect_from_fire_link_create_url(fire_link.slug), params: { testimonial: valid_body }
       end.to change(Testimonial, :count).by(1)
       expect(user.testimonials.count).to be(1)
       expect(other_user.testimonials.count).to be(0)
@@ -47,33 +47,33 @@ RSpec.describe 'Collects', type: :request do
 
     it 'renders errors for missing attributes of testimonial' do
       expect do
-        post collect_from_shareable_link_create_url(shareable_link.slug), params: { testimonial: invalid_body }
+        post collect_from_fire_link_create_url(fire_link.slug), params: { testimonial: invalid_body }
       end.to_not change(Testimonial, :count)
       expect(user.testimonials.count).to be(0)
       expect(response.body).to include('Content can&#39;t be blank')
-      expect(response).to render_template('collect/from_shareable_link_new')
+      expect(response).to render_template('collect/from_fire_link_new')
     end
   end
 
   describe '#send_email_new' do
     it 'redirects to not authorized for other authenticated user' do
       sign_in other_user
-      get collect_send_email_new_url(shareable_link.slug)
+      get collect_send_email_new_url(fire_link.slug)
       expect(response).to have_http_status(302)
       expect(response).to redirect_to('/')
       follow_redirect!
       expect(response.body).to include('Not authorized')
     end
 
-    it 'renders for authenticated user of shareable link' do
+    it 'renders for authenticated user of fire link' do
       sign_in user
-      get collect_send_email_new_url(shareable_link.slug)
+      get collect_send_email_new_url(fire_link.slug)
       expect(response).to have_http_status(200)
       expect(response).to render_template('collect/send_email_new')
     end
 
     it 'redirects to login if not authenticated' do
-      get collect_send_email_new_url(shareable_link.slug)
+      get collect_send_email_new_url(fire_link.slug)
       expect(response).to have_http_status(302)
       expect(response).to redirect_to('/login')
     end
@@ -82,7 +82,7 @@ RSpec.describe 'Collects', type: :request do
   describe '#send_email_create' do
     it 'redirects to not authorized for other authenticated user' do
       sign_in other_user
-      post collect_send_email_create_url(shareable_link.slug)
+      post collect_send_email_create_url(fire_link.slug)
       expect(response).to have_http_status(302)
       expect(response).to redirect_to('/')
       follow_redirect!
@@ -91,7 +91,7 @@ RSpec.describe 'Collects', type: :request do
 
     it 'renders bad request if emails addresses are missing' do
       sign_in user
-      post collect_send_email_create_url(shareable_link.slug)
+      post collect_send_email_create_url(fire_link.slug)
       expect(response).to have_http_status(400)
       expect(response.body).to include('Your request has something wrong')
     end
@@ -99,17 +99,17 @@ RSpec.describe 'Collects', type: :request do
     it 'sends emails for authenticated user' do
       sign_in user
       expect do
-        post collect_send_email_create_url(shareable_link.slug),
+        post collect_send_email_create_url(fire_link.slug),
              params: { email_addresses: ['example@example.com', 'otherexample@example.com'] }
       end.to change { ActionMailer::Base.deliveries.count }.by(2)
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to("/shareable_links")
+      expect(response).to redirect_to("/fire_link")
       follow_redirect!
       expect(response.body).to include('Successfully sent email to recipients!')
     end
 
     it 'redirects to login if not authenticated' do
-      post collect_send_email_create_url(shareable_link.slug)
+      post collect_send_email_create_url(fire_link.slug)
       expect(response).to have_http_status(302)
       expect(response).to redirect_to('/login')
     end

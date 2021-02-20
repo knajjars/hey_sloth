@@ -6,7 +6,7 @@ class Testimonial < ApplicationRecord
   has_rich_text :rich_text
 
   belongs_to :user
-  belongs_to :shareable_link, optional: true
+  belongs_to :fire_link, optional: true
   has_one_attached :image
 
   before_validation { self.content = self.rich_text.to_plain_text unless self.rich_text.nil? }
@@ -15,7 +15,7 @@ class Testimonial < ApplicationRecord
   validates_presence_of :content
   validates :image,
             attached: true,
-            if: ->(testimonial) { !testimonial.tweet? && (testimonial.shareable_link.present? && testimonial.shareable_link.image_required) },
+            if: ->(testimonial) { !testimonial.tweet? && (testimonial.fire_link.present? && testimonial.fire_link.image_required) },
             content_type: %i[png jpg jpeg]
 
   def self.with_rich_text

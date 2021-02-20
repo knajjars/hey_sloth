@@ -1,12 +1,12 @@
 <div class="shadow-xl rounded sm:overflow-hidden">
   <div class="px-4 py-6 sm:px-6">
 
-    <h1 class="text-purple-600 font-black text-2xl mb-5 underline"><%= current_action?("create") || current_action?("new") ? "Create a shareable link" : "Update shareable link" %></h1>
+    <h1 class="text-purple-600 font-black text-2xl mb-5 underline"><%= current_action?("create") || current_action?("new") ? "Create a fire link" : "Update fire link" %></h1>
 
-    <%= form_with(model: shareable_link) do |form| %>
-      <% if shareable_link.errors.any? %>
+    <%= form_with(model: fire_link, url: current_action?("create") | current_action?("new") ? fire_link_index_path : fire_link_path) do |form| %>
+      <% if fire_link.errors.any? %>
         <div class="flex flex-col my-4 items-start justify-between">
-          <% shareable_link.errors.each do |error| %>
+          <% fire_link.errors.each do |error| %>
             <p class="text-red-600 text-sm font-black"><%= error.full_message %></p>
           <% end %>
         </div>
@@ -86,7 +86,7 @@
 
       </div>
       <div class="flex justify-between items-center px-4 py-3 sm:px-6">
-        <%= link_to "Back", shareable_links_path, class: "uppercase cursor-pointer inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-gray-500" %>
+        <%= link_to "Back", fire_link_index_path, class: "uppercase cursor-pointer inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-400 hover:bg-gray-500" %>
         <%= form.submit "Save", class: "uppercase cursor-pointer inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-800" %>
       </div>
     <% end %>
