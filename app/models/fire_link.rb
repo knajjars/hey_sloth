@@ -1,4 +1,4 @@
-class ShareableLink < ApplicationRecord
+class FireLink < ApplicationRecord
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
@@ -30,7 +30,7 @@ class ShareableLink < ApplicationRecord
 
   def tag_and_sequence
     slug = normalize_friendly_id(tag)
-    sequence = ShareableLink.where("slug like '#{slug}-%'").count + 2
+    sequence = FireLink.where("slug like '#{slug}-%'").count + 2
     "#{slug}-#{sequence}"
   end
 

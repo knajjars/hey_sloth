@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Testimonial, type: :model do
-  let(:testimonial) { FactoryBot.create(:testimonial, :with_shareable_link) }
-  let(:shareable_link) { FactoryBot.create(:shareable_link, :image_not_required) }
+  let(:testimonial) { FactoryBot.create(:testimonial, :with_fire_link) }
+  let(:fire_link) { FactoryBot.create(:fire_link, :image_not_required) }
   let(:testimonial_with_rich_text_params) { FactoryBot.attributes_for(:testimonial, :with_rich_text) }
   let(:testimonial_params) { FactoryBot.attributes_for(:testimonial) }
   let(:testimonial_tweet) { FactoryBot.create(:testimonial, :tweet) }
-  let(:testimonial_image_required) { FactoryBot.build(:testimonial, :with_shareable_link_and_image_required) }
+  let(:testimonial_image_required) { FactoryBot.build(:testimonial, :with_fire_link_and_image_required) }
 
   it 'requires a name' do
     testimonial.name = nil
@@ -30,15 +30,15 @@ RSpec.describe Testimonial, type: :model do
     end
 
     it 'can create testimonial without content but with rich_text' do
-      testimonial_with_rich_text = shareable_link.testimonials.new testimonial_with_rich_text_params.merge({ user: shareable_link.user })
+      testimonial_with_rich_text = fire_link.testimonials.new testimonial_with_rich_text_params.merge({ user: fire_link.user })
       expect(testimonial_with_rich_text).to be_valid
 
-      testimonial_without_rich_text = shareable_link.testimonials.new testimonial_params.merge({ user: shareable_link.user })
+      testimonial_without_rich_text = fire_link.testimonials.new testimonial_params.merge({ user: fire_link.user })
       expect(testimonial_without_rich_text).to be_valid
     end
 
     it 'requires either content or rich_text' do
-      testimonial_without_rich_text_and_content = shareable_link.testimonials.new testimonial_params.merge({ user: shareable_link.user }).except(:content)
+      testimonial_without_rich_text_and_content = fire_link.testimonials.new testimonial_params.merge({ user: fire_link.user }).except(:content)
       expect(testimonial_without_rich_text_and_content).to_not be_valid
     end
 
@@ -105,7 +105,7 @@ RSpec.describe Testimonial, type: :model do
   end
 
   describe 'image' do
-    it 'requires image if not tweet and shareable link requires it' do
+    it 'requires image if not tweet and fire link requires it' do
       expect(testimonial_image_required).to_not be_valid
 
       image = ActiveStorage::Blob.create_and_upload!(
@@ -124,7 +124,7 @@ RSpec.describe Testimonial, type: :model do
       expect(testimonial_image_required).to be_valid
     end
 
-    it 'does not require if shareable_link does not requires it' do
+    it 'does not require if fire_link does not requires it' do
       expect(testimonial).to be_valid
     end
   end
@@ -160,14 +160,14 @@ RSpec.describe Testimonial, type: :model do
       expect(user_association.macro).to eq :belongs_to
     end
 
-    it 'can belong to a shareable_link' do
-      shareable_link_association = Testimonial.reflect_on_association :shareable_link
-      expect(shareable_link_association.macro).to eq :belongs_to
-      expect(shareable_link_association.options[:optional]).to eq true
+    it 'can belong to a fire_link' do
+      fire_link_association = Testimonial.reflect_on_association :fire_link
+      expect(fire_link_association.macro).to eq :belongs_to
+      expect(fire_link_association.options[:optional]).to eq true
     end
 
-    it 'can be updated when shareable_link is destroyed' do
-      testimonial.shareable_link.destroy
+    it 'can be updated when fire_link is destroyed' do
+      testimonial.fire_link.destroy
       testimonial.save!
       testimonial.reload
 
