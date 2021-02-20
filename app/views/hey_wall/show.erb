@@ -1,10 +1,24 @@
 <div>
   <pre>
-    &lt;div id="testimonials"&gt;&lt;/div&gt;
-    &lt;script src="<%= embed_url(format: :js) %>"&gt;&lt;/script&gt;
-    &lt;link rel="stylesheet" type="text/css" href="<%= embed_url(format: :css) %>"&gt;
+    <code class="language-html">
+      &lt;div id="testimonials" data-heywall-id=<%= current_user.public_token %>&gt;&lt;/div&gt;
+      &lt;script src="<%= embed_url(format: :js) %>"&gt;&lt;/script&gt;
+    </code>
   </pre>
+
+  <div>
+    <h2 class="font-black text-purple-600 text-3xl">Preview of HeyWall</h2>
+    <div id="testimonials" data-heywall-id="<%= current_user.public_token %>"></div>
+    <%= javascript_pack_tag "embed" %>
+  </div>
+
 </div>
 
-
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('pre code').forEach((block) => {
+            window.hljs.highlightBlock(block);
+        });
+    });
+</script>
 
