@@ -1,4 +1,4 @@
-class ExternalController < ApplicationController
+class ApiController < ApplicationController
   before_action :set_testimonials, only: [:list_testimonials]
 
   def list_testimonials

@@ -61,7 +61,7 @@
     <div class="p-4 bg-gray-100 rounded">
       <h2 class="font-bold text-lg border-b-2 pb-4">API</h2>
       <p class="mt-6 mb-4">Use this public link to fetch your showcased testimonials.</p>
-      <%= render "shared/copy_clipboard", content: get_testimonials_json_url(current_user.public_token, subdomain: 'external') %>
+      <%= render "shared/copy_clipboard", content: get_testimonials_json_url(current_user.public_token, subdomain: 'api') %>
     </div>
 
 

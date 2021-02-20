@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Externals', type: :request do
+RSpec.describe 'Api', type: :request do
   let(:testimonial_created) { FactoryBot.create(:testimonial, :with_fire_link, showcase: true) }
   let(:testimonial_attributes) { FactoryBot.attributes_for(:testimonial, :tweet, showcase: true) }
   let(:user) { testimonial_created.user }

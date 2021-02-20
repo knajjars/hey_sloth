@@ -26,8 +26,8 @@ Rails.application.routes.draw do
     root to: 'dashboard#index', as: :app_root
   end
 
-  constraints subdomain: 'external' do
-    get ':public_token/testimonials', to: 'external#list_testimonials', as: 'get_testimonials_json'
+  constraints subdomain: 'api' do
+    get ':public_token/testimonials', to: 'api#list_testimonials', as: 'get_testimonials_json'
   end
 
   root to: 'page#index'
