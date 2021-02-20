@@ -17,7 +17,7 @@
           <div class="hidden md:block w-full">
             <div class="flex justify-center space-x-16">
               <%= link_to "Dashboard", app_root_path, class: "#{current_controller?('dashboard') ? active_class : non_active_class } #{nav_item_class}" %>
-              <%= link_to "HeyWall", app_root_path, class: "#{current_controller?('heywall') ? active_class : non_active_class } #{nav_item_class}" %>
+              <%= link_to "HeyWall", hey_wall_path, class: "#{current_controller?('hey_wall') ? active_class : non_active_class } #{nav_item_class}" %>
               <div data-dashboard-target="collectButton">
                 <div data-action="click@window->dashboard#clickOutsideCollect" class="flex items-center">
                   <div class="relative">
@@ -78,7 +78,7 @@
     <div data-dashboard-target="mobileMenu" class="hidden md:hidden mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <%= link_to "Dashboard", app_root_path, class: "#{current_controller?('dashboard') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
-        <%= link_to "HeyWall", app_root_path, class: "#{current_controller?('heywall') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+        <%= link_to "HeyWall", hey_wall_path, class: "#{current_controller?('hey_wall') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
         <div class="pt-4 border-t border-gray-600"></div>
         <p class="<%= "#{mobile_nav_item_class}" %> text-gray-400">
           Collect

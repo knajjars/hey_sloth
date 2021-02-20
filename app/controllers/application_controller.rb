@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include DeviseWhitelist
   include Pagy::Backend
 
-  before_action :authenticate_user!, except: [:from_fire_link_create, :from_fire_link_new, :list_testimonials]
+  before_action :authenticate_user!, except: [:from_fire_link_create, :from_fire_link_new, :list_testimonials, :widget]
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
