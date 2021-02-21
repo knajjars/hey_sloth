@@ -5,14 +5,14 @@ require("stylesheets/tailwind.scss")
 
 import {Testimonials} from "../widget/Testimonials";
 
-const token = document.querySelector("#testimonials").dataset.heywallId
+const token = document.querySelector("#testimonials")?.dataset?.heywallId
 
 const testimonialsNode = document.querySelector("#testimonials")
-const event = (typeof Turbolinks == "object" && Turbolinks.supported) ? "turbolinks:load" : 'DOMContentLoaded'
 
-document.addEventListener(event, () => {
+if (testimonialsNode !== null && testimonialsNode.childNodes.length === 0) {
+
     ReactDOM.render(
         <Testimonials token={token}/>,
         testimonialsNode
     )
-})
+}

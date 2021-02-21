@@ -11,6 +11,7 @@ export function Testimonials(props) {
             .then(data => setTestimonials(data))
     }, []);
 
+
     if (testimonials.length === 0) {
         return (
             <span className="inline-flex rounded-md shadow-sm bg-purple-600 text-white">
