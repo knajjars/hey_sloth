@@ -9,12 +9,13 @@
 
   <div>
     <h2 class="font-black text-purple-600 text-3xl">Preview of HeyWall</h2>
+    <% content_tag :div, nil, data: { test: true } unless Rails.env.production? %>
+    <span id="is-testimonial-test" data-test="true"></span>
     <div id="testimonials" data-heywall-id="<%= current_user.public_token %>"></div>
     <%= javascript_pack_tag "embed", 'data-turbolinks-track': 'reload' %>
   </div>
 
 </div>
-<% content_tag :div, nil, data: { test: true } unless Rails.env.production? %>
-<span id="is-testimonial-test" data-test="true"></span>
+
 <%= javascript_pack_tag 'highlight', 'data-turbolinks-track': false %>
 
