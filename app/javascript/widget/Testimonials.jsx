@@ -10,7 +10,7 @@ export function Testimonials(props) {
     const [testimonials, setTestimonials] = useState([]);
 
     useEffect(() => {
-        fetch(`${url}${props.token}/testimonials`, {headers: {accept: 'application/json'}})
+        fetch(`${url}/gi${props.token}/testimonials`, {headers: {accept: 'application/json'}})
             .then(response => response.json())
             .then(data => setTestimonials(data))
     }, []);
