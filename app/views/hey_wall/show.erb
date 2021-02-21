@@ -3,6 +3,7 @@
     <code class="language-html">
       &lt;div id="testimonials" data-heywall-id=<%= current_user.public_token %>&gt;&lt;/div&gt;
       &lt;script src="<%= embed_url(format: :js) %>"&gt;&lt;/script&gt;
+      &lt;link rel="stylesheet" type="text/css" href="<%= embed_url(format: :css) %>"&gt;
     </code>
   </pre>
 
@@ -13,6 +14,7 @@
   </div>
 
 </div>
-
+<% content_tag :div, nil, data: { test: true } unless Rails.env.production? %>
+<span id="is-testimonial-test" data-test="true"></span>
 <%= javascript_pack_tag 'highlight', 'data-turbolinks-track': false %>
 
