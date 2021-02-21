@@ -49,3 +49,4 @@ gem 'twitter', '~> 7.0'
 gem "tailwindcss-rails", "~> 0.3.1"
 gem 'pagy', '~> 3.10'
 gem 'twitter-text', '~> 3.1'
+gem 'rack-cors', '~> 1.1', '>= 1.1.1'

@@ -1,0 +1,18 @@
+<div data-controller="code-highlight" class="code-snippet">
+  <pre>
+    <code class="language-html">
+      &lt;div id="testimonials" data-heywall-id=<%= current_user.public_token %>&gt;&lt;/div&gt;
+      &lt;script src="<%= embed_url(format: :js) %>"&gt;&lt;/script&gt;
+    </code>
+  </pre>
+
+  <div>
+    <h2 class="font-black text-purple-600 text-3xl">Preview of HeyWall</h2>
+    <div id="testimonials" data-heywall-id="<%= current_user.public_token %>"></div>
+    <%= javascript_pack_tag "embed", 'data-turbolinks-track': 'reload' %>
+  </div>
+
+</div>
+
+<%= javascript_pack_tag 'highlight', 'data-turbolinks-track': false %>
+

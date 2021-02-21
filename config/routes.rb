@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
     resources :fire_link, except: :show, on: :member
 
+    get 'hey-wall', to: 'hey_wall#show'
+
     resources :testimonials, only: %i[show destroy] do
       post 'toggle_showcase', to: 'testimonials#toggle_showcase', on: :member, as: 'toggle_showcase'
     end
@@ -28,6 +30,7 @@ Rails.application.routes.draw do
 
   constraints subdomain: 'api' do
     get ':public_token/testimonials', to: 'api#list_testimonials', as: 'get_testimonials_json'
+    get 'embed', to: 'embed#widget'
   end
 
   root to: 'page#index'
