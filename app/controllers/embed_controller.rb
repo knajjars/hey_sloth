@@ -7,7 +7,7 @@ class EmbedController < ApplicationController
   def widget
     respond_to do |format|
       format.js { redirect_to sources_from_manifest_entries(['embed'], type: :javascript).first }
-      format.css { redirect_to sources_from_manifest_entries(['embed'], type: :stylesheet).first }
+      format.css { redirect_to sources_from_manifest_entries(['application'], type: :stylesheet).first }
     end
   end
 end
