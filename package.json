@@ -17,7 +17,7 @@
     "react-dom": "^17.0.1",
     "stimulus": "^2.0.0",
     "stimulus-use": "^0.23.0",
-    "tailwindcss": "^2.0.2",
+    "tailwindcss": "^2.0.3",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },

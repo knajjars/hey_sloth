@@ -283,7 +283,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    tailwindcss-rails (0.3.1)
+    tailwindcss-rails (0.3.3)
       rails (>= 6.0.0)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -365,7 +365,7 @@ DEPENDENCIES
   sib-api-v3-sdk (~> 7.3)
   simplecov (~> 0.21.2)
   spring
-  tailwindcss-rails (~> 0.3.1)
+  tailwindcss-rails (~> 0.3.3)
   turbolinks (~> 5)
   twitter (~> 7.0)
   twitter-text (~> 3.1)
