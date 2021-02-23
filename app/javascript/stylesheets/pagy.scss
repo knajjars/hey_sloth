@@ -1,7 +1,7 @@
 .pagy-nav,
 .pagy-nav-js,
 .pagy-combo-nav-js {
-  @apply flex h-8 m-5
+  @apply flex h-8 m-5;
 }
 
 .pagy-nav .page,
@@ -12,7 +12,7 @@
 }
 
 .pagy-nav .page > a {
-  @apply w-full h-full flex justify-center items-center
+  @apply w-full h-full flex justify-center items-center;
 }
 
 .pagy-nav .page:hover,
@@ -29,7 +29,6 @@
 .pagy-nav-js .active:hover {
   @apply text-white;
 }
-
 
 .pagy-nav .prev,
 .pagy-nav-js .prev,

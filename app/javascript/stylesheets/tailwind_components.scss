@@ -1,0 +1,71 @@
+.full-screen-page {
+  @apply flex flex-col justify-center items-center min-h-screen p-6 bg-gray-50 relative;
+}
+
+.page-title {
+  @apply mb-16 font-black text-3xl md:text-6xl text-purple-600 underline;
+}
+
+// card
+.card {
+  @apply flex max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-2xl mb-16 z-10;
+}
+
+.card-body {
+  @apply flex flex-col overflow-y-auto md:flex-row;
+}
+
+.card-body-left {
+  @apply flex items-center justify-center p-6 sm:p-8 md:w-3/5 w-full;
+}
+
+.card-body-right {
+  @apply flex flex-col items-start justify-end p-6 sm:p-8 md:w-2/5;
+}
+
+.card-title {
+  @apply mb-4 text-xl font-bold text-gray-700;
+}
+
+.card-link {
+  @apply font-medium text-purple-600 hover:underline;
+}
+
+// Buttons
+
+.btn {
+  @apply inline-block px-6 py-2 font-medium leading-7 text-center text-white uppercase transition rounded shadow hover:shadow-lg focus:outline-none cursor-pointer;
+}
+
+.btn-primary {
+  @apply bg-purple-600 hover:bg-purple-800;
+}
+
+// From
+.form-field {
+  @apply block my-3 text-sm;
+}
+
+.form-fiield-inline {
+  @apply block my-3 text-sm flex items-center justify-start;
+}
+
+.form-label {
+  @apply text-gray-700;
+}
+
+.form-input {
+  @apply block w-full my-1 text-sm focus:border-purple-400 focus:outline-none border border-gray-300 p-3 rounded;
+}
+
+.form-checkbox {
+  @apply h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded mr-2;
+}
+
+// Tweet
+
+.tweet_link {
+  a {
+    @apply text-blue-500 cursor-pointer hover:underline;
+  }
+}
