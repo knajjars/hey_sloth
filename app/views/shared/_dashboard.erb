@@ -1,11 +1,3 @@
-<% active_class = 'bg-purple-600 text-white hover:bg-purple-600' %>
-<% non_active_class = 'text-gray-50 hover:bg-purple-900 hover:text-white' %>
-<% nav_item_class = 'px-3 py-2 rounded-md text-sm font-medium text-white uppercase' %>
-
-<% mobile_active_class = 'bg-purple-600 text-white' %>
-<% mobile_non_active_class = 'text-gray-300 hover:bg-purple-900 hover:text-white ' %>
-<% mobile_nav_item_class = 'block px-3 py-2 rounded-md text-base font-medium' %>
-
 <div data-controller="dashboard" data-dashboard-hidden-class="hidden">
   <nav class="md:mx-5 md:mt-5 bg-gray-800 md:rounded-2xl">
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,23 +8,23 @@
           </div>
           <div class="hidden md:block w-full">
             <div class="flex justify-center space-x-16">
-              <%= link_to "Dashboard", app_root_path, class: "#{current_controller?('dashboard') ? active_class : non_active_class } #{nav_item_class}" %>
-              <%= link_to "HeyWall", hey_wall_path, class: "#{current_controller?('hey_wall') ? active_class : non_active_class } #{nav_item_class}" %>
+              <%= link_to "Dashboard", app_root_path, class: "#{"nav-active" if current_controller?('dashboard')} nav-item" %>
+              <%= link_to "HeyWall", hey_wall_path, class: "#{"nav-active" if current_controller?('hey_wall')} nav-item" %>
               <div data-dashboard-target="collectButton">
                 <div data-action="click@window->dashboard#clickOutsideCollect" class="flex items-center">
                   <div class="relative">
                     <div>
                       <button data-action="click->dashboard#toggleCollect"
-                              class="<%= "#{current_controller?('collect') | current_controller?('fire_link') ? active_class : non_active_class} #{nav_item_class}  focus:bg-purple-900 focus:text-white" %>"
+                              class="<%= "#{"nav-active" if current_controller?('collect') | current_controller?('fire_link')} nav-item focus:bg-purple-900 focus:text-white" %>"
                               id="user-menu" aria-haspopup="true">
                         <span class="sr-only">Open collect menu</span>
                         Collect
                       </button>
                     </div>
                     <div data-dashboard-target="collectOptions" class="z-50 hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 text-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                      <%= link_to 'From Fire link', fire_link_index_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if current_controller?('fire_link')}", role: "menuitem" %>
-                      <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if controller_and_action?('collect', 'twitter_post_new')}", role: "menuitem" %>
-                      <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if controller_and_action?('collect', 'twitter_search')}", role: "menuitem" %>
+                      <%= link_to 'From Fire link', fire_link_index_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{"nav-active" if current_controller?('fire_link')}", role: "menuitem" %>
+                      <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{"nav-active" if controller_and_action?('collect', 'twitter_post_new')}", role: "menuitem" %>
+                      <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{"nav-active" if controller_and_action?('collect', 'twitter_search')}", role: "menuitem" %>
                     </div>
                   </div>
                 </div>
@@ -53,7 +45,7 @@
                 </button>
               </div>
               <div data-dashboard-target="profileOptions" class="z-50 hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 text-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                <%= link_to 'Account settings', edit_user_registration_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{active_class if controller_and_action?('registrations', 'edit')}", role: "menuitem" %>
+                <%= link_to 'Account settings', edit_user_registration_path, class: "block px-4 py-2 text-sm hover:bg-gray-200 #{"nav-active" if controller_and_action?('registrations', 'edit')}", role: "menuitem" %>
                 <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm hover:bg-gray-200", role: "menuitem" %>
               </div>
             </div>
@@ -77,16 +69,16 @@
 
     <div data-dashboard-target="mobileMenu" class="hidden md:hidden mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <%= link_to "Dashboard", app_root_path, class: "#{current_controller?('dashboard') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
-        <%= link_to "HeyWall", hey_wall_path, class: "#{current_controller?('hey_wall') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+        <%= link_to "Dashboard", app_root_path, class: "#{"nav-active-mobile" if current_controller?('dashboard')} nav-item-mobile", role: 'menuitem' %>
+        <%= link_to "HeyWall", hey_wall_path, class: "#{"nav-active-mobile" if current_controller?('hey_wall')} nav-item-mobile", role: 'menuitem' %>
         <div class="pt-4 border-t border-gray-600"></div>
-        <p class="<%= "#{mobile_nav_item_class}" %> text-gray-400">
+        <p class="nav-item-mobile text-gray-400">
           Collect
         </p>
         <div class="mt-3 px-2 space-y-1">
-          <%= link_to 'From Fire link', fire_link_index_path, class: "#{current_controller?('fire_link') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
-          <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "#{controller_and_action?('collect', 'twitter_post_new') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
-          <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "#{controller_and_action?('collect', 'twitter_search') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: 'menuitem' %>
+          <%= link_to 'From Fire link', fire_link_index_path, class: "#{"nav-active-mobile" if current_controller?('fire_link')} nav-item-mobile", role: 'menuitem' %>
+          <%= link_to 'I have a Twitter post', collect_twitter_post_new_path, class: "#{"nav-active-mobile" if controller_and_action?('collect', 'twitter_post_new')} nav-item-mobile", role: 'menuitem' %>
+          <%= link_to 'Search my Twitter', collect_twitter_search_path, class: "#{"nav-active-moible" if controller_and_action?('collect', 'twitter_search')} nav-item-mobile", role: 'menuitem' %>
         </div>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-600">
@@ -99,8 +91,8 @@
           </div>
         </div>
         <div class="mt-3 px-2 space-y-1">
-          <%= link_to 'Account settings', edit_user_registration_path, class: "#{controller_and_action?('registrations', 'edit') ? mobile_active_class : mobile_non_active_class } #{mobile_nav_item_class}", role: "menuitem" %>
-          <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "#{mobile_non_active_class } #{mobile_nav_item_class}", role: "menuitem" %>
+          <%= link_to 'Account settings', edit_user_registration_path, class: "#{"nav-active-mobile" if controller_and_action?('registrations', 'edit')} nav-item-mobile", role: "menuitem" %>
+          <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "nav-item-mobile", role: "menuitem" %>
         </div>
       </div>
     </div>

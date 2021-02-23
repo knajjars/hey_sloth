@@ -1,0 +1,12 @@
+<body
+  <% if controller_and_action?("hey_wall", "show") %>
+    data-turbolinks="false"
+  <% end %>
+>
+
+<% if dashboard_partial? %>
+    <%= render 'shared/dashboard' %>
+<% else %>
+    <%= yield %>
+<% end%>
+</body>
