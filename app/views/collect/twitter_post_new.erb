@@ -1,5 +1,4 @@
-<div class="shadow-xl rounded sm:overflow-hidden flex flex-col px-4 py-6 sm:px-6">
-  <h1 class="text-purple-600 font-black text-3xl mb-5">Collect a Twitter post</h1>
+<%= render 'shared/page_content', page_title: 'Twitter post' do %>
   <%= form_with url: collect_twitter_post_new_path, method: :get do |form| %>
     <div class="flex flex-col space-y-4 items-start md:justify-center md:flex-row md:items-end md:space-x-4 ">
       <%= form.label :tweet_url, "Tweet URL:", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
@@ -14,4 +13,4 @@
       <%= render 'tweet/collect_tweet' %>
     </div>
   <% end %>
-</div>
+<% end %>

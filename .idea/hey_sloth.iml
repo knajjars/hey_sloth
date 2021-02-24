@@ -143,7 +143,7 @@
     <orderEntry type="library" scope="PROVIDED" name="spring (v2.1.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.0.2, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.2.2, rbenv: 3.0.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="tailwindcss-rails (v0.3.1, rbenv: 3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tailwindcss-rails (v0.3.3, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.0.1, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.6, rbenv: 3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.0.10, rbenv: 3.0.0) [gem]" level="application" />

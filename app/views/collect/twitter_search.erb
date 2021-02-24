@@ -1,25 +1,25 @@
-<div class="shadow-xl rounded sm:overflow-hidden">
-  <div class="px-4 py-6 sm:px-6 flex flex-col space-y-6">
-    <% if @twitter_handle.nil? %>
-      <h1 class="text-purple-600 font-black text-3xl mb-5 ">Timeline tweets</h1>
-      <div>
-        <p>There is no Twitter account associated with your HeySloth
-          account.
-          Go <%= link_to 'here', edit_user_registration_path("link_twitter": true), class: "text-purple-500 font-black hover:text-purple-600 underline" %>
-          to proceed.</p>
+<%= render 'shared/page_content', page_title: 'Timeline tweets' do %>
+  <% if @twitter_handle.nil? %>
+    <div>
+      <p>There is no Twitter account associated with your HeySloth
+        account.
+        Go <%= link_to 'here', edit_user_registration_path("link_twitter": true), class: "text-purple-500 font-black hover:text-purple-600 underline" %>
+        to proceed.</p>
+    </div>
+  <% else %>
+    <h2 class="text-xl mb-5">
+      Mentions for
+      <span class="italic font-black text-2xl">
+        <%= @twitter_handle %>
+      </span>
+    </h2>
+    <% if @testimonials.any? %>
+      <div class="grid auto-cols-auto grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16">
+        <% @testimonials.each do |t| %>
+          <% @testimonial = t %>
+          <%= render 'tweet/collect_tweet' %>
+        <% end %>
       </div>
-    <% else %>
-      <h1 class="text-purple-600 font-black text-3xl mb-5">Timeline tweets
-        for <span class="font-black"><%= @twitter_handle %></span>
-      </h1>
-      <% if @testimonials.any? %>
-        <div class="grid auto-cols-auto grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16">
-          <% @testimonials.each do |t| %>
-            <% @testimonial = t %>
-            <%= render 'tweet/collect_tweet' %>
-          <% end %>
-        </div>
-      <% end %>
     <% end %>
-  </div>
-</div>
+  <% end %>
+<% end %>
