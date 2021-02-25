@@ -2,11 +2,7 @@
   <% @testimonials.each do |t| %>
     <% @testimonial = t %>
     <div class="item">
-      <% if @testimonial.tweet? %>
-        <%= render 'testimonials/tweet_testimonial' %>
-      <% else %>
-        <%= render 'testimonials/link_testimonial' %>
-      <% end %>
+      <%= render @testimonial %>
     </div>
   <% end %>
 </div>
