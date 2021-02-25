@@ -1,49 +1,47 @@
-<div class="shadow-xl rounded sm:overflow-hidden">
-  <div class="px-4 py-6 sm:px-6 flex flex-col space-y-6">
-    <h1 class="text-purple-600 font-black text-3xl mb-5">Account settings</h1>
-    <div class="p-4 bg-gray-100 rounded">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-        <div class="flex space-y-4 flex-col justify-center items-stretch w-full">
-          <h2 class="font-bold text-lg  border-b-2 pb-4">Profile details</h2>
-          <%= f.label :email, "Email", class: "text-base text-gray-700 font-bold" %>
-          <%= f.email_field :email, class: "rounded px-2 py-1 w-full", autocomplete: "email" %>
+<%= render 'shared/page_content', page_title: 'Account settings' do %>
+  <div class="p-4 bg-gray-100 rounded">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="flex space-y-4 flex-col justify-center items-stretch w-full">
+        <h2 class="font-bold text-lg  border-b-2 pb-4">Profile details</h2>
+        <%= f.label :email, "Email", class: "text-base text-gray-700 font-bold" %>
+        <%= f.email_field :email, class: "rounded px-2 py-1 w-full", autocomplete: "email" %>
 
-          <%= f.label :company_name, "Company", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
-          <%= f.text_field :company_name, class: "rounded px-2 py-1 w-full", autocomplete: "company-name" %>
+        <%= f.label :company_name, "Company", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
+        <%= f.text_field :company_name, class: "rounded px-2 py-1 w-full", autocomplete: "company-name" %>
 
-          <%= f.label :password, "New password", class: "text-base text-gray-700 font-bold" %>
-          <p class="text-gray-500 text-xs">Leave password blank if you don't want to change it.</p>
-          <%= f.password_field :password, class: " rounded px-2 py-1 w-full", autocomplete: "new-password" %>
+        <%= f.label :password, "New password", class: "text-base text-gray-700 font-bold" %>
+        <p class="text-gray-500 text-xs">Leave password blank if you don't want to change it.</p>
+        <%= f.password_field :password, class: " rounded px-2 py-1 w-full", autocomplete: "new-password" %>
 
-          <%= f.label :password_confirmation, "Confirm new password", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
-          <%= f.password_field :password_confirmation, class: "rounded px-2 py-1 w-full", autocomplete: "new-password" %>
+        <%= f.label :password_confirmation, "Confirm new password", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
+        <%= f.password_field :password_confirmation, class: "rounded px-2 py-1 w-full", autocomplete: "new-password" %>
 
-          <div class="flex flex-row items-center space-x-4 w-full bg-gray-700 p-4 rounded">
-            <%= f.password_field :current_password, placeholder: "Enter current password to apply changes.", autocomplete: "current-password", class: "rounded px-2 py-1 w-full", required: true %>
-            <%= f.submit "Save", class: "uppercase cursor-pointer inline-flex justify-center py-1.5 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-500" %>
-          </div>
+        <div class="flex flex-row items-center space-x-4 w-full bg-gray-700 p-4 rounded">
+          <%= f.password_field :current_password, placeholder: "Enter current password to apply changes.", autocomplete: "current-password", class: "rounded px-2 py-1 w-full", required: true %>
+          <%= f.submit "Save", class: "uppercase cursor-pointer inline-flex justify-center py-1.5 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-500" %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+  </div>
 
 
-    <div class="p-4 bg-gray-100 rounded">
-      <h2 class="font-bold text-lg border-b-2 pb-4">Linked accounts</h2>
-      <% authorizations = current_user.authorizations %>
-      <% if authorizations.empty? %>
-        <div class=" flex items-center space-x-3 mt-6">
-          <p>You don't have a linked account
-            yet. <%= link_to 'Link Twitter', user_twitter_omniauth_authorize_path, class: "underline text-purple-600 font-bold" %>
-          </p>
-          <% if params[:link_twitter].present? %>
-            <svg class="w-12 h-12 blink text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
-            </svg>
-          <% end %>
-        </div>
-      <% else %>
-        <% authorizations.each do |auth| %>
+  <div class="p-4 bg-gray-100 rounded">
+    <h2 class="font-bold text-lg border-b-2 pb-4">Linked accounts</h2>
+    <% authorizations = current_user.authorizations %>
+    <% if authorizations.empty? %>
+      <div class=" flex items-center space-x-3 mt-6">
+        <p>You don't have a linked account
+          yet. <%= link_to 'Link Twitter', user_twitter_omniauth_authorize_path, class: "underline text-purple-600 font-bold" %>
+        </p>
+        <% if params[:link_twitter].present? %>
+          <svg class="w-12 h-12 blink text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+          </svg>
+        <% end %>
+      </div>
+    <% else %>
+      <% authorizations.each do |auth| %>
           <span class="flex items-center space-x-2 mt-6">
             <%= link_to auth.twitter_handle, auth.link, target: :_blank, class: "text-indigo-600" %>
             <%= link_to disconnect_authorization_path(auth.provider.downcase), class: "underline text-red-500 font-bold", data: { confirm: "Are you sure?" }, method: :delete do %>
@@ -52,22 +50,21 @@
               </svg>
             <% end %>
           </span>
-        <% end %>
       <% end %>
+    <% end %>
 
-    </div>
-
-
-    <div class="p-4 bg-gray-100 rounded">
-      <h2 class="font-bold text-lg border-b-2 pb-4">API</h2>
-      <p class="mt-6 mb-4">Use this public link to fetch your showcased testimonials.</p>
-      <%= render "shared/copy_clipboard", content: get_testimonials_json_url(current_user.public_token, subdomain: 'api') %>
-    </div>
-
-
-    <div class="p-4 bg-gray-100 rounded">
-      <h2 class="font-bold text-lg border-b-2 pb-4">Danger zone</h2>
-      <%= button_to "Cancel account", registration_path(resource_name), class: "uppercase text-sm mt-6 mb-4 px-2 py-1 text-white cursor-pointer bg-red-400 hover:bg-red-600 rounded", data: { confirm: "Are you sure?" }, method: :delete %>
-    </div>
   </div>
-</div>
+
+
+  <div class="p-4 bg-gray-100 rounded">
+    <h2 class="font-bold text-lg border-b-2 pb-4">API</h2>
+    <p class="mt-6 mb-4">Use this public link to fetch your showcased testimonials.</p>
+    <%= render "shared/copy_clipboard", content: get_testimonials_json_url(current_user.public_token, subdomain: 'api') %>
+  </div>
+
+
+  <div class="p-4 bg-gray-100 rounded">
+    <h2 class="font-bold text-lg border-b-2 pb-4">Danger zone</h2>
+    <%= button_to "Cancel account", registration_path(resource_name), class: "uppercase text-sm mt-6 mb-4 px-2 py-1 text-white cursor-pointer bg-red-400 hover:bg-red-600 rounded", data: { confirm: "Are you sure?" }, method: :delete %>
+  </div>
+<% end %>

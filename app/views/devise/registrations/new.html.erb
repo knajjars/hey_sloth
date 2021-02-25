@@ -1,54 +1,52 @@
 <%= render "shared/confetti" %>
-<div class="flex flex-col justify-center items-center min-h-screen p-6 bg-gray-50 relative">
-  <div class="mb-16  font-black text-3xl md:text-6xl text-purple-600 underline ">
+<div class="full-screen-page">
+  <div class="page-title">
     <h1>Good to have you!</h1>
   </div>
-  <div class="flex max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-2xl mb-16 z-10">
-    <div class="flex flex-col overflow-y-auto md:flex-row">
-      <div class="flex items-center justify-center p-6 sm:p-8 md:w-3/5">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-body-left">
         <div class="w-full">
-          <h1
-            class="mb-4 text-xl font-bold text-gray-700"
-          >
+          <h1 class="card-title">
             Create a new account
           </h1>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
-            <label class="block text-sm">
-              <%= f.label :email, class: "text-gray-700" %>
-              <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input border border-gray-300 p-3 rounded", placeholder: "Jane Doe" %>
+            <label class="form-field">
+              <%= f.label :email, class: "form-label" %>
+              <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "form-input", placeholder: "Jane Doe" %>
             </label>
 
-            <label class="block mt-4 text-sm">
-              <%= f.label :password, class: "text-gray-700" %>
+            <label class="form-field">
+              <%= f.label :password, class: "form-label" %>
               <% if @minimum_password_length %>
                 <em class="text-gray-400">(<%= @minimum_password_length %> characters minimum)</em>
               <% end %><br/>
-              <%= f.password_field :password, required: true, autocomplete: "new-password", class: "block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input border border-gray-300 p-3 rounded", placeholder: "***************" %>
+              <%= f.password_field :password, required: true, autocomplete: "new-password", class: "form-input", placeholder: "***************" %>
             </label>
 
-            <label class="block mt-4 text-sm">
-              <%= f.label :password_confirmation, class: "text-gray-700" %>
-              <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input border border-gray-300 p-3 rounded", placeholder: "***************" %>
+            <label class="form-field">
+              <%= f.label :password_confirmation, class: "form-label" %>
+              <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", class: "form-input", placeholder: "***************" %>
             </label>
 
-            <%= f.submit "Sign up", class: "block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" %>
+            <%= f.submit "Sign up", class: "btn btn-primary w-full mt-4" %>
           <% end %>
 
           <p class="mt-5">
-            <span class="font-light fon">Already have an account?</span>
-            <%= link_to "Log in", new_user_session_path, class: "text-md font-medium text-purple-600 hover:underline" %>
+            <span class="font-light">Already have an account?</span>
+            <%= link_to "Log in", new_user_session_path, class: "card-link text-md" %>
           </p>
         </div>
       </div>
-      <div class="flex flex-col items-start justify-end p-6 sm:p-8 md:w-2/5">
+      <div class="card-body-right">
 
         <div class="w-60 self-center justify-start m-2 hidden md:block">
           <%= image_pack_tag 'media/images/hey_sloth_icon.png' %>
         </div>
         <div class="mt-1">
-          <p><%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-sm font-medium text-purple-600 hover:underline" %></p>
-          <p><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "text-sm font-medium text-purple-600 hover:underline" %></p>
+          <p><%= link_to "Forgot your password?", new_password_path(resource_name), class: "card-link text-sm" %></p>
+          <p><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "card-link text-sm" %></p>
         </div>
       </div>
     </div>

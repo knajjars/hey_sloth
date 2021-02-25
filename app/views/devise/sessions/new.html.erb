@@ -1,49 +1,51 @@
 <%= render "shared/confetti" %>
-<div class="flex flex-col justify-center items-center min-h-screen p-6 bg-gray-50 relative">
-  <div class="mb-16 font-black text-3xl md:text-6xl text-purple-600 underline ">
+<div class="full-screen-page">
+  <div class="page-title">
     <h1>Welcome back!</h1>
   </div>
-  <div class="flex max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-2xl mb-16 z-10">
-    <div class="flex flex-col overflow-y-auto md:flex-row">
-      <div class="flex items-center justify-center p-6 sm:p-8 md:w-3/5">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-body-left">
         <div class="w-full">
-          <h1 class="mb-4 text-xl font-bold text-gray-700">
+          <h1 class="card-title">
             Log in to your account
           </h1>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <input type="hidden" name="remember_me" value="true">
-            <label class="block text-sm">
-              <%= f.label :email, class: "text-gray-700" %>
-              <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input border border-gray-300 p-3 rounded", placeholder: "Jane Doe" %>
+            <label class="form-field">
+              <%= f.label :email, class: "form-label" %>
+              <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email", class: "form-input", placeholder: "Jane Doe" %>
             </label>
 
-            <label class="block mt-4 text-sm">
-              <%= f.label :password, class: "text-gray-700" %>
-              <%= f.password_field :password, required: true, autocomplete: "current-password", class: "block w-full mt-1 text-sm focus:border-purple-400 focus:outline-none focus:shadow-outline-purple form-input border border-gray-300 p-3 rounded", placeholder: "***************" %>
+            <label class="form-field">
+              <%= f.label :password, class: "form-label" %>
+              <%= f.password_field :password, required: true, autocomplete: "current-password", class: "form-input", placeholder: "***************" %>
             </label>
 
-            <label class="block mt-4 text-sm flex items-center justify-start">
-              <%= f.check_box :remember_me, class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded mr-2" %>
-              <%= f.label :remember_me, class: "text-gray-700" %>
+            <label class="form-field-inline">
+              <%= f.check_box :remember_me, class: "form-checkbox" %>
+              <%= f.label :remember_me, class: "form-label" %>
             </label>
-            <%= f.submit "Log in", class: "block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" %>
+            <%= f.submit "Log in", class: "btn btn-primary w-full mt-4" %>
+            
+          </button>
           <% end %>
 
           <p class="mt-5">
-            <span class="font-light fon">Don't have an account?</span>
-            <%= link_to "Sign up", new_registration_path(resource_name), class: "text-md font-medium text-purple-600 hover:underline" %>
+            <span class="font-light">Don't have an account?</span>
+            <%= link_to "Sign up", new_registration_path(resource_name), class: "card-link text-md" %>
           </p>
         </div>
       </div>
-      <div class="flex flex-col items-start justify-end p-6 sm:p-8 md:w-2/5">
+      <div class="card-body-right">
 
         <div class="w-60 self-center justify-start m-2 hidden md:block">
           <%= image_pack_tag 'media/images/hey_sloth_icon.png' %>
         </div>
 
         <div class="mt-1">
-          <p><%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-sm font-medium text-purple-600 hover:underline" %></p>
-          <p><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "text-sm font-medium text-purple-600 hover:underline" %></p>
+          <p><%= link_to "Forgot your password?", new_password_path(resource_name), class: "card-link text-sm " %></p>
+          <p><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "card-link text-sm " %></p>
         </div>
       </div>
     </div>

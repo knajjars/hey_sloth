@@ -1,32 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HeySloth | App</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
 
-  <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
+<%= render 'shared/head' %>
+<%= render 'shared/notice' %>
+<%= render 'shared/body' %>
 
-<body
-  <% if controller_and_action?("hey_wall", "show") %>
-  data-turbolinks="false"
-  <% end %>
-  >
-
-<% if notice || alert %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-<% end %>
-
-<% if dashboard_partial? %>
-  <%= render "shared/dashboard" do %>
-    <%= yield %>
-  <% end %>
-<% else %>
-  <%= yield %>
-<% end %>
-</body>
 </html>
