@@ -5,7 +5,11 @@ class EmbedController < ApplicationController
   before_action :allow_iframe_requests, only: :widget
   before_action :set_hey_wall, only: :widget
 
-  def widget; end
+  def widget
+    respond_to do |format|
+      format.html { render :widget }
+    end
+  end
 
   private
 
