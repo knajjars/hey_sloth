@@ -1,10 +1,10 @@
 <%= render 'shared/page_content', page_title: 'Twitter post' do %>
   <%= form_with url: collect_twitter_post_new_path, method: :get do |form| %>
-    <div class="flex flex-col space-y-4 items-start md:justify-center md:flex-row md:items-end md:space-x-4 ">
-      <%= form.label :tweet_url, "Tweet URL:", class: "text-base text-gray-700 font-bold whitespace-nowrap" %>
-      <%= form.text_field :tweet_url, required: true, autofocus: true, type: :url, class: "text-gray-500 text-xs w-full p-2 border-purple-200 border-2 rounded", placeholder: "https://twitter.com/elonmusk/status/1336351038106869760" %>
-      <%= form.submit "Search", class: "uppercase cursor-pointer inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-800" %>
+    <div class="form-field">
+      <%= form.label :tweet_url, "Tweet URL:", class: "form-label" %>
+      <%= form.text_field :tweet_url, required: true, autofocus: true, type: :url, class: "form-input", placeholder: "https://twitter.com/elonmusk/status/1336351038106869760" %>
     </div>
+    <%= form.submit "Search", class: "btn btn-primary" %>
   <% end %>
 
   <% if @testimonial %>
