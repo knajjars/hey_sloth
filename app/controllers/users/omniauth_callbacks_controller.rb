@@ -11,7 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     current_user.authorizations.build(auth_attr)
     current_user.save
 
-    redirect_to edit_user_registration_path
+    redirect_to collect_twitter_search_path
   end
 
   def failure

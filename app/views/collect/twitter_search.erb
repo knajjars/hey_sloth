@@ -3,7 +3,7 @@
     <div>
       <p>There is no Twitter account associated with your HeySloth
         account.
-        Go <%= link_to 'here', edit_user_registration_path("link_twitter": true), class: "text-purple-500 font-black hover:text-purple-600 underline" %>
+        <%= link_to 'Link now', user_twitter_omniauth_authorize_path, class: "text-purple-500 font-black hover:text-purple-600 underline" %>
         to proceed.</p>
     </div>
   <% else %>
