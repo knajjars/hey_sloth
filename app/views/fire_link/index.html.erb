@@ -1,21 +1,43 @@
 <%= render 'shared/page_content', page_title: 'Fire Link' do %>
-  <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-16">
-    <% if @fire_link.present? %>
-      <div class="bg-white rounded shadow-lg p-6 w-full flex flex-col justify-between items-between space-y-3">
-        <h1 class="font-black text-purple-600 text-2xl"><%= @fire_link.tag %></h1>
+  <% is_fire_link_created = @fire_link.present? %>
+
+  <% if is_fire_link_created %>
+    <div class="bg-white rounded border-t-4 border-yellow-400 px-4 py-3 shadow-md md:w-2/3" role="alert">
+      <div class="flex">
+        <div class="py-1">
+          <svg class="fill-current text-yellow-400 h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="font-bold">This is FireLink</p>
+          <p class="text-sm">Use it to <strong>collect testimonials</strong> from your users by sharing the URL or
+            sending it through an email.</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid place-items-center relative bg-gradient-to-r from-purple-600 to-purple-500 rounded">
+      <div class=" text-white rounded shadow-lg p-6 w-full flex flex-col justify-between items-between space-y-3">
+        <h1 class="font-black text-white text-2xl"><%= @fire_link.tag %></h1>
         <%= render "shared/copy_clipboard", key: @fire_link.slug, content: collect_from_fire_link_new_url(@fire_link.slug, subdomain: false) %>
-        <%= @fire_link.note if @fire_link.note.present? %>
+        <% if @fire_link.note.present? %>
+          <div class="flex flex-col space-y-1">
+            <p class="font-black">Note:</p>
+            <%= @fire_link.note if @fire_link.note.present? %>
+          </div>
+        <% end %>
         <div class="flex flex-col">
-          <% [{ "Social link required?": @fire_link.social_link_required }, { "Job & Company required?": @fire_link.job_required }, { "Image required": @fire_link.image_required }].each do |item| %>
+          <p class="font-black">Required fields:</p>
+          <% [{ "Social link": @fire_link.social_link_required }, { "Job & Company": @fire_link.job_required }, { "Image": @fire_link.image_required }].each do |item| %>
             <% item.each do |key, required| %>
               <div class="flex flex-row justify-between items-center">
-                <p class="font-bold text-gray-800"><%= key %></p>
+                <p><%= key %></p>
                 <% if required %>
                   <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                   </svg>
                 <% else %>
-                  <svg class="w-5 h-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <svg class="w-5 h-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd"/>
                   </svg>
                 <% end %>
@@ -24,8 +46,8 @@
           <% end %>
         </div>
         <div class="flex flex-col border-t space-y-4">
-          <div class="flex flex-row space-x-3 justify-end items-center pt-5">
-            <%= link_to collect_send_email_new_path(@fire_link.slug), class: "w-10 h-8 flex justify-center items-center text-white bg-gray-600 rounded mr-auto", tooltip: true, "tooltip-right": true, "tooltip-content": "Send email with my link" do %>
+          <div class="flex flex-row space-x-3 justify-end items-center pt-5" data-controller="tooltip">
+            <%= link_to collect_send_email_new_path(@fire_link.slug), class: "w-10 h-8 flex justify-center items-center hover:bg-gray-800 text-white bg-gray-600 rounded mr-auto", data: { 'tooltip-target': 'destination', action: "mouseover->tooltip#show" }, "tooltip-right": true, "tooltip-content": "Send email with my link" do %>
               <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
@@ -50,15 +72,20 @@
           </p>
         </div>
       </div>
-    <% else %>
-      You don't have a Fire Link yet.
-      <div class="border-dotted border-4 border-gray-300 rounded shadow-lg w-full bg-yellow-100 hover:bg-yellow-200 text-yellow-500 hover:text-yellow-600 hover:underline">
-        <%= link_to new_fire_link_path do %>
-          <div class="flex justify-center items-center h-full w-full">
-            <p class="font-black text-3xl p-6 md:text-5xl uppercase">Create one</p>
-          </div>
-        <% end %>
+    </div>
+  <% else %>
+    <div class="bg-white rounded border-t-4 border-yellow-400 px-4 py-3 shadow-md md:w-2/3" role="alert">
+      <div class="flex">
+        <div class="py-1">
+          <svg class="fill-current text-yellow-400 h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="font-bold">You don't have a Fire Link yet.</p>
+          <%= link_to "Create one", new_fire_link_path, class: "btn btn-primary mt-3" %>
+        </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>

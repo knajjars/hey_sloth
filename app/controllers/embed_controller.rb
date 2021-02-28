@@ -2,12 +2,26 @@ class EmbedController < ApplicationController
   include ActionView::Helpers::AssetUrlHelper
   include Webpacker::Helper
 
-  protect_from_forgery except: :widget
+  before_action :allow_iframe_requests, only: :widget
+  before_action :set_hey_wall, only: :widget
 
   def widget
     respond_to do |format|
-      format.js { redirect_to sources_from_manifest_entries(['embed'], type: :javascript).first }
-      format.css { redirect_to sources_from_manifest_entries(['application'], type: :stylesheet).first }
+      format.html { render :widget }
     end
   end
+
+  private
+
+  def allow_iframe_requests
+    response.headers.delete('X-Frame-Options')
+  end
+
+  def set_hey_wall
+    user = User.find_by_public_token(params[:token])
+    return render_not_found if user.nil?
+
+    @testimonials = user.testimonials.showcased
+  end
+
 end

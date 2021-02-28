@@ -1,10 +1,24 @@
-<h1>Collect#send_email</h1>
+<%= render 'shared/page_content', page_title: 'Send email' do %>
 
-<%= form_with url: collect_send_email_create_path(@fire_link.slug), method: :post do |form| %>
-  <%= form.label :email_addresses, "Email addresses:" %>
-  <%= form.text_field :email_addresses, required: true, autofocus: true, type: :email, multiple: true %>
-  <%= form.text_field :email_addresses, required: false, autofocus: true, type: :email, multiple: true %>
-  <%= form.submit "Send" %>
+  <%= form_with url: collect_send_email_create_path(@fire_link.slug), method: :post do |form| %>
+    <div data-controller="dynamic-form">
+      <template data-dynamic-form-target="template">
+        <%= render 'email_field', form: form %>
+      </template>
+
+      <%= render 'email_field', form: form %>
+      <%= button_tag data: { dynamic_form_target: "addButton", action: 'click->dynamic-form#add_field' } do %>
+        <svg class="h-8 w-8 text-purple-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/>
+        </svg>
+      <% end %>
+    </div>
+
+    <div class="flex justify-between mt-6">
+      <%= link_to 'Back', fire_link_index_path, class: "btn btn-secondary block" %>
+      <%= form.submit "Send", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+
 <% end %>
-
-<%= link_to 'Back', @fire_link %>

@@ -41,13 +41,21 @@
   @apply bg-purple-600 hover:bg-purple-800;
 }
 
+.btn-secondary {
+  @apply bg-gray-600 hover:bg-gray-900
+}
+
+.btn-danger {
+  @apply border-red-400 border-2 hover:bg-red-400 text-red-400 hover:text-white;
+}
+
 // From
 
 .form-field {
   @apply block my-3 text-sm;
 }
 
-.form-fiield-inline {
+.form-field-inline {
   @apply block my-3 text-sm flex items-center justify-start;
 }
 
@@ -91,4 +99,12 @@
 
 .nav-item-mobile {
   @apply block px-3 py-2 rounded-md text-base font-medium text-gray-50;
+}
+
+// Details table
+
+.details-table {
+  > * {
+    @apply px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6 bg-white;
+  }
 }

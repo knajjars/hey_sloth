@@ -1,111 +1,97 @@
-<main class="flex flex-col justify-center items-start mb-8">
-  <div class="bg-white shadow-lg overflow-hidden sm:rounded-lg w-full">
-    <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">
-        Collected Testimonial
-      </h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">
-        Details
-      </p>
-    </div>
-    <div class="border-t border-gray-200">
-      <dl>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Name
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= @testimonial.name %>
-          </dd>
+<%= render 'shared/page_content', page_title: 'Testimonial details' do %>
+  <div class="border-t border-gray-200">
+    <div class="details-table">
+      <div>
+        <div class="text-sm font-medium text-gray-500">
+          Name
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Company
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= @testimonial.company || '-' %>
-          </dd>
+        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @testimonial.name %>
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Role
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= @testimonial.role || '-' %>
-          </dd>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">
+          Company
         </div>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Social Link
-          </dt>
-          <% if @testimonial.social_link.present? %>
-            <dd class="mt-1 text-sm sm:mt-0 sm:col-span-2 hover:underline text-purple-500">
-              <%= link_to @testimonial.social_link, @testimonial.social_link, target: "_blank" %>
-            </dd>
+        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @testimonial.company || '-' %>
+        </div>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">
+          Role
+        </div>
+        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @testimonial.role || '-' %>
+        </div>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">
+          Social Link
+        </div>
+        <% if @testimonial.social_link.present? %>
+          <div class="mt-1 text-sm sm:mt-0 sm:col-span-2 hover:underline text-purple-500">
+            <%= link_to @testimonial.social_link, @testimonial.social_link, target: "_blank" %>
+          </div>
+        <% else %>
+          <div class="mt-1 text-sm sm:mt-0 sm:col-span-2 text-gray-500">
+            -
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">
+          Collected from
+        </div>
+        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <% if @testimonial.tweet? %>
+            <%= link_to 'Twitter', @testimonial.tweet_url, target: "_blank", class: "hover:underline text-purple-500" %>
           <% else %>
-            <dd class="mt-1 text-sm sm:mt-0 sm:col-span-2 text-gray-500">
-              -
-            </dd>
+            <%= @testimonial.fire_link.nil? ? 'Fire link (deleted)' : "Fire link #{link_to(@testimonial.fire_link.tag, fire_link_index_path, class: "hover:underline text-purple-500")}".html_safe %>
           <% end %>
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Collected from
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <% if @testimonial.tweet? %>
-              <%= link_to 'Twitter', @testimonial.tweet_url, target: "_blank", class: "hover:underline text-purple-500" %>
-            <% else %>
-              <%= @testimonial.fire_link.nil? ? 'Fire link (deleted)' : "Fire link #{link_to(@testimonial.fire_link.tag, fire_link_index_path, class: "hover:underline text-purple-500")}".html_safe %>
-            <% end %>
-          </dd>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">
+          Collected date
         </div>
-
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Collected date
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= formatted_date @testimonial.created_at, with_time_passed: true %>
-          </dd>
+        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= formatted_date @testimonial.created_at, with_time_passed: true %>
         </div>
-
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Showcase
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <% if @testimonial.showcase %>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">
+          Showcase
+        </div>
+        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <% if @testimonial.showcase %>
             <span class="p-1 inline-flex rounded bg-green-400 text-white">
               This testimonial is being showcased to others.
             </span>
-              <p class="mt-1">
-                Don't want to
-                showcase? <%= link_to 'No', toggle_showcase_testimonial_path(@testimonial), method: :post, class: "mt-1 text-sm sm:mt-0 sm:col-span-2 hover:underline text-red-400" %>
-              </p>
-            <% else %>
+            <p class="mt-1">
+              Don't want to
+              showcase? <%= link_to 'No', toggle_showcase_testimonial_path(@testimonial), method: :post, remote: true, class: "mt-1 text-sm sm:mt-0 sm:col-span-2 hover:underline text-red-400" %>
+            </p>
+          <% else %>
             <span class="p-1 inline-flex text-sm font-light rounded bg-yellow-200 text-gray-900">
               This testimonial is not being showcased to others.
             </span>
-              <p class="mt-1">
-                <%= link_to 'Add now', toggle_showcase_testimonial_path(@testimonial), method: :post, class: "mt-1 text-sm sm:mt-0 sm:col-span-2 hover:underline text-purple-500" %>
-              </p>
-            <% end %>
-          </dd>
+            <p class="mt-1">
+              <%= link_to 'Add now', toggle_showcase_testimonial_path(@testimonial), method: :post, remote: true, class: "mt-1 text-sm sm:mt-0 sm:col-span-2 hover:underline text-purple-500" %>
+            </p>
+          <% end %>
         </div>
-
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">
-            Testimonial
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= @testimonial.content %>
-          </dd>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-500">
+          Testimonial
         </div>
-      </dl>
+        <div class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= @testimonial.content %>
+        </div>
+      </div>
     </div>
   </div>
-
 
   <div class="my-8 bg-white shadow-lg overflow-hidden sm:rounded-lg w-full">
     <div class="px-4 py-5 sm:px-6">
@@ -122,8 +108,8 @@
     </div>
   </div>
 
-  <div class="flex flex-row space-x-4 bg-white">
-    <%= link_to 'Back', app_root_path, class: "flex justify-center items-center w-20 bg-gray-600 hover:bg-gray-900 focus:outline-none transition text-white px-2 py-1 rounded" %>
-    <%= link_to 'Remove', @testimonial, class: "flex justify-center items-center w-20 bg-white border-red-400 border-2 hover:bg-red-400 focus:outline-none transition text-red-400 hover:text-white px-2 py-1 rounded", method: :delete, data: { confirm: 'Are you sure?' } %>
+  <div class="flex flex-row space-x-4">
+    <%= link_to 'Back', app_root_path, class: "btn btn-secondary" %>
+    <%= link_to 'Remove', @testimonial, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
-</main>
+<% end %>

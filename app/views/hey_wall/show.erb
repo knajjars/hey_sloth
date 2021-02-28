@@ -1,22 +1,14 @@
 <%= render 'shared/page_content', page_title: 'HeyWall' do %>
-  <div data-controller="code-highlight" class="code-snippet">
-  <pre>
-    <code class="language-html">
-      &lt;div id="testimonials" data-heywall-id=<%= current_user.public_token %>&gt;&lt;/div&gt;
-      &lt;script src="<%= embed_url(format: :js) %>"&gt;&lt;/script&gt;
-      &lt;link rel="stylesheet" type="text/css" href="<%= embed_url(format: :css) %>"&gt;
-    </code>
-  </pre>
-
-    <div>
+  <div data-controller="code-highlight iframe-resizer" class="code-snippet">
+    <pre>
+      <code class="language-html">
+        &lt;iframe data-iframe-resizer-target="iframe" style="overflow: auto; border: 0px; height: 100%; width: 100%;"
+        src=<%= embed_url(token: current_user.public_token) %> &gt;&lt;/iframe&gt;
+      </code>
+    </pre>
+    <div class="mt-4">
       <h2 class="font-black text-2xl mb-5">Preview</h2>
-      <%= content_tag :div, nil, id: "is-testimonial-test", data: { test: true } if Rails.env.development? %>
-      <div id="testimonials" data-heywall-id="<%= current_user.public_token %>"></div>
-      <%= javascript_pack_tag "embed", 'data-turbolinks-track': 'reload' %>
+      <iframe data-iframe-resizer-target="iframe" style="overflow: auto; border: 0px; height: 100%; width: 100%;" src="<%= embed_url(token: current_user.public_token) %>"></iframe>
     </div>
-
   </div>
-
-  <%= javascript_pack_tag 'highlight', 'data-turbolinks-track': false %>
-
 <% end %>
