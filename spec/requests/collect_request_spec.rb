@@ -100,7 +100,7 @@ RSpec.describe 'Collects', type: :request do
       sign_in user
       expect do
         post collect_send_email_create_url(fire_link.slug),
-             params: { email_addresses: ['example@example.com', 'otherexample@example.com'] }
+             params: { email: ['example@example.com', 'otherexample@example.com'] }
       end.to change { ActionMailer::Base.deliveries.count }.by(2)
       expect(response).to have_http_status(302)
       expect(response).to redirect_to("/fire_link")
