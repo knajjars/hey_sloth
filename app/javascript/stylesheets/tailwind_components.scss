@@ -41,13 +41,21 @@
   @apply bg-purple-600 hover:bg-purple-800;
 }
 
+.btn-secondary {
+  @apply bg-gray-600 hover:bg-gray-900
+}
+
+.btn-danger {
+  @apply border-red-400 border-2 hover:bg-red-400 text-red-400 hover:text-white;
+}
+
 // From
 
 .form-field {
   @apply block my-3 text-sm;
 }
 
-.form-fiield-inline {
+.form-field-inline {
   @apply block my-3 text-sm flex items-center justify-start;
 }
 

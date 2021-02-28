@@ -30,9 +30,9 @@ class CollectController < ApplicationController
 
   def send_email_create
     authorize @fire_link
-    return render_bad_request if params[:email_addresses].nil?
+    return render_bad_request if params[:email].nil?
 
-    email_addresses = params[:email_addresses].reject(&:empty?)
+    email_addresses = params[:email].reject(&:empty?)
     email_addresses.each do |email_address|
       CollectMailer.new_testimonial(email_address, @fire_link).deliver
     end

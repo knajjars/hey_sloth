@@ -1,0 +1,4 @@
+<%= content_tag :div, class: "form-field" do %>
+  <%= form.label :email, "Email address:", class: "form-label" %>
+  <%= form.email_field :email, class: "form-input", required: true, autofocus: true, type: :email, multiple: true, placeholder: "hi@heysloth.com" %>
+<% end %>
