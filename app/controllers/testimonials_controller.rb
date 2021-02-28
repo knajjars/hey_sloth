@@ -17,6 +17,7 @@ class TestimonialsController < ApplicationController
     authorize @testimonial
     @testimonial.showcase = !@testimonial.showcase
     @testimonial.save!
+
     redirect_back fallback_location: app_root_path
   end
 

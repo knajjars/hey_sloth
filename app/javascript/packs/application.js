@@ -7,7 +7,6 @@ import "@rails/actiontext"
 import "controllers"
 
 import "./rich_text"
-import "./highlight"
 
 Rails.start()
 Turbolinks.start()

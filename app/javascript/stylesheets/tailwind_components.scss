@@ -92,3 +92,12 @@
 .nav-item-mobile {
   @apply block px-3 py-2 rounded-md text-base font-medium text-gray-50;
 }
+
+// Details table
+
+.details-table {
+  > * {
+    @apply px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6 bg-white;
+  }
+}
+

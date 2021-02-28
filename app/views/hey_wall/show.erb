@@ -1,13 +1,14 @@
 <%= render 'shared/page_content', page_title: 'HeyWall' do %>
   <div data-controller="code-highlight iframe-resizer" class="code-snippet">
-    <pre><code class="language-html">&lt;iframe data-iframe-resizer-target="iframe" src=<%= embed_url(token: current_user.public_token) %>
-      style="overflow: auto; border: 0px; height: 100%; width: 100%;" &gt;&lt;/iframe&gt;</code></pre>
+    <pre>
+      <code class="language-html">
+        &lt;iframe data-iframe-resizer-target="iframe" style="overflow: auto; border: 0px; height: 100%; width: 100%;"
+        src=<%= embed_url(token: current_user.public_token) %> &gt;&lt;/iframe&gt;
+      </code>
+    </pre>
     <div class="mt-4">
       <h2 class="font-black text-2xl mb-5">Preview</h2>
       <iframe data-iframe-resizer-target="iframe" style="overflow: auto; border: 0px; height: 100%; width: 100%;" src="<%= embed_url(token: current_user.public_token) %>"></iframe>
     </div>
   </div>
-
-  <%= javascript_pack_tag 'highlight', 'data-turbolinks-track': false %>
-
 <% end %>
