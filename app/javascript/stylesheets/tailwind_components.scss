@@ -108,3 +108,29 @@
     @apply px-4 py-5 sm:grid sm:grid-cols-3 sm:space-x-4 sm:px-6 bg-white;
   }
 }
+
+// Dashboard cards
+
+.pane-stack {
+  @apply grid grid-cols-2 md:grid-cols-4 gap-4 w-full;
+}
+
+.pane-item {
+  @apply w-full p-4 rounded-lg bg-white border-l-4;
+}
+
+.pane-container {
+  @apply flex justify-start whitespace-nowrap items-start;
+}
+
+.pane-icon {
+  @apply w-10 h-10 p-2 text-white rounded-full mr-3;
+}
+
+.pane-counter {
+  @apply text-xl text-gray-800;
+}
+
+.pane-description {
+  @apply text-sm md:text-lg text-gray-500;
+}
