@@ -1,4 +1,11 @@
-<% if notice || alert %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+<% if notice %>
+  <%= render 'alerts/info' do %>
+    <%= notice %>
+  <% end %>
+<% end %>
+
+<% if alert %>
+  <%= render 'alerts/danger' do %>
+    <%= alert %>
+  <% end %>
 <% end %>

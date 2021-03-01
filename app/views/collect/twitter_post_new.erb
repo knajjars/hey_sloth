@@ -1,4 +1,7 @@
 <%= render 'shared/page_content', page_title: 'Twitter post' do %>
+  <%= render 'alerts/message' do %>
+    <p>Copy and paste a Tweet post URL here to collect it.</p>
+  <% end %>
   <%= form_with url: collect_twitter_post_new_path, method: :get do |form| %>
     <div class="form-field">
       <%= form.label :tweet_url, "Tweet URL:", class: "form-label" %>

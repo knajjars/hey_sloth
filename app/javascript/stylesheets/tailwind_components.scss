@@ -34,6 +34,10 @@
   @apply font-medium text-purple-600 hover:underline;
 }
 
+.link-bold {
+  @apply text-purple-500 font-black hover:text-purple-600 underline;
+}
+
 // Buttons
 
 .btn {

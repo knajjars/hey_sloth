@@ -1,10 +1,12 @@
 <%= render 'shared/page_content', page_title: 'Timeline tweets' do %>
   <% if @twitter_handle.nil? %>
     <div>
-      <p>There is no Twitter account associated with your HeySloth
-        account.
-        <%= link_to 'Link now', user_twitter_omniauth_authorize_path, class: "text-purple-500 font-black hover:text-purple-600 underline" %>
-        to proceed.</p>
+      <%= render 'alerts/info' do %>
+        <p>There is no Twitter account associated with your HeySloth
+          account.
+          <%= link_to 'Link now', user_twitter_omniauth_authorize_path, class: "link-bold" %>
+          to proceed.</p>
+      <% end %>
     </div>
   <% else %>
     <h2 class="text-xl mb-5">
