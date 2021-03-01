@@ -1,4 +1,7 @@
 class HeyWallController < ApplicationController
 
-  def show; end
+  def show
+    @has_showcased_testimonials = current_user.testimonials.showcased.any?
+  end
+
 end
