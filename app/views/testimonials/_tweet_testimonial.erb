@@ -15,7 +15,7 @@
       </svg>
     <% end %>
   </div>
-  <p class="text-black dark:text-white block text-xl leading-snug mt-3 whitespace-pre-wrap tweet_link"><%= auto_link(@testimonial.content, { username_include_symbol: true }).html_safe %></p>
+  <p class="text-black dark:text-white block text-xl leading-snug mt-3 whitespace-pre-wrap tweet_link text-left"><%= auto_link(@testimonial.content, { username_include_symbol: true }).html_safe %></p>
 
   <p class="text-gray-500 dark:text-gray-400 text-base py-1 my-0.5">
     <%= formatted_date @testimonial.tweet_date, with_time_passed: false %>
