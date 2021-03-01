@@ -18,7 +18,12 @@
                               class="<%= "#{current_controller?('collect') | current_controller?('fire_link') ? "nav-active" : "nav-interactive"} nav-item focus:bg-purple-900 focus:text-white" %>"
                               id="user-menu" aria-haspopup="true">
                         <span class="sr-only">Open collect menu</span>
-                        Collect
+                        <span class="flex space-x-2 items-center justify-center">
+                          Collect
+                          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/>
+                          </svg>
+                        </span>
                       </button>
                     </div>
                     <div data-dashboard-target="collectOptions" class="z-50 hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 text-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">

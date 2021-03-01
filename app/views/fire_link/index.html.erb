@@ -1,7 +1,5 @@
 <%= render 'shared/page_content', page_title: 'Fire Link' do %>
-  <% is_fire_link_created = @fire_link.present? %>
-
-  <% if is_fire_link_created %>
+  <% if @fire_link.present? %>
     <div class="bg-white rounded border-t-4 border-yellow-400 px-4 py-3 shadow-md md:w-2/3" role="alert">
       <div class="flex">
         <div class="py-1">
@@ -82,8 +80,9 @@
           </svg>
         </div>
         <div>
-          <p class="font-bold">You don't have a Fire Link yet.</p>
-          <%= link_to "Create one", new_fire_link_path, class: "btn btn-primary mt-3" %>
+          <p class="font-bold">Tip</p>
+          <p>You don't have a Fire Link
+            yet. <%= link_to "Create one now", new_fire_link_path, class: "link" %> to proceed.</p>
         </div>
       </div>
     </div>
