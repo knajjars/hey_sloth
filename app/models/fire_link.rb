@@ -8,11 +8,11 @@ class FireLink < ApplicationRecord
   has_many :testimonials, dependent: :nullify
   has_one_attached :logo
 
-  validates :tag,
+  validates :url,
             presence: true,
             length: { in: 4..30 },
-            tag_exclusion: true
-  validates :logo, content_type: %i[png jpg jpeg]
+            url_exclusion: true
+  validates :logo, attached: true, content_type: %i[png jpg jpeg]
 
   after_validation :restore_slug
 
@@ -25,17 +25,17 @@ class FireLink < ApplicationRecord
   end
 
   def slug_candidates
-    %i[tag tag_and_sequence]
+    %i[url url_and_sequence]
   end
 
-  def tag_and_sequence
-    slug = normalize_friendly_id(tag)
+  def url_and_sequence
+    slug = normalize_friendly_id(url)
     sequence = FireLink.where("slug like '#{slug}-%'").count + 2
     "#{slug}-#{sequence}"
   end
 
   def should_generate_new_friendly_id?
     save_slug
-    tag_changed?
+    url_changed?
   end
 end

@@ -11,9 +11,9 @@
     <% end %>
     <div class="space-y-6 md:space-y-10 ">
       <div class="flex space-x-4 items-start w-full md:w-2/3 lg:w-3/5 xl:w-2/5">
-        <%= form.label :tag, "Title*", class: "text-base text-gray-700 font-bold", required: true %>
+        <%= form.label :url, "URL*", class: "text-base text-gray-700 font-bold", required: true %>
         <div class="w-full flex flex-col space-y-2">
-          <%= form.text_field :tag, class: " border-2 rounded border-gray-300 px-2 py-1 block w-full" %>
+          <%= form.text_field :url, class: " border-2 rounded border-gray-300 px-2 py-1 block w-full" %>
           <p class="text-gray-500 text-xs">This will be used to generate the link name.</p>
         </div>
       </div>

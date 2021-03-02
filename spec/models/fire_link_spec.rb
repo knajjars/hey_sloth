@@ -1,55 +1,55 @@
 require 'rails_helper'
 
 RSpec.describe FireLink, type: :model do
-  let(:fire_link) { create(:fire_link, tag: 'Some Tag') }
-  let(:fire_links) { create_list(:fire_link, 3, tag: 'Some Tag') }
+  let(:fire_link) { create(:fire_link, url: 'Some Url') }
+  let(:fire_links) { create_list(:fire_link, 3, url: 'Some Url') }
   let(:fire_link_with_testimonial) { FactoryBot.create(:fire_link, :image_not_required) }
   let(:testimonial) { FactoryBot.create(:testimonial, fire_link: fire_link_with_testimonial) }
 
-  describe 'tag' do
+  describe 'url' do
     it 'exists' do
       expect(fire_link).to be_valid
     end
 
-    it 'generates slug based on tag' do
-      expect(fire_link.tag).to eq('Some Tag')
-      expect(fire_link.slug).to eq('some-tag')
+    it 'generates slug based on url' do
+      expect(fire_link.url).to eq('Some Url')
+      expect(fire_link.slug).to eq('some-url')
     end
 
-    it 'updates slug based on tag' do
-      expect(fire_link.slug).to eq('some-tag')
+    it 'updates slug based on url' do
+      expect(fire_link.slug).to eq('some-url')
 
-      fire_link.tag = 'Other tag'
+      fire_link.url = 'Other url'
       fire_link.save
 
-      expect(fire_link.slug).to eq('other-tag')
+      expect(fire_link.slug).to eq('other-url')
 
     end
 
-    it 'auto increment slug if tag already exists' do
+    it 'auto increment slug if url already exists' do
       slugs = fire_links.map(&:slug)
       expect(slugs).to contain_exactly(
-                         'some-tag',
-                         'some-tag-2',
-                         'some-tag-3'
+                         'some-url',
+                         'some-url-2',
+                         'some-url-3'
                        )
     end
 
     it 'is between 4 and 30 characters' do
-      fire_link.tag = '123'
+      fire_link.url = '123'
       expect(fire_link).to_not be_valid
 
-      fire_link.tag = '100000000020000000003000000000' + '4'
+      fire_link.url = '100000000020000000003000000000' + '4'
       expect(fire_link).to_not be_valid
     end
 
     it 'does not allow reserved words' do
       %w[new edit index session login logout users admin
          stylesheets assets javascripts javascript images].each do |word|
-        fire_link.tag = word
+        fire_link.url = word
         expect(fire_link).to_not be_valid
 
-        fire_link.tag = word.upcase
+        fire_link.url = word.upcase
         expect(fire_link).to_not be_valid
       end
     end

@@ -4,9 +4,9 @@
       <p>This is your Fire Link. Use it to <strong>collect testimonials</strong> from your users by sharing it's URL or
         sending it via email.</p>
     <% end %>
-    <div class="grid place-items-center relative bg-gradient-to-r from-purple-600 to-purple-500 rounded">
-      <div class=" text-white rounded shadow-lg p-6 w-full flex flex-col justify-between items-between space-y-3">
-        <h1 class="font-black text-white text-2xl"><%= @fire_link.tag %></h1>
+    <div class="grid place-items-center relative bg-white shadow-2xl rounded-xl">
+      <div class=" text-gray-700 rounded shadow-lg p-6 w-full flex flex-col justify-between items-between space-y-3">
+        <h1 class="font-black text-2xl"><%= @fire_link.url %></h1>
         <%= render "shared/copy_clipboard", key: @fire_link.slug, content: collect_from_fire_link_new_url(@fire_link.slug, subdomain: false) %>
         <% if @fire_link.note.present? %>
           <div class="flex flex-col space-y-1">

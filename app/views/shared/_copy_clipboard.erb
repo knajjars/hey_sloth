@@ -1,5 +1,5 @@
-<div data-controller="clipboard tooltip" class="flex flex-col items-end bg-gray-700 text-white p-3 rounded-xl space-y-2">
-  <%= text_field_tag 'copy-clipboard', content, data: { "clipboard-target": "source", "action": "focus->clipboard#copy click->tooltip#show" }, readonly: "readonly", class: "bg-gray-700 w-full" %>
+<div data-controller="clipboard tooltip" class="flex flex-col items-end bg-gray-600 text-white p-3 rounded-xl space-y-2">
+  <%= text_field_tag 'copy-clipboard', content, data: { "clipboard-target": "source", "action": "focus->clipboard#copy click->tooltip#show" }, readonly: "readonly", class: "bg-gray-600 w-full" %>
   <%= button_tag data: { "action": "click->clipboard#copy click->tooltip#show", tooltip_target: 'destination' }, "tooltip-left": true, "tooltip-content": "Copied!" do %>
     <%= content_tag :div, class: "flex space-x-2 items-center bg-purple-500 rounded-xl text-white px-2 py-1 font-medium" do %>
       <p>Copy</p>

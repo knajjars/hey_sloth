@@ -47,7 +47,7 @@
           <% if @testimonial.tweet? %>
             <%= link_to 'Twitter', @testimonial.tweet_url, target: "_blank", class: "hover:underline text-purple-500" %>
           <% else %>
-            <%= @testimonial.fire_link.nil? ? 'Fire link (deleted)' : "Fire link #{link_to(@testimonial.fire_link.tag, fire_link_index_path, class: "hover:underline text-purple-500")}".html_safe %>
+            <%= @testimonial.fire_link.nil? ? 'Fire link (deleted)' : "Fire link #{link_to(@testimonial.fire_link.url, fire_link_index_path, class: "hover:underline text-purple-500")}".html_safe %>
           <% end %>
         </div>
       </div>

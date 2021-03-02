@@ -4,7 +4,10 @@ user.save!
 
 puts 'Created test user!'
 
-sl1 = FireLink.create! user: user, tag: 'awesome1', note: 'My Awesome Note!', social_link_required: true
+sl1 = FireLink.create user: user, url: 'awesome1', note: 'My Awesome Note!', social_link_required: true
+sl1.logo.attach(io: File.open('spec/fixtures/image.png'),
+                filename: 'image.png')
+sl1.save!
 
 puts 'Created Fire Links!'
 

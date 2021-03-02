@@ -4,8 +4,9 @@ RSpec.describe "FireLink", type: :request do
   let(:fire_link) { FactoryBot.create(:fire_link) }
   let(:user) { fire_link.user }
   let(:other_user) { FactoryBot.create(:user) }
-  let(:valid_body) { (FactoryBot.attributes_for(:fire_link)) }
-  let(:invalid_body) { (FactoryBot.attributes_for(:fire_link)).except(:tag) }
+  let(:logo) { { logo: Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'image.png'), 'application/png', true) } }
+  let(:valid_body) { (FactoryBot.attributes_for(:fire_link)).merge(logo) }
+  let(:invalid_body) { (FactoryBot.attributes_for(:fire_link)).except(:url) }
   let(:valid_update_body) { (FactoryBot.attributes_for(:fire_link)) }
   let(:invalid_update_body) { (FactoryBot.attributes_for(:fire_link)).merge({ random_attr: "random" }) }
 
@@ -21,7 +22,7 @@ RSpec.describe "FireLink", type: :request do
       get fire_link_index_url
       expect(response).to have_http_status(200)
       expect(response).to render_template('fire_link/index')
-      expect(response.body).to include(fire_link.tag)
+      expect(response.body).to include(fire_link.url)
     end
   end
 
@@ -56,7 +57,7 @@ RSpec.describe "FireLink", type: :request do
       expect(response).to have_http_status(302)
       follow_redirect!
       expect(response).to render_template("fire_link/index")
-      expect(FireLink.find_by_tag(valid_body[:tag]).user.id).to eq(user.id)
+      expect(FireLink.find_by_url(valid_body[:url]).user.id).to eq(user.id)
     end
 
     it 'renders errors for missing attributes of fire link' do
@@ -66,7 +67,7 @@ RSpec.describe "FireLink", type: :request do
       }.to_not change(FireLink, :count)
 
       expect(response).to render_template("fire_link/new")
-      expect(response.body).to include("Tag can&#39;t be blank")
+      expect(response.body).to include("Url can&#39;t be blank")
     end
   end
 
@@ -103,7 +104,7 @@ RSpec.describe "FireLink", type: :request do
 
     it 'updates fire link for authenticated user' do
       sign_in user
-      expect(FireLink.find(fire_link.id).tag).to eq(fire_link.tag)
+      expect(FireLink.find(fire_link.id).url).to eq(fire_link.url)
       expect {
         patch fire_link_url(fire_link.id), params: { fire_link: valid_update_body }
       }.to_not change(FireLink, :count)
@@ -111,12 +112,12 @@ RSpec.describe "FireLink", type: :request do
       expect(response).to have_http_status(302)
       follow_redirect!
       expect(response).to render_template("fire_link/index")
-      expect(FireLink.find(fire_link.id).tag).to eq(valid_update_body[:tag])
+      expect(FireLink.find(fire_link.id).url).to eq(valid_update_body[:url])
     end
 
     it 'does not update fire link with invalid attributes for authenticated user' do
       sign_in user
-      expect(FireLink.find(fire_link.id).tag).to eq(fire_link.tag)
+      expect(FireLink.find(fire_link.id).url).to eq(fire_link.url)
       expect {
         patch fire_link_url(fire_link.id), params: { fire_link: invalid_update_body }
       }.to_not change(FireLink, :count)
