@@ -24,7 +24,7 @@ Rails.application.routes.draw do
         post 'create', to: 'collect#twitter_post_create'
       end
     end
-    get '*path' => redirect('/')
+    get '*path', to: redirect('/'), constraints: ->(req) { req.path.exclude? 'rails/active_storage' }
     root to: 'dashboard#index', as: :app_root
   end
 

@@ -50,3 +50,5 @@ gem "tailwindcss-rails", "~> 0.3.3"
 gem 'pagy', '~> 3.10'
 gem 'twitter-text', '~> 3.1'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+gem "mini_magick"
+gem 'image_processing', '~> 1.2'
