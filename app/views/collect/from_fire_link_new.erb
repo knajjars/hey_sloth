@@ -41,11 +41,7 @@
 
   <div class="field">
     <%= form.label :social_link %>
-    <% if @fire_link.social_link_required %>
-      <%= form.text_field :social_link, required: true %>
-    <% else %>
-      <%= form.text_field :social_link, required: false %>
-    <% end %>
+    <%= form.text_field :social_link, required: true %>
   </div>
 
   <div class="field">

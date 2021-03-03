@@ -2,7 +2,6 @@ FactoryBot.define do
   factory :fire_link do
     url { Faker::Internet.slug }
     note { Faker::Lorem.paragraph }
-    social_link_required { Faker::Boolean.boolean }
     job_required { Faker::Boolean.boolean }
     image_required { Faker::Boolean.boolean }
 

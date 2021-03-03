@@ -53,6 +53,6 @@ class FireLinkController < ApplicationController
   end
 
   def fire_link_params
-    params.require(:fire_link).permit(:url, :note, :social_link_required, :job_required, :image_required, :logo)
+    params.require(:fire_link).permit(:url, :note, :job_required, :image_required, :logo)
   end
 end

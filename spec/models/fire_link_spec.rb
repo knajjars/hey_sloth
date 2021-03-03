@@ -56,10 +56,6 @@ RSpec.describe FireLink, type: :model do
   end
 
   describe '_required fields' do
-    it 'has social_link_required' do
-      expect(fire_link.social_link_required).to be(true).or be(false)
-    end
-
     it 'has image_required' do
       expect(fire_link.image_required).to be(true).or be(false)
     end
