@@ -3,7 +3,7 @@
   <%= form_with url: collect_send_email_create_path(@fire_link.slug), method: :post do |form| %>
     <div data-controller="dynamic-form">
       <template data-dynamic-form-target="template">
-        <%= render 'email_field', form: form %>
+        <%= render 'email_field', form: form, can_be_removed: true %>
       </template>
 
       <%= render 'email_field', form: form %>
