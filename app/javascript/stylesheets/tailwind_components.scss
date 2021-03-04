@@ -41,15 +41,15 @@
 // Buttons
 
 .btn {
-  @apply inline-block px-6 py-2 font-medium leading-7 text-center text-white uppercase transition rounded shadow hover:shadow-lg focus:outline-none cursor-pointer;
+  @apply inline-block px-6 py-2 font-medium leading-7 text-center uppercase transition rounded shadow hover:shadow-lg focus:outline-none cursor-pointer bg-transparent;
 }
 
 .btn-primary {
-  @apply bg-purple-600 hover:bg-purple-800;
+  @apply text-white bg-purple-600 hover:bg-purple-800;
 }
 
 .btn-secondary {
-  @apply bg-gray-600 hover:bg-gray-900
+  @apply text-white bg-gray-600 hover:bg-gray-900
 }
 
 .btn-danger {
