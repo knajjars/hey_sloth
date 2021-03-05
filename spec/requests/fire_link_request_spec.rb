@@ -1,14 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe "FireLink", type: :request do
+RSpec.describe 'FireLink', type: :request do
   let(:fire_link) { FactoryBot.create(:fire_link) }
   let(:user) { fire_link.user }
   let(:other_user) { FactoryBot.create(:user) }
-  let(:logo) { { logo: Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'image.png'), 'application/png', true) } }
+  let(:logo) do
+    { logo: Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'image.png'), 'application/png', true) }
+  end
   let(:valid_body) { (FactoryBot.attributes_for(:fire_link)).merge(logo) }
   let(:invalid_body) { (FactoryBot.attributes_for(:fire_link)).except(:url) }
-  let(:valid_update_body) { (FactoryBot.attributes_for(:fire_link)) }
-  let(:invalid_update_body) { (FactoryBot.attributes_for(:fire_link)).merge({ random_attr: "random" }) }
+  let(:valid_update_body) { FactoryBot.attributes_for(:fire_link) }
+  let(:invalid_update_body) { (FactoryBot.attributes_for(:fire_link)).merge({ random_attr: 'random' }) }
 
   describe '#index' do
     it 'redirects to login if not authenticated' do
@@ -37,7 +39,7 @@ RSpec.describe "FireLink", type: :request do
       sign_in user
       get new_fire_link_url
       expect(response).to have_http_status(200)
-      expect(response).to render_template("fire_link/new")
+      expect(response).to render_template('fire_link/new')
     end
   end
 
@@ -50,24 +52,24 @@ RSpec.describe "FireLink", type: :request do
 
     it 'creates fire link for authenticated user' do
       sign_in user
-      expect {
+      expect do
         post fire_link_index_url, params: { fire_link: valid_body }
-      }.to change(FireLink, :count).by(1)
+      end.to change(FireLink, :count).by(1)
 
       expect(response).to have_http_status(302)
       follow_redirect!
-      expect(response).to render_template("fire_link/index")
+      expect(response).to render_template('fire_link/index')
       expect(FireLink.find_by_url(valid_body[:url]).user.id).to eq(user.id)
     end
 
     it 'renders errors for missing attributes of fire link' do
       sign_in user
-      expect {
+      expect do
         post fire_link_index_url, params: { fire_link: invalid_body }
-      }.to_not change(FireLink, :count)
+      end.to_not change(FireLink, :count)
 
-      expect(response).to render_template("fire_link/new")
-      expect(response.body).to include("Url can&#39;t be blank")
+      expect(response).to render_template('fire_link/new')
+      expect(response.body).to include('Url can&#39;t be blank')
     end
   end
 
@@ -82,16 +84,16 @@ RSpec.describe "FireLink", type: :request do
       sign_in user
       get edit_fire_link_url(fire_link.id)
       expect(response).to have_http_status(200)
-      expect(response).to render_template("fire_link/edit")
+      expect(response).to render_template('fire_link/edit')
     end
 
     it 'redirects to not authorized for other authenticated user' do
       sign_in other_user
       get edit_fire_link_url(fire_link.id)
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to("/")
+      expect(response).to redirect_to('/')
       follow_redirect!
-      expect(response.body).to include("Not authorized")
+      expect(response.body).to include('Not authorized')
     end
   end
 
@@ -105,25 +107,25 @@ RSpec.describe "FireLink", type: :request do
     it 'updates fire link for authenticated user' do
       sign_in user
       expect(FireLink.find(fire_link.id).url).to eq(fire_link.url)
-      expect {
+      expect do
         patch fire_link_url(fire_link.id), params: { fire_link: valid_update_body }
-      }.to_not change(FireLink, :count)
+      end.to_not change(FireLink, :count)
 
       expect(response).to have_http_status(302)
       follow_redirect!
-      expect(response).to render_template("fire_link/index")
+      expect(response).to render_template('fire_link/index')
       expect(FireLink.find(fire_link.id).url).to eq(valid_update_body[:url])
     end
 
     it 'does not update fire link with invalid attributes for authenticated user' do
       sign_in user
       expect(FireLink.find(fire_link.id).url).to eq(fire_link.url)
-      expect {
+      expect do
         patch fire_link_url(fire_link.id), params: { fire_link: invalid_update_body }
-      }.to_not change(FireLink, :count)
+      end.to_not change(FireLink, :count)
       expect(response).to have_http_status(302)
       follow_redirect!
-      expect(response).to render_template("fire_link/index")
+      expect(response).to render_template('fire_link/index')
       expect(FireLink.find(fire_link.id)).to eq(fire_link)
     end
 
@@ -131,9 +133,9 @@ RSpec.describe "FireLink", type: :request do
       sign_in other_user
       patch fire_link_url(fire_link.id), params: { fire_link: valid_update_body }
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to("/")
+      expect(response).to redirect_to('/')
       follow_redirect!
-      expect(response.body).to include("Not authorized")
+      expect(response.body).to include('Not authorized')
     end
   end
 
@@ -147,25 +149,25 @@ RSpec.describe "FireLink", type: :request do
     it 'deletes fire link for authenticated user' do
       sign_in user
       id = fire_link.id
-      expect {
+      expect do
         delete fire_link_url(id)
-      }.to change(FireLink, :count).by(-1)
+      end.to change(FireLink, :count).by(-1)
       expect(response).to have_http_status(302)
       expect(response).to redirect_to('/fire_link')
       follow_redirect!
-      expect(response).to render_template("fire_link/index")
+      expect(response).to render_template('fire_link/index')
     end
 
     it 'redirects to not authorized for other authenticated user' do
       sign_in other_user
       id = fire_link.id
-      expect {
+      expect do
         delete fire_link_url(id)
-      }.to_not change(FireLink, :count)
+      end.to_not change(FireLink, :count)
       expect(response).to have_http_status(302)
       expect(response).to redirect_to('/')
       follow_redirect!
-      expect(response.body).to include("Not authorized")
+      expect(response.body).to include('Not authorized')
     end
   end
 end

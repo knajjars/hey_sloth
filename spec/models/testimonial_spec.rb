@@ -171,10 +171,10 @@ RSpec.describe Testimonial, type: :model do
       testimonial.save!
       testimonial.reload
 
-      expect {
+      expect do
         testimonial.showcase = !testimonial.showcase
         testimonial.save!
-      }.to_not raise_error
+      end.to_not raise_error
     end
   end
 

@@ -5,8 +5,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
                   uid: twitter_data['extra']['raw_info']['id'],
                   token: twitter_data['credentials']['token'],
                   secret: twitter_data['credentials']['secret'],
-                  link: "https://twitter.com/#{twitter_data['info']['nickname']}"
-    }
+                  link: "https://twitter.com/#{twitter_data['info']['nickname']}" }
 
     current_user.authorizations.build(auth_attr)
     current_user.save

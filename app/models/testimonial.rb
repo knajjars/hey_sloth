@@ -9,13 +9,15 @@ class Testimonial < ApplicationRecord
   belongs_to :fire_link, optional: true
   has_one_attached :image
 
-  before_validation { self.content = self.rich_text.to_plain_text unless self.rich_text.nil? }
+  before_validation { self.content = rich_text.to_plain_text unless rich_text.nil? }
 
   validates_presence_of :name
   validates_presence_of :content
   validates :image,
             attached: true,
-            if: ->(testimonial) { !testimonial.tweet? && (testimonial.fire_link.present? && testimonial.fire_link.image_required) },
+            if: lambda { |testimonial|
+                  !testimonial.tweet? && (testimonial.fire_link.present? && testimonial.fire_link.image_required)
+                },
             content_type: %i[png jpg jpeg]
 
   def self.with_rich_text
@@ -37,5 +39,4 @@ class Testimonial < ApplicationRecord
   def rich_text_or_content
     rich_text.nil? ? content : rich_text
   end
-
 end

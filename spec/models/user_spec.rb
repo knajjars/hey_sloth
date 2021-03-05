@@ -68,5 +68,4 @@ RSpec.describe User, type: :model do
     authorizations = User.reflect_on_association :authorizations
     expect(authorizations.macro).to eq :has_many
   end
-
 end

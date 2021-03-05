@@ -3,7 +3,7 @@ class CollectController < ApplicationController
 
   before_action :set_collected_tweets, only: %i[twitter_search twitter_post_new]
   before_action :set_fire_link, only: %i[from_fire_link_new from_fire_link_create send_email_create send_email_new]
-  layout 'page', only: %i[from_fire_link_new from_fire_link_create]
+  # layout 'app', only: %i[from_fire_link_new from_fire_link_create]
 
   def from_fire_link_new
     @testimonial = Testimonial.new
@@ -50,7 +50,6 @@ class CollectController < ApplicationController
       testimonial = Testimonial.new map_tweet_to_testimonial(t)
       @testimonials << testimonial
     end
-
   end
 
   def twitter_post_new
@@ -63,7 +62,6 @@ class CollectController < ApplicationController
       client = current_user.twitter? ? current_user.twitter : TwitterApi.client
       tweet = client.status(tweet_status, tweet_mode: 'extended')
       @testimonial = Testimonial.new map_tweet_to_testimonial(tweet)
-
     rescue Twitter::Error::NotFound => e
       redirect_to collect_twitter_post_new_path, alert: 'Please copy a valid twitter post URL.'
     rescue StandardError
@@ -117,5 +115,4 @@ class CollectController < ApplicationController
   def testimonial_params
     params.require(:testimonial).permit(:name, :company, :role, :social_link, :rich_text, :image)
   end
-
 end

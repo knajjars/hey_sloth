@@ -55,7 +55,8 @@ RSpec.describe 'Api', type: :request do
         get get_testimonials_json_url(public_token: user.public_token)
         expect(response).to have_http_status(200)
         body = JSON.parse(response.body).first
-        %w[name company role social_link content source tweet_status_id tweet_url tweet_user_id created_at image_url].each do |key|
+        %w[name company role social_link content source tweet_status_id tweet_url tweet_user_id created_at
+           image_url].each do |key|
           expect(body).to have_key(key)
         end
 

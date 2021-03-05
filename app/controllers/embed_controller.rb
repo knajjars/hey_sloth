@@ -23,5 +23,4 @@ class EmbedController < ApplicationController
 
     @testimonials = user.testimonials.showcased
   end
-
 end

@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Authorization, type: :model do
-  let(:authorization) {
+  let(:authorization) do
     create(:authorization, :with_user, token: 'token', secret: 'secret', provider: 'twitter',
-           link: 'https://www.twitter.com/heysloth') }
+                                       link: 'https://www.twitter.com/heysloth')
+  end
 
   it 'decrypts user token' do
     expect(authorization.token).to eq('token')

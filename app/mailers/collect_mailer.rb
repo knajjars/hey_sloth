@@ -1,7 +1,6 @@
 class CollectMailer < ApplicationMailer
-
   def new_testimonial(email, fire_link)
-    @greeting = "Hi"
+    @greeting = 'Hi'
 
     @fire_link = fire_link
 

@@ -23,16 +23,15 @@ RSpec.describe FireLink, type: :model do
       fire_link.save
 
       expect(fire_link.slug).to eq('other-url')
-
     end
 
     it 'auto increment slug if url already exists' do
       slugs = fire_links.map(&:slug)
       expect(slugs).to contain_exactly(
-                         'some-url',
-                         'some-url-2',
-                         'some-url-3'
-                       )
+        'some-url',
+        'some-url-2',
+        'some-url-3'
+      )
     end
 
     it 'is between 4 and 30 characters' do
@@ -106,13 +105,12 @@ RSpec.describe FireLink, type: :model do
       expect(testimonial.fire_link).to_not be_nil
       expect(fire_link_with_testimonial.testimonials.count).to eq(1)
 
-      expect {
+      expect do
         fire_link_with_testimonial.destroy!
-      }.to change(FireLink, :count).by(-1)
+      end.to change(FireLink, :count).by(-1)
 
       testimonial.reload
       expect(testimonial.fire_link).to be_nil
     end
   end
-
 end

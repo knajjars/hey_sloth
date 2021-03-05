@@ -1,7 +1,5 @@
 class PageController < ActionController::Base
-  layout "page"
+  layout 'page'
 
-  def index
-  end
-
+  def index; end
 end

@@ -26,5 +26,4 @@ class FireLinkPolicy < ApplicationPolicy
   def from_fire_link_create?
     true
   end
-
 end

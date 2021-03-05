@@ -40,9 +40,9 @@ RSpec.describe 'Testimonials', type: :request do
 
     it 'deletes testimonial for authorized user' do
       sign_in user
-      expect {
+      expect do
         delete testimonial_url(testimonial.hashid)
-      }.to change(Testimonial, :count).by(-1)
+      end.to change(Testimonial, :count).by(-1)
       expect(response).to have_http_status(302)
       follow_redirect!
       expect(response.body).to include('Testimonial was successfully destroyed')

@@ -12,7 +12,6 @@ module MapTweetToTestimonial
       tweet_date: tweet.created_at,
       tweet_retweet_count: tweet.retweet_count,
       tweet_favorite_count: tweet.favorite_count,
-      source: 1
-    }
+      source: 1 }
   end
 end

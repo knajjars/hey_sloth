@@ -4,6 +4,7 @@ FactoryBot.define do
     content { Faker::Lorem.paragraph }
     source { 0 }
     association :user
+    social_link { Faker::Internet.url }
 
     after(:build) do |testimonial|
       testimonial.user = FactoryBot.create(:user) if testimonial.user.nil?
@@ -22,7 +23,9 @@ FactoryBot.define do
     end
 
     trait :with_rich_text do
-      rich_text { "<div><strong>This is awesome!<br></strong><br></div><ul><li>I am a test</li><li><em>and this rocks!</em></li><li><del>truly.</del></li></ul" }
+      rich_text do
+        '<div><strong>This is awesome!<br></strong><br></div><ul><li>I am a test</li><li><em>and this rocks!</em></li><li><del>truly.</del></li></ul'
+      end
       content { nil }
     end
 

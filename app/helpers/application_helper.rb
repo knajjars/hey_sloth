@@ -23,6 +23,10 @@ module ApplicationHelper
   def dashboard_partial?
     return true if controller_and_action?('registrations', 'edit') || controller_and_action?('registrations', 'update')
 
+    if controller_and_action?('collect', 'from_fire_link_create') || controller_and_action?('collect', 'from_fire_link_new')
+      return false
+    end
+
     controllers_whitelist = %w[testimonials collect fire_link dashboard hey_wall]
     controllers_whitelist.include?(controller_name)
   end
