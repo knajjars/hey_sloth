@@ -20,7 +20,7 @@
 }
 
 .card-body-right {
-  @apply flex flex-col items-start justify-end p-6 sm:p-8 md:w-2/5;
+  @apply flex flex-col items-start justify-between p-6 sm:p-8 md:w-2/5;
 }
 
 .card-title {
