@@ -2,7 +2,7 @@
   <div class="flex items-center">
     <% if @testimonial.has_image? %>
       <%= link_to @testimonial.social_link, target: :_blank, class: "mr-4" do %>
-        <%= display_image @testimonial, alt: "User of testimonial", class_names: "h-12 w-12 rounded-full" %>
+        <%= display_image @testimonial, alt: "User of testimonial", class_names: "h-12 w-12 rounded-full object-cover" %>
       <% end %>
     <% end %>
     <div class="flex flex-col">
