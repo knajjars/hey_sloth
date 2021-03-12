@@ -1,21 +1,21 @@
 <div class="container mx-auto h-screen">
-  <div class="text-center px-3 lg:px-0">
+  <div class="text-center px-3  lg:px-0 flex flex-col space-y-6 items-center h-full">
     <h1
-      class="my-4 text-2xl md:text-3xl lg:text-5xl font-black leading-tight"
+      class="my-4 text-5xl font-black leading-tight"
     >
       <span class="font-black text-yellow-300 italic">Showcase</span> why your product is
       the <span class="underline">best</span> in town.
     </h1>
     <p
-      class="leading-normal text-gray-800 text-base md:text-xl lg:text-2xl mb-8"
+      class="leading-normal text-gray-800 text-2xl mb-8"
     >
       Start creating a portfolio of why your users love your product now 💪
     </p>
 
     <%= link_to 'Sign up', new_registration_url('user'), class: 'btn btn-alert' %>
-  </div>
 
-  <div class="flex items-center w-full mx-auto content-end mt-10">
-    <%= image_pack_tag 'media/images/dashboard.png', class: 'mx-auto w-full md:w-4/5 transform transition hover:scale-105 duration-700 ease-in-out rounded-xl' %>
+    <div class="flex items-center w-full mx-auto content-end hidden md:block">
+      <%= image_pack_tag 'media/images/dashboard.png', class: 'mx-auto w-full rounded-xl' %>
+    </div>
   </div>
 </div>
