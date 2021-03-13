@@ -1,64 +1,83 @@
-<h1>Collect New Testimonial</h1>
+<div class="flex justify-center items-center p-4 w-full bg-gray-700 min-h-screen">
+  <div class="bg-white shadow-2xl rounded-2xl p-6 container">
+    <%= form_with(model: @testimonial, url: collect_from_fire_link_create_path) do |form| %>
+      <% if @testimonial.errors.any? %>
+        <div id="error_explanation">
+          <h2>Oops... There were some issues</h2>
+          <ul>
+            <% @testimonial.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-<%= form_with(model: @testimonial, url: collect_from_fire_link_create_path) do |form| %>
-  <% if @testimonial.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@testimonial.errors.count, "error") %> prohibited this testimonial from being saved:</h2>
+      <div class="flex flex-col space-y-4">
+        <div>
+          <div class="flex items-center space-x-4">
+            <%= image_tag @fire_link.logo.variant(resize_to_limit: [150, 150]), height: 150, width: 150, class: "object-contain" if @fire_link.logo.attached? %>
+            <h1 class="leading-relaxed font-extralight">Please share your
+              opinion <%= "for <span class=\"text-purple-600 font-bold\">#{@company_name}</span>".html_safe if @company_name.present? %></h1>
+          </div>
+          <% if @fire_link.note.present? %>
+            <%= render 'alerts/message' do %>
+              <% content_tag :p, @fire_link.note %>
+            <% end %>
+          <% end %>
+        </div>
 
-      <ul>
-        <% @testimonial.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <div class="flex flex-col md:flex-row justify-between space-y-4 md:space-y-0 md:space-x-6">
+          <div class="flex-1">
+            <div class="form-field">
+              <%= form.label :name, class: 'form-label' %>
+              <%= form.text_field :name, class: 'form-input', required: true %>
+            </div>
+
+            <div class="form-field">
+              <%= form.label :company, class: 'form-label' %>
+              <%= form.text_field :company, required: @fire_link.job_required, class: 'form-input' %>
+
+            </div>
+
+            <div class="form-field">
+              <%= form.label :role, 'Position', class: 'form-label' %>
+              <%= form.text_field :role, required: @fire_link.job_required, class: 'form-input' %>
+
+            </div>
+
+            <div class="form-field">
+              <%= form.label :social_link, class: 'form-label' %>
+              <%= form.text_field :social_link, required: true, class: 'form-input' %>
+            </div>
+
+            <div class="form-field" data-controller="file-upload">
+              <%= form.label :image, class: 'form-label' %>
+
+              <div class="relative h-28 rounded-xl border-dashed border-2 border-gray-300 bg-gray-100 flex justify-center items-center mt-2">
+                <div class="absolute">
+                  <div class="flex flex-col space-y-2 justify-center items-center">
+                    <%= image_tag("", class: "hidden object-cover h-12 w-12", data: { file_upload_target: "output" }) %>
+                    <div data-file-upload-target="previewIcon">
+                      <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <span class="block text-gray-400 font-normal">Attach image</span></div>
+                </div>
+                <%= form.file_field :image, required: @fire_link.image_required, accept: "image/png, image/jpg, image/jpeg", class: 'h-full w-full opacity-0 cursor-pointer', data: { file_upload_target: "input", action: "file-upload#readURL" } %>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 flex flex-col justify-between items-end w-full">
+            <div class="form-field w-full">
+              <%= form.label :rich_text, "Your thoughts", class: 'form-label' %>
+              <%= form.rich_text_area :rich_text, required: true, class: 'h-full' %>
+            </div>
+
+            <%= form.submit 'Submit', class: 'btn btn-primary' %>
+          </div>
+        </div>
+    <% end %>
     </div>
-  <% end %>
-
-  <%= image_tag @fire_link.logo if @fire_link.logo.attached? %>
-  <%= content_tag :p, @fire_link.note unless @fire_link.note.empty? %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, required: true %>
   </div>
-
-  <div class="field">
-    <%= form.label :company %>
-    <% if @fire_link.job_required %>
-      <%= form.text_field :company, required: true %>
-    <% else %>
-      <%= form.text_field :company, required: false %>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= form.label :role %>
-    <% if @fire_link.job_required %>
-      <%= form.text_field :role, required: true %>
-    <% else %>
-      <%= form.text_field :role, required: false %>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= form.label :social_link %>
-    <%= form.text_field :social_link, required: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <% if @fire_link.image_required %>
-      <%= form.file_field :image, required: true, accept: "image/png, image/jpg, image/jpeg" %>
-    <% else %>
-      <%= form.file_field :image, accept: "image/png, image/jpg, image/jpeg" %>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rich_text, "Content" %>
-    <%= form.rich_text_area :rich_text, required: true %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

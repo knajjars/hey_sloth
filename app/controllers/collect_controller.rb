@@ -3,10 +3,10 @@ class CollectController < ApplicationController
 
   before_action :set_collected_tweets, only: %i[twitter_search twitter_post_new]
   before_action :set_fire_link, only: %i[from_fire_link_new from_fire_link_create send_email_create send_email_new]
-  # layout 'app', only: %i[from_fire_link_new from_fire_link_create]
 
   def from_fire_link_new
     @testimonial = Testimonial.new
+    @company_name = @fire_link.user.company_name
     render_not_found if @fire_link.nil?
   end
 
