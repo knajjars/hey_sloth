@@ -30,24 +30,23 @@
           <div class="flex-1">
             <div class="form-field">
               <%= form.label :name, class: 'form-label' %>
-              <%= form.text_field :name, class: 'form-input', required: true %>
+              <%= form.text_field :name, class: 'form-input', required: true, placeholder: "Jane Doe" %>
             </div>
 
             <div class="form-field">
               <%= form.label :company, class: 'form-label' %>
-              <%= form.text_field :company, required: @fire_link.job_required, class: 'form-input' %>
-
+              <%= form.text_field :company, required: @fire_link.job_required, class: 'form-input', placeholder: 'Orange Inc.' %>
             </div>
 
             <div class="form-field">
               <%= form.label :role, 'Position', class: 'form-label' %>
-              <%= form.text_field :role, required: @fire_link.job_required, class: 'form-input' %>
+              <%= form.text_field :role, required: @fire_link.job_required, class: 'form-input', placeholder: 'Marketing' %>
 
             </div>
 
             <div class="form-field">
               <%= form.label :social_link, class: 'form-label' %>
-              <%= form.text_field :social_link, required: true, class: 'form-input' %>
+              <%= form.text_field :social_link, required: true, class: 'form-input', placeholder: 'https://www.twitter.com/janedoe' %>
             </div>
 
             <div class="form-field" data-controller="file-upload">
