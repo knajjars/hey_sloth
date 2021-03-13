@@ -150,3 +150,15 @@
 .pane-description {
   @apply text-sm md:text-lg text-gray-500;
 }
+
+
+// Landing page
+
+.section-title {
+  @apply w-full my-2 text-4xl md:text-5xl font-bold leading-tight text-center text-gray-800;
+}
+
+
+.section-title-light {
+  @apply w-full my-2 text-4xl md:text-5xl font-bold leading-tight text-center text-white;
+}
