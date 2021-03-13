@@ -6,7 +6,6 @@ class CollectController < ApplicationController
 
   def from_fire_link_new
     @testimonial = Testimonial.new
-    @company_name = @fire_link.user.company_name
     render_not_found if @fire_link.nil?
   end
 

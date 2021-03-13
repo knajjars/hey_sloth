@@ -2,13 +2,11 @@
   <div class="bg-white shadow-2xl rounded-2xl p-6 container">
     <%= form_with(model: @testimonial, url: collect_from_fire_link_create_path) do |form| %>
       <% if @testimonial.errors.any? %>
-        <div id="error_explanation">
-          <h2>Oops... There were some issues</h2>
-          <ul>
-            <% @testimonial.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
+        <div class="font-semibold text-red-400">
+          <h2>Oops...</h2>
+          <% @testimonial.errors.each do |error| %>
+            <p class="font-extralight text-gray-700"><%= error.full_message %></p>
+          <% end %>
         </div>
       <% end %>
 
@@ -17,7 +15,7 @@
           <div class="flex items-center space-x-4">
             <%= image_tag @fire_link.logo.variant(resize_to_limit: [150, 150]), height: 150, width: 150, class: "object-contain" if @fire_link.logo.attached? %>
             <h1 class="leading-relaxed font-extralight">Please share your
-              opinion <%= "for <span class=\"text-purple-600 font-bold\">#{@company_name}</span>".html_safe if @company_name.present? %></h1>
+              opinion <%= "for <span class=\"text-purple-600 font-bold\">#{@fire_link.user.company_name}</span>".html_safe if @fire_link.user.company_name.present? %></h1>
           </div>
           <% if @fire_link.note.present? %>
             <%= render 'alerts/message' do %>
