@@ -1,12 +1,24 @@
-<%= content_tag :div, class: "bg-gradient-to-r from-purple-300 to-purple-500 leading-relaxed tracking-wide flex flex-col", data: { controller: "page" } do %>
+<%= content_tag :div, class: "bg-gradient-to-r from-purple-300 to-purple-500 leading-relaxed tracking-wide flex flex-col space-y-20", data: { controller: "page" } do %>
 
   <%= render 'shared/notice' %>
   <%= render 'nav' %>
-  <%= render 'hero' %>
-  <%= render 'how_it_works' %>
-  <%= render 'features' %>
-  <%= render 'pricing' %>
-  <%= render 'cta' %>
-  <%= render 'footer' %>
 
+  <div class="w-full">
+    <%= render 'hero' %>
+  </div>
+  <div class="w-full">
+    <%= render 'how_it_works' %>
+  </div>
+  <div class="w-full">
+    <%= render 'features' %>
+  </div>
+  <div class="w-full">
+    <%= render 'pricing' %>
+  </div>
+  <div class="w-full">
+    <%= render 'cta' %>
+  </div>
+  <div class="w-full">
+    <%= render 'footer' %>
+  </div>
 <% end %>

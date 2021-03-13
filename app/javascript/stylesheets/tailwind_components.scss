@@ -48,6 +48,11 @@
   @apply text-white bg-purple-600 hover:bg-purple-800;
 }
 
+.btn-light {
+  @apply text-gray-800 bg-white hover:bg-gray-200;
+}
+
+
 .btn-secondary {
   @apply text-white bg-gray-600 hover:bg-gray-900
 }
