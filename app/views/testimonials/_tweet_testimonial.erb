@@ -1,7 +1,7 @@
 <div class="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border max-w-xl">
   <div class="flex justify-between">
     <div class="flex items-center">
-      <%= display_image @testimonial, alt: "User of testimonial", class_names: "h-12 w-12 rounded-full" %>
+      <%= display_image @testimonial, alt: "User of testimonial", class_names: "h-12 w-12 rounded-full object-cover" %>
       <div class="ml-1.5 text-sm leading-tight">
         <%= link_to @testimonial.name, @testimonial.social_link, target: :blank, class: "text-black dark:text-white font-bold block" %>
         <%= link_to "@#{@testimonial.social_link.split("/").last}", @testimonial.social_link, target: :blank, class: "text-gray-500 dark:text-gray-400 font-normal block" %>
