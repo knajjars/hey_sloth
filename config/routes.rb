@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   root to: 'page#index'
 
+  get 'subscribe', to: 'subscription#index', as: 'subscribe'
+
   get ':fire_link_id', to: 'collect#from_fire_link_new', as: 'collect_from_fire_link_new'
   post ':fire_link_id', to: 'collect#from_fire_link_create', as: 'collect_from_fire_link_create'
 end

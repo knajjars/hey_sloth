@@ -52,3 +52,6 @@ gem 'sib-api-v3-sdk', '~> 7.3'
 gem 'tailwindcss-rails', '~> 0.3.3'
 gem 'twitter', '~> 7.0'
 gem 'twitter-text', '~> 3.1'
+gem "stripe-rails", "~> 2.3"
+
+gem "stripe", "~> 5.30"

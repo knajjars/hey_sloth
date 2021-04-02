@@ -36,5 +36,8 @@ module HeySloth
     config.generators.system_tests = nil
     config.autoload_paths << "#{Rails.root}/lib/services"
     config.autoload_paths << "#{Rails.root}/lib/validators"
+
+    config.stripe.secret_key = Rails.application.credentials.stripe[:secret_key]
+    config.stripe.publishable_key = Rails.application.credentials.stripe[:publishable_key]
   end
 end
