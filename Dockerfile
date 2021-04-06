@@ -7,6 +7,7 @@ RUN apk add --update --virtual \
     libxml2-dev \
     libxslt-dev \
     libidn \
+    libidn-dev \
     nodejs \
     yarn \
     libffi-dev \
