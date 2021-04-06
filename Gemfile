@@ -11,6 +11,7 @@ gem 'rails', '~> 6.1.0'
 gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
+gem "idn-ruby", "~> 0.1.0"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -52,3 +53,4 @@ gem 'sib-api-v3-sdk', '~> 7.3'
 gem 'tailwindcss-rails', '~> 0.3.3'
 gem 'twitter', '~> 7.0'
 gem 'twitter-text', '~> 3.1'
+

@@ -25,7 +25,7 @@ RUN apk add --update --virtual \
 WORKDIR /app
 COPY . /app/
 
-ENV BUND_PATH /gems
+ENV BUNDLE_PATH /gems
 
 RUN yarn
 RUN bundle

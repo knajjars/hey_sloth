@@ -353,6 +353,7 @@ DEPENDENCIES
   friendly_id (~> 5.4, >= 5.4.2)
   hashid-rails (~> 1.0)
   honeybadger (~> 4.0)
+  idn-ruby (~> 0.1.0)
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   letter_opener
