@@ -2,7 +2,7 @@
 
 HeySloth is an open source project for collecting, managing and building a wall of **testimonials** so that you can showcase why your users love your product 💜.
 
-**Please notice that you will need to self host it.**
+**Please notice that you will need to self host it**
 
 Some of the features that HeySloth offers include:
 
@@ -36,7 +36,7 @@ Improvements are always welcome, you can help by:
 - Improving features
 - Improve documentation
 - Add more tests
-- 
+
 ## How to initiate instance of HeySloth locally
 
 To run a local instance of HeySloth it's recommended to build & run it using a Docker container. For this make sure the Docker daemon is running and simply run:
